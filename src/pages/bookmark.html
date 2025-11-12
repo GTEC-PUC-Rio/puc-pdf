@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advanced PDF Bookmark Tool - BentoPDF</title>
-    <link rel="icon" type="image/png" href="../../images/favicon.svg" />
+    <title>Ferramenta avançada de marcadores - PUC PDF</title>
+    <link rel="icon" type="image/png" href="/images/puc-favicon.ico" />
     <link href="../../src/css/styles.css" rel="stylesheet" />
     <link href="../../src/css/bookmark.css" rel="stylesheet" />
   </head>
@@ -17,21 +17,21 @@
             id="home-logo"
           >
             <img
-              src="../../public/images/favicon.svg"
-              alt="Bento PDF Logo"
+              src="/images/logo-puc.png"
+              alt="Logo da PUC-Rio"
               class="h-8 w-8"
             />
             <span class="text-white font-bold text-xl ml-2">
-              <a href="index.html">BentoPDF</a>
+              <a href="index.html">PUC PDF</a>
             </span>
           </div>
 
           <!-- Desktop Navigation -->
           <div class="hidden md:flex items-center space-x-8 text-white">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="./about.html" class="nav-link">About</a>
-            <a href="./contact.html" class="nav-link">Contact</a>
-            <a href="index.html#tools-header" class="nav-link">All Tools</a>
+            <a href="index.html" class="nav-link">Início</a>
+            <a href="./about.html" class="nav-link">Sobre</a>
+            <a href="./contact.html" class="nav-link">Contato</a>
+            <a href="index.html#tools-header" class="nav-link">Todas as ferramentas</a>
           </div>
 
           <!-- Mobile Hamburger Button -->
@@ -43,7 +43,7 @@
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
-              <span class="sr-only">Open main menu</span>
+              <span class="sr-only">Abrir menu principal</span>
               <!-- Hamburger Icon -->
               <svg
                 id="menu-icon"
@@ -89,11 +89,11 @@
         class="hidden md:hidden bg-gray-800 border-t border-gray-700"
       >
         <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-          <a href="index.html" class="mobile-nav-link">Home</a>
-          <a href="./about.html" class="mobile-nav-link">About</a>
-          <a href="./contact.html" class="mobile-nav-link">Contact</a>
+          <a href="index.html" class="mobile-nav-link">Início</a>
+          <a href="./about.html" class="mobile-nav-link">Sobre</a>
+          <a href="./contact.html" class="mobile-nav-link">Contato</a>
           <a href="index.html#tools-header" class="mobile-nav-link"
-            >All Tools</a
+            >Todas as ferramentas</a
           >
         </div>
       </div>
@@ -110,10 +110,10 @@
           class="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 font-semibold"
         >
           <i data-lucide="arrow-left" class="cursor-pointer"></i>
-          <span class="cursor-pointer"> Back to Tools </span>
+          <span class="cursor-pointer"> Voltar para as ferramentas </span>
         </button>
         <p class="text-gray-400 mb-6">
-          Upload a PDF to begin editing bookmarks
+          Envie um PDF para começar a editar os marcadores.
         </p>
 
         <!-- Drop Zone for Main PDF Upload -->
@@ -127,12 +127,11 @@
               class="w-10 h-10 mb-3 text-gray-400"
             ></i>
             <p class="mb-2 text-sm text-gray-300">
-              <span class="font-semibold">Click to select a file</span> or drag
-              and drop
+              <span class="font-semibold">Clique para selecionar um arquivo</span> ou arraste e solte
             </p>
-            <p class="text-xs text-gray-500">A single PDF file</p>
+            <p class="text-xs text-gray-500">Apenas um arquivo PDF</p>
             <p class="text-xs text-gray-500">
-              Your files never leave your device.
+              Seus arquivos nunca saem do seu dispositivo.
             </p>
           </div>
           <input
@@ -154,20 +153,20 @@
               id="auto-extract-checkbox"
               class="w-4 h-4 accent-blue-500"
             />
-            <span>Auto-extract existing bookmarks</span>
+            <span>Extrair automaticamente marcadores existentes</span>
           </label>
         </div>
 
         <!-- Import Bookmarks Section -->
         <div class="mt-8 pt-6 border-t border-gray-700">
           <h3 class="text-sm font-semibold text-gray-300 mb-4">
-            Or Import Bookmarks
+            Ou importe marcadores
           </h3>
 
           <!-- CSV Upload -->
           <label class="block mb-4">
             <span class="text-xs text-gray-500"
-              >CSV format: title,page,level</span
+              >Formato CSV: titulo,página,nível</span
             >
             <div
               class="relative flex flex-col items-center justify-center w-full h-32 mt-2 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
@@ -175,8 +174,7 @@
               <div class="flex flex-col items-center justify-center pt-4 pb-4">
                 <i data-lucide="sheet" class="w-8 h-8 mb-2 text-gray-400"></i>
                 <p class="text-xs text-gray-400">
-                  <span class="font-semibold">Click to upload CSV</span> or drag
-                  here
+                  <span class="font-semibold">Clique para enviar um CSV</span> ou arraste para cá
                 </p>
               </div>
               <input
@@ -190,15 +188,14 @@
 
           <!-- JSON Upload -->
           <label class="block">
-            <span class="text-xs text-gray-500">JSON format</span>
+            <span class="text-xs text-gray-500">Formato JSON</span>
             <div
               class="relative flex flex-col items-center justify-center w-full h-32 mt-2 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
             >
               <div class="flex flex-col items-center justify-center pt-4 pb-4">
                 <i data-lucide="braces" class="w-8 h-8 mb-2 text-gray-400"></i>
                 <p class="text-xs text-gray-400">
-                  <span class="font-semibold">Click to upload JSON</span> or
-                  drag here
+                  <span class="font-semibold">Clique para enviar um JSON</span> ou arraste para cá
                 </p>
               </div>
               <input
@@ -220,7 +217,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3">
           <div class="flex items-center justify-between flex-wrap gap-2">
             <h1 class="text-xl font-bold text-white" id="filename-display">
-              PDF Bookmark Editor
+              Editor de marcadores em PDF
             </h1>
             <div class="flex gap-2 flex-wrap">
               <button
@@ -228,26 +225,26 @@
                 class="px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
                 disabled
               >
-                <i data-lucide="undo-2" class="w-4 h-4"></i> Undo
+                <i data-lucide="undo-2" class="w-4 h-4"></i> Desfazer
               </button>
               <button
                 id="redo-btn"
                 class="px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
                 disabled
               >
-                <i data-lucide="redo-2" class="w-4 h-4"></i> Redo
+                <i data-lucide="redo-2" class="w-4 h-4"></i> Refazer
               </button>
               <button
                 id="delete-all-btn"
                 class="px-3 py-2 text-sm bg-red-600 hover:bg-red-700 text-white rounded flex items-center gap-1"
               >
-                <i data-lucide="trash-2" class="w-4 h-4"></i> Delete All
+                <i data-lucide="trash-2" class="w-4 h-4"></i> Excluir tudo
               </button>
               <button
                 id="reset-btn"
                 class="px-3 py-2 text-sm bg-orange-600 hover:bg-orange-700 text-white rounded flex items-center gap-1"
               >
-                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reiniciar
               </button>
             </div>
           </div>
@@ -260,13 +257,13 @@
             id="show-viewer-btn"
             class="flex-1 py-3 text-sm font-medium bg-indigo-600 text-white"
           >
-            PDF Viewer
+            Visualizador de PDF
           </button>
           <button
             id="show-bookmarks-btn"
             class="flex-1 py-3 text-sm font-medium text-gray-300 hover:text-white"
           >
-            Bookmarks
+            Marcadores
           </button>
         </div>
       </div>
@@ -288,7 +285,7 @@
                   <span
                     id="page-indicator"
                     class="text-sm font-medium text-gray-700 whitespace-nowrap"
-                    >Page 1 / 1</span
+                    >Página 1 / 1</span
                   >
                   <button
                     id="next-page"
@@ -298,7 +295,7 @@
                   </button>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="text-sm text-gray-600">Go to:</span>
+                  <span class="text-sm text-gray-600">Ir para:</span>
                   <input
                     type="number"
                     id="goto-page"
@@ -309,14 +306,14 @@
                     id="goto-btn"
                     class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm"
                   >
-                    Go
+                    Ir
                   </button>
                 </div>
                 <div class="flex items-center gap-2">
                   <button
                     id="zoom-out-btn"
                     class="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded text-sm"
-                    title="Zoom Out"
+                    title="Reduzir zoom"
                   >
                     −
                   </button>
@@ -328,16 +325,16 @@
                   <button
                     id="zoom-in-btn"
                     class="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded text-sm"
-                    title="Zoom In"
+                    title="Ampliar zoom"
                   >
                     +
                   </button>
                   <button
                     id="zoom-fit-btn"
                     class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-sm"
-                    title="Fit to Width"
+                    title="Ajustar à largura"
                   >
-                    Fit
+                    Ajustar
                   </button>
                 </div>
               </div>
@@ -353,14 +350,14 @@
                       class="w-5 h-5 text-blue-600"
                     ></i>
                     <span class="text-sm font-medium text-blue-800"
-                      >Click on the PDF to set bookmark destination</span
+                      >Clique no PDF para definir o destino do marcador</span
                     >
                   </div>
                   <button
                     id="cancel-picking-btn"
                     class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-xs"
                   >
-                    Cancel
+                    Cancelar
                   </button>
                 </div>
               </div>
@@ -384,7 +381,7 @@
             class="hidden lg:block w-full lg:w-[50%] flex-shrink-0"
           >
             <div class="bg-white rounded-lg shadow-lg p-4">
-              <h3 class="text-lg font-bold text-gray-800 mb-4">Bookmarks</h3>
+              <h3 class="text-lg font-bold text-gray-800 mb-4">Marcadores</h3>
 
               <div class="mb-4">
                 <div class="relative">
@@ -395,7 +392,7 @@
                   <input
                     type="text"
                     id="search-bookmarks"
-                    placeholder="Search bookmarks..."
+                    placeholder="Buscar marcadores..."
                     class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm"
                   />
                 </div>
@@ -405,7 +402,7 @@
                 <input
                   type="text"
                   id="bookmark-title"
-                  placeholder="Bookmark title..."
+                  placeholder="Título do marcador..."
                   class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2 text-sm"
                 />
                 <button
@@ -414,7 +411,7 @@
                 >
                   <i data-lucide="plus" class="w-4 h-4"></i>
                   <span
-                    >Add to Page <span id="current-page-display">1</span></span
+                    >Adicionar à página <span id="current-page-display">1</span></span
                   >
                 </button>
               </div>
@@ -429,8 +426,8 @@
                     class="w-4 h-4"
                   />
                   <span
-                    >Batch Mode (<span id="selected-count">0</span>
-                    selected)</span
+                    >Modo em lote (<span id="selected-count">0</span>
+                    selecionados)</span
                   >
                 </label>
 
@@ -439,7 +436,7 @@
                   class="hidden p-3 bg-blue-50 rounded-lg border border-blue-200"
                 >
                   <div class="text-xs font-semibold text-gray-700 mb-2">
-                    Batch Operations
+                    Operações em lote
                   </div>
                   <div class="flex flex-col gap-2">
                     <div class="flex gap-2">
@@ -448,14 +445,13 @@
                         class="flex-1 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded text-xs flex items-center justify-center gap-1"
                       >
                         <i data-lucide="check-square" class="w-3 h-3"></i>
-                        Select All
+                        Selecionar tudo
                       </button>
                       <button
                         id="deselect-all-btn"
                         class="flex-1 px-3 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded text-xs flex items-center justify-center gap-1"
                       >
-                        <i data-lucide="square" class="w-3 h-3"></i> Deselect
-                        All
+                        <i data-lucide="square" class="w-3 h-3"></i> Limpar seleção
                       </button>
                     </div>
 
@@ -463,32 +459,31 @@
                       id="batch-color-select"
                       class="text-xs p-2 border rounded"
                     >
-                      <option value="">Set Color...</option>
-                      <option value="null">None</option>
-                      <option value="red">Red</option>
-                      <option value="blue">Blue</option>
-                      <option value="green">Green</option>
-                      <option value="yellow">Yellow</option>
-                      <option value="purple">Purple</option>
+                      <option value="">Definir cor...</option>
+                      <option value="null">Nenhuma</option>
+                      <option value="red">Vermelho</option>
+                      <option value="blue">Azul</option>
+                      <option value="green">Verde</option>
+                      <option value="yellow">Amarelo</option>
+                      <option value="purple">Roxo</option>
                     </select>
 
                     <select
                       id="batch-style-select"
                       class="text-xs p-2 border rounded"
                     >
-                      <option value="">Set Style...</option>
+                      <option value="">Definir estilo...</option>
                       <option value="null">Normal</option>
-                      <option value="bold">Bold</option>
-                      <option value="italic">Italic</option>
-                      <option value="bold-italic">Bold & Italic</option>
+                      <option value="bold">Negrito</option>
+                      <option value="italic">Itálico</option>
+                      <option value="bold-italic">Negrito e itálico</option>
                     </select>
 
                     <button
                       id="batch-delete-btn"
                       class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded text-xs flex items-center justify-center gap-1"
                     >
-                      <i data-lucide="trash-2" class="w-3 h-3"></i> Delete
-                      Selected
+                      <i data-lucide="trash-2" class="w-3 h-3"></i> Excluir selecionados
                     </button>
                   </div>
                 </div>
@@ -499,13 +494,13 @@
                   id="expand-all-btn"
                   class="flex-1 px-3 py-2 bg-gradient-to-b from-gray-100 to-gray-200 hover:shadow-md text-gray-700 rounded text-sm font-medium flex items-center justify-center gap-1 focus:ring-2 focus:ring-gray-300 transition duration-200"
                 >
-                  <i data-lucide="chevrons-down" class="w-4 h-4"></i> Expand All
+                  <i data-lucide="chevrons-down" class="w-4 h-4"></i> Expandir tudo
                 </button>
                 <button
                   id="collapse-all-btn"
                   class="flex-1 px-3 py-2 bg-gradient-to-b from-gray-100 to-gray-200 hover:shadow-md text-gray-700 rounded text-sm font-medium flex items-center justify-center gap-1 focus:ring-2 focus:ring-gray-300 transition duration-200"
                 >
-                  <i data-lucide="chevrons-up" class="w-4 h-4"></i> Collapse All
+                  <i data-lucide="chevrons-up" class="w-4 h-4"></i> Recolher tudo
                 </button>
               </div>
 
@@ -515,7 +510,7 @@
                     id="import-dropdown-btn"
                     class="w-full px-3 py-2 bg-gradient-to-b from-gray-100 to-gray-200 hover:shadow-md text-gray-700 rounded text-sm font-medium flex items-center justify-center gap-1 focus:ring-2 focus:ring-gray-300 transition duration-200"
                   >
-                    <i data-lucide="upload" class="w-4 h-4"></i> Import
+                    <i data-lucide="upload" class="w-4 h-4"></i> Importar
                     <i data-lucide="chevron-down" class="w-3 h-3"></i>
                   </button>
                   <div
@@ -530,14 +525,14 @@
                         data-lucide="file-text"
                         class="w-4 h-4 text-gray-600"
                       ></i>
-                      Import CSV
+                      Importar CSV
                     </button>
                     <button
                       id="import-json-btn"
                       class="w-full px-3 py-2 text-sm text-left flex items-center gap-2 rounded-b-lg bg-gradient-to-b from-gray-50 to-gray-100 hover:shadow-sm hover:from-gray-100 hover:to-gray-200 transition duration-150"
                     >
                       <i data-lucide="braces" class="w-4 h-4 text-gray-600"></i>
-                      Import JSON
+                      Importar JSON
                     </button>
                   </div>
                 </div>
@@ -547,7 +542,7 @@
                     id="export-dropdown-btn"
                     class="w-full px-3 py-2 bg-gradient-to-b from-gray-100 to-gray-200 hover:shadow-md text-gray-700 rounded text-sm font-medium flex items-center justify-center gap-1 focus:ring-2 focus:ring-gray-300 transition duration-200"
                   >
-                    <i data-lucide="download" class="w-4 h-4"></i> Export
+                    <i data-lucide="download" class="w-4 h-4"></i> Exportar
                     <i data-lucide="chevron-down" class="w-3 h-3"></i>
                   </button>
                   <div
@@ -558,13 +553,13 @@
                       id="export-csv-btn"
                       class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 flex items-center gap-2 rounded-t-lg"
                     >
-                      <i data-lucide="file-text" class="w-4 h-4"></i> Export CSV
+                      <i data-lucide="file-text" class="w-4 h-4"></i> Exportar CSV
                     </button>
                     <button
                       id="export-json-btn"
                       class="w-full px-3 py-2 text-sm text-left hover:bg-gray-50 flex items-center gap-2 rounded-b-lg"
                     >
-                      <i data-lucide="braces" class="w-4 h-4"></i> Export JSON
+                      <i data-lucide="braces" class="w-4 h-4"></i> Exportar JSON
                     </button>
                   </div>
                 </div>
@@ -578,7 +573,7 @@
                   id="no-bookmarks"
                   class="text-center py-8 text-gray-400 text-sm"
                 >
-                  No bookmarks yet. Add one above!
+                  Nenhum marcador ainda. Adicione um acima!
                 </div>
               </div>
 
@@ -587,13 +582,13 @@
                   id="download-btn"
                   class="w-full px-4 py-2 bg-gradient-to-b from-blue-600 to-blue-700 hover:shadow-xl text-white rounded font-medium flex items-center justify-center gap-2 focus:ring-2 focus:ring-blue-400 transition duration-200"
                 >
-                  Save PDF with Bookmarks
+                  Salvar PDF com marcadores
                 </button>
                 <button
                   id="extract-existing-btn"
                   class="w-full px-4 py-2 bg-gradient-to-b from-green-500 to-green-600 hover:shadow-xl text-white rounded font-medium flex items-center justify-center gap-2 focus:ring-2 focus:ring-green-400 transition duration-200"
                 >
-                  Extract Existing Bookmarks
+                  Extrair marcadores existentes
                 </button>
               </div>
             </div>
@@ -609,127 +604,62 @@
 
     <footer class="mt-16 border-t-2 border-gray-700 py-8 bg-[#111827]">
       <div class="container mx-auto px-4">
-        <div
-          class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left"
-        >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
           <div class="mb-8 md:mb-0">
             <div class="flex items-center justify-center md:justify-start mb-4">
-              <img
-                src="../../public/images/favicon.svg"
-                alt="Bento PDF Logo"
-                class="h-10 w-10 mr-3"
-              />
-              <span class="text-xl font-bold text-white">BentoPDF</span>
+              <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-10 w-auto mr-3" />
+              <span class="text-xl font-bold text-white">PUC PDF</span>
             </div>
-            <p class="text-gray-400 text-sm">
-              &copy; 2025 BentoPDF. All rights reserved.
+            <p class="text-gray-500 text-xs mt-2">
+              <a href="https://github.com/orgs/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
+            </p>
+            <p class="text-gray-500 text-xs">
+              Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
             </p>
           </div>
 
           <div>
-            <h3 class="font-bold text-white mb-4">Company</h3>
+            <h3 class="font-bold text-white mb-4">Empresa</h3>
             <ul class="space-y-2 text-gray-400">
               <li>
-                <a href="./about.html" class="hover:text-indigo-400"
-                  >About Us</a
-                >
+                <a href="../../about.html" class="hover:text-indigo-400">Sobre nós</a>
               </li>
+              <li><a href="../../faq.html" class="hover:text-indigo-400">Perguntas frequentes</a></li>
               <li>
-                <a href="./faq.html" class="hover:text-indigo-400">FAQ</a>
-              </li>
-              <li>
-                <a href="./contact.html" class="hover:text-indigo-400"
-                  >Contact Us</a
-                >
+                <a href="../../contact.html" class="hover:text-indigo-400">Fale conosco</a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 class="font-bold text-white mb-4">Legal</h3>
+            <h3 class="font-bold text-white mb-4">Jurídico</h3>
             <ul class="space-y-2 text-gray-400">
               <li>
-                <a href="./terms.html" class="hover:text-indigo-400"
-                  >Terms and Conditions</a
-                >
+                <a href="../../terms.html" class="hover:text-indigo-400">Termos e Condições</a>
               </li>
               <li>
-                <a href="./privacy.html" class="hover:text-indigo-400"
-                  >Privacy Policy</a
-                >
+                <a href="../../privacy.html" class="hover:text-indigo-400">Política de Privacidade</a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 class="font-bold text-white mb-4">Follow Us</h3>
+            <h3 class="font-bold text-white mb-4">Siga-nos</h3>
             <div class="flex justify-center md:justify-start space-x-4">
-              <a
-                href="https://github.com/alam00000/bentopdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-400 hover:text-indigo-400"
-                title="GitHub"
-              >
-                <svg
-                  class="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                    clip-rule="evenodd"
-                  />
+              <a href="https://github.com/orgs/GTEC-PUC-Rio/puc-pdf" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-indigo-400" title="GitHub">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                 </svg>
               </a>
-              <a
-                href="https://discord.gg/q42xWQmJ"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-400 hover:text-indigo-400"
-                title="Discord"
-              >
-                <svg
-                  class="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.instagram.com/thebentopdf/"
-                class="text-gray-400 hover:text-indigo-400"
-                title="Instagram"
-              >
+              <a href="https://www.instagram.com/pucrio.oficial" class="text-gray-400 hover:text-indigo-400" target="_blank" rel="noopener noreferrer" title="Instagram">
                 <i data-lucide="instagram"></i>
               </a>
-              <a
-                href="https://www.linkedin.com/company/bentopdf/"
-                class="text-gray-400 hover:text-indigo-400"
-                title="LinkedIn"
-              >
+              <a href="https://www.linkedin.com/school/puc-rio/" class="text-gray-400 hover:text-indigo-400" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                 <i data-lucide="linkedin"></i>
               </a>
-              <a
-                href="https://x.com/BentoPDF"
-                class="text-gray-400 hover:text-indigo-400"
-                title="X (Twitter)"
-              >
-                <svg
-                  class="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                  />
+              <a href="https://x.com/pucriooficial" class="text-gray-400 hover:text-indigo-400" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
             </div>

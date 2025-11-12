@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generate Table of Contents - BentoPDF</title>
-  <link rel="icon" type="image/png" href="../../images/favicon.svg" />
+  <title>Gerar sumário - PUC PDF</title>
+  <link rel="icon" type="image/png" href="/images/puc-favicon.ico" />
   <link href="../../src/css/styles.css" rel="stylesheet" />
 </head>
 
@@ -14,18 +14,18 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center h-16">
         <div class="flex-shrink-0 flex items-center cursor-pointer" id="home-logo">
-          <img src="../../public/images/favicon.svg" alt="Bento PDF Logo" class="h-8 w-8" />
+          <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-8" />
           <span class="text-white font-bold text-xl ml-2">
-            <a href="../../index.html">BentoPDF</a>
+            <a href="../../index.html">PUC PDF</a>
           </span>
         </div>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-8 text-white">
-          <a href="../../index.html" class="nav-link">Home</a>
-          <a href="../../about.html" class="nav-link">About</a>
-          <a href="../../contact.html" class="nav-link">Contact</a>
-          <a href="../../index.html#tools-header" class="nav-link">All Tools</a>
+          <a href="../../index.html" class="nav-link">Início</a>
+          <a href="../../about.html" class="nav-link">Sobre</a>
+          <a href="../../contact.html" class="nav-link">Contato</a>
+          <a href="../../index.html#tools-header" class="nav-link">Todas as ferramentas</a>
         </div>
 
         <!-- Mobile Hamburger Button -->
@@ -33,7 +33,7 @@
           <button id="mobile-menu-button" type="button"
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
             aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
+            <span class="sr-only">Abrir menu principal</span>
             <!-- Hamburger Icon -->
             <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" aria-hidden="true">
@@ -52,10 +52,10 @@
     <!-- Mobile Menu Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
       <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-        <a href="../../index.html" class="mobile-nav-link">Home</a>
-        <a href="../../about.html" class="mobile-nav-link">About</a>
-        <a href="../../contact.html" class="mobile-nav-link">Contact</a>
-        <a href="../../index.html#tools-header" class="mobile-nav-link">All Tools</a>
+        <a href="../../index.html" class="mobile-nav-link">Início</a>
+        <a href="../../about.html" class="mobile-nav-link">Sobre</a>
+        <a href="../../contact.html" class="mobile-nav-link">Contato</a>
+        <a href="../../index.html#tools-header" class="mobile-nav-link">Todas as ferramentas</a>
       </div>
     </div>
   </nav>
@@ -65,13 +65,13 @@
       <button id="back-to-tools"
         class="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 font-semibold">
         <i data-lucide="arrow-left" class="cursor-pointer"></i>
-        <span class="cursor-pointer"> Back to Tools </span>
+        <span class="cursor-pointer"> Voltar para as ferramentas </span>
       </button>
       <h1 class="text-2xl font-bold text-white mb-2">
-        Generate Table of Contents
+        Gerar sumário automático
       </h1>
       <p class="text-gray-400 mb-6">
-        Upload a PDF with bookmarks to generate a table of contents page
+        Envie um PDF com marcadores para gerar uma página de sumário pronta para impressão.
       </p>
 
       <!-- Drop Zone for Main PDF Upload -->
@@ -80,12 +80,11 @@
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
           <i data-lucide="upload-cloud" class="w-10 h-10 mb-3 text-gray-400"></i>
           <p class="mb-2 text-sm text-gray-300">
-            <span class="font-semibold">Click to select a file</span> or drag
-            and drop
+            <span class="font-semibold">Clique para selecionar um arquivo</span> ou arraste e solte
           </p>
-          <p class="text-xs text-gray-500">A single PDF file</p>
+          <p class="text-xs text-gray-500">Apenas um arquivo PDF</p>
           <p class="text-xs text-gray-500">
-            Your files never leave your device.
+            Seus arquivos nunca saem do seu dispositivo.
           </p>
         </div>
         <input type="file" id="file-input" accept=".pdf"
@@ -99,16 +98,16 @@
       <div class="mt-6 space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-2">
-            TOC Title
+            Título do sumário
           </label>
-          <input type="text" id="toc-title" value="Table of Contents"
+          <input type="text" id="toc-title" value="Sumário"
             class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Table of Contents" />
+            placeholder="Sumário" />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-2">
-            Font Size
+            Tamanho da fonte
           </label>
           <select id="font-size"
             class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -133,7 +132,7 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-300 mb-2">
-            Font Family
+            Família tipográfica
           </label>
           <select id="font-family"
             class="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -155,14 +154,14 @@
         <div class="flex items-center gap-2">
           <input type="checkbox" id="add-bookmark" checked class="w-4 h-4 accent-blue-500" />
           <label for="add-bookmark" class="text-sm text-gray-300">
-            Add bookmark for TOC page
+            Adicionar marcador para a página do sumário
           </label>
         </div>
       </div>
 
       <!-- Generate Button -->
       <button id="generate-btn" disabled class="btn-gradient w-full mt-6">
-        <span id="generate-btn-text">Generate Table of Contents</span>
+        <span id="generate-btn-text">Gerar sumário</span>
       </button>
 
       <!-- Status Message -->
@@ -175,45 +174,48 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
         <div class="mb-8 md:mb-0">
           <div class="flex items-center justify-center md:justify-start mb-4">
-            <img src="../../public/images/favicon.svg" alt="Bento PDF Logo" class="h-10 w-10 mr-3" />
-            <span class="text-xl font-bold text-white">BentoPDF</span>
+            <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-10 w-10 mr-3" />
+            <span class="text-xl font-bold text-white">PUC PDF</span>
           </div>
-          <p class="text-gray-400 text-sm">
-            &copy; 2025 BentoPDF. All rights reserved.
+          <p class="text-gray-500 text-xs mt-2">
+            <a href="https://github.com/orgs/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
+          </p>
+          <p class="text-gray-500 text-xs">
+            Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
           </p>
         </div>
 
         <div>
-          <h3 class="font-bold text-white mb-4">Company</h3>
+          <h3 class="font-bold text-white mb-4">Empresa</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
-              <a href="../../about.html" class="hover:text-indigo-400">About Us</a>
+              <a href="../../about.html" class="hover:text-indigo-400">Sobre nós</a>
             </li>
             <li>
-              <a href="../../faq.html" class="hover:text-indigo-400">FAQ</a>
+              <a href="../../faq.html" class="hover:text-indigo-400">Perguntas frequentes</a>
             </li>
             <li>
-              <a href="../../contact.html" class="hover:text-indigo-400">Contact Us</a>
+              <a href="../../contact.html" class="hover:text-indigo-400">Fale conosco</a>
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="font-bold text-white mb-4">Legal</h3>
+          <h3 class="font-bold text-white mb-4">Jurídico</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
-              <a href="../../terms.html" class="hover:text-indigo-400">Terms and Conditions</a>
+              <a href="../../terms.html" class="hover:text-indigo-400">Termos e Condições</a>
             </li>
             <li>
-              <a href="../../privacy.html" class="hover:text-indigo-400">Privacy Policy</a>
+              <a href="../../privacy.html" class="hover:text-indigo-400">Política de Privacidade</a>
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="font-bold text-white mb-4">Follow Us</h3>
+          <h3 class="font-bold text-white mb-4">Siga-nos</h3>
           <div class="flex justify-center md:justify-start space-x-4">
-            <a href="https://github.com/alam00000/bentopdf" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/orgs/GTEC-PUC-Rio/puc-pdf" target="_blank" rel="noopener noreferrer"
               class="text-gray-400 hover:text-indigo-400" title="GitHub">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill-rule="evenodd"
@@ -221,22 +223,15 @@
                   clip-rule="evenodd" />
               </svg>
             </a>
-            <a href="https://discord.gg/q42xWQmJ" target="_blank" rel="noopener noreferrer"
-              class="text-gray-400 hover:text-indigo-400" title="Discord">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
-              </svg>
-            </a>
-            <a href="https://www.instagram.com/thebentopdf/" class="text-gray-400 hover:text-indigo-400"
-              title="Instagram">
+            <a href="https://www.instagram.com/pucrio.oficial" class="text-gray-400 hover:text-indigo-400"
+              title="Instagram" target="_blank" rel="noopener noreferrer">
               <i data-lucide="instagram"></i>
             </a>
-            <a href="https://www.linkedin.com/company/bentopdf/" class="text-gray-400 hover:text-indigo-400"
-              title="LinkedIn">
+            <a href="https://www.linkedin.com/school/puc-rio/" class="text-gray-400 hover:text-indigo-400"
+              title="LinkedIn" target="_blank" rel="noopener noreferrer">
               <i data-lucide="linkedin"></i>
             </a>
-            <a href="https://x.com/BentoPDF" class="text-gray-400 hover:text-indigo-400" title="X (Twitter)">
+            <a href="https://x.com/pucriooficial" class="text-gray-400 hover:text-indigo-400" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

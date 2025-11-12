@@ -1,4 +1,4 @@
-# BentoPDF – PUC-Rio Fork
+# PUC PDF – Fork do BentoPDF
 
 Este repositório é um fork do [BentoPDF original](https://github.com/alam00000/bentopdf) mantido pela comunidade da PUC-Rio. O objetivo é disponibilizar a suíte de ferramentas de PDF em português, com identidade visual e rótulos alinhados à universidade, operando exclusivamente no **Simple Mode** para uso interno.
 

@@ -29,8 +29,8 @@ const init = () => {
           <div class="container mx-auto px-4">
             <div class="flex justify-start items-center h-16">
               <div class="flex-shrink-0 flex items-center">
-                <img src="images/favicon.svg" alt="Bento PDF Logo" class="h-8 w-8">
-                <span class="text-white font-bold text-xl ml-2">BentoPDF</span>
+                <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto">
+                <span class="text-white font-bold text-xl ml-2">PUC PDF</span>
               </div>
             </div>
           </div>
@@ -87,14 +87,14 @@ const init = () => {
         simpleFooter.innerHTML = `
           <div class="container mx-auto px-4">
             <div class="flex items-center mb-4">
-              <img src="images/favicon.svg" alt="Bento PDF Logo" class="h-8 w-8 mr-2">
-              <span class="text-white font-bold text-lg">BentoPDF</span>
+              <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto mr-2">
+              <span class="text-white font-bold text-lg">PUC PDF</span>
             </div>
-            <p class="text-gray-400 text-sm">
-              &copy; 2025 BentoPDF. All rights reserved.
-            </p>
             <p class="text-gray-500 text-xs mt-2">
-              Version <span id="app-version-simple">1.6.0</span>
+              <a href="https://github.com/orgs/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
+            </p>
+            <p class="text-gray-500 text-xs">
+              Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
             </p>
           </div>
         `;
@@ -106,18 +106,18 @@ const init = () => {
         (divider as HTMLElement).style.display = 'none';
       });
 
-      document.title = 'BentoPDF - PDF Tools';
+      document.title = 'PUC PDF - Ferramentas de PDF';
 
       const toolsHeader = document.getElementById('tools-header');
       if (toolsHeader) {
         const title = toolsHeader.querySelector('h2');
         const subtitle = toolsHeader.querySelector('p');
         if (title) {
-          title.textContent = 'PDF Tools';
+          title.textContent = 'Ferramentas de PDF';
           title.className = 'text-4xl md:text-5xl font-bold text-white mb-3';
         }
         if (subtitle) {
-          subtitle.textContent = 'Select a tool to get started';
+          subtitle.textContent = 'Escolha uma ferramenta para começar';
           subtitle.className = 'text-lg text-gray-400';
         }
       }
@@ -267,7 +267,7 @@ const init = () => {
   }
 
   createIcons({ icons });
-  console.log('Please share our tool and share the love!');
+  console.log('Compartilhe o PUC PDF com quem precisa de ferramentas privadas!');
 
   const githubStarsElement = document.getElementById('github-stars');
   if (githubStarsElement && !__SIMPLE_MODE__) {

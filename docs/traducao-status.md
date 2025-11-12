@@ -16,6 +16,12 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 | `faq.html` | ✅ Concluído | Perguntas e respostas alinhadas com conteúdo principal. |
 | `privacy.html` | ✅ Concluído | Política de privacidade integralmente traduzida. |
 | `terms.html` | ✅ Concluído | Termos e condições completos em pt-BR. |
+| `src/pages/json-to-pdf.html` | ✅ Concluído | Tela auxiliar alinhada ao Simple Mode com avisos e CTAs em pt-BR. |
+| `src/pages/pdf-to-json.html` | ✅ Concluído | Upload, instruções e controles adaptados para o público da PUC-Rio. |
+| `src/pages/table-of-contents.html` | ✅ Concluído | Fluxo de geração de sumário traduzido, inclusive opções avançadas. |
+| `src/pages/bookmark.html` | ✅ Concluído | Editor de marcadores traduzido (menus, etiquetas, botões e placeholders). |
+| `src/pages/pdf-multi-tool.html` | ✅ Concluído | Toolbar, instruções e mensagens desta ferramenta avançada traduzidas, mantendo o fluxo em pt-BR. |
+| `src/js/config/tools.ts` | ✅ Concluído | Categorias, nomes e descrições das ferramentas traduzidos. |
 | Templates dinâmicos (`src/js/ui.ts`) | ⏳ Pendente | Necessário traduzir todos os textos das ferramentas e botões exibidos após seleção. |
 | Mensagens de lógica (`src/js/logic/*`) | ⏳ Pendente | Alertas, loaders e erros específicos por ferramenta precisam ser revisados. |
 | Documentação (`README.md`, etc.) | ⏳ Pendente | Conteúdo permanece em inglês; tradução será feita após camada dinâmica. |
@@ -26,3 +32,9 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 3. Localizar documentação Markdown (README, CONTRIBUTING, SECURITY, etc.).
 
 Manter este documento atualizado a cada entrega ajudará a garantir transparência sobre o que já foi traduzido e o que ainda falta.
+- 2025-11-12: Templates dos fluxos "Unir PDF", "Dividir PDF", "Proteger PDF", "Remover senha", "Organizar", "Girar", "Adicionar numeração", "PDF↔JPG", "Compressão" e componentes gerais (upload, modais) traduzidos em `src/js/ui.ts`.
+- 2025-11-12: Fluxos "Excluir páginas", "Adicionar página em branco", "Extrair páginas", "Marca d’água", "Imagens → PDF", "PDF → imagens (PNG/WebP)", "PNG/WebP → PDF" e "PDF em tons de cinza/ZIP" traduzidos em `src/js/ui.ts`.
+- 2025-11-12: Branding atualizado para PUC PDF (favicon, logos, rodapés com link do repositório e crédito ao BentoPDF) e documentado em `docs/customizacao.md`.
+- 2025-11-12: Traduzidos também "Cabeçalho/Rodapé", "Alterar permissões", "PDF→Markdown", "Texto→PDF", "Inverter cores", "Ver metadados", "Inverter ordem", "Markdown→PDF", conversões SVG/BMP/HEIC/TIFF e bloco de assinaturas/OCR.
+- 2025-11-12: Interface completa da `src/pages/pdf-multi-tool.html` localizada (botões, legendas e mensagens de carregamento) para uso no Simple Mode.
+- 2025-11-12: Páginas auxiliares (`json-to-pdf`, `pdf-to-json`, `table-of-contents`, `bookmark`) receberam tradução completa e rodapés atualizados com assets locais.
