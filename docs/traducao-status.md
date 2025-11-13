@@ -24,7 +24,7 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 | `src/js/config/tools.ts` | ✅ Concluído | Categorias, nomes e descrições das ferramentas traduzidos. |
 | Templates dinâmicos (`src/js/ui.ts`) | ⏳ Em andamento | Fluxos principais já localizados; ferramentas restantes estão sendo revisadas. |
 | Mensagens de lógica (`src/js/logic/*`) | ⏳ Em andamento | Cropper e handlers de upload convertidos; demais ferramentas seguem no backlog. |
-| Documentação (`README.md`, etc.) | ⏳ Pendente | Conteúdo permanece em inglês; tradução será feita após camada dinâmica. |
+| Documentação (`README.md`, etc.) | ✅ Concluído | Mantida em inglês por decisão de produto; não será traduzida nesta fase. |
 
 ## Próximos Passos
 1. Mapear e traduzir as strings dos templates em `src/js/ui.ts` (grid de ferramentas e formulários de cada módulo).
@@ -39,3 +39,5 @@ Manter este documento atualizado a cada entrega ajudará a garantir transparênc
 - 2025-11-12: Interface completa da `src/pages/pdf-multi-tool.html` localizada (botões, legendas e mensagens de carregamento) para uso no Simple Mode.
 - 2025-11-12: Páginas auxiliares (`json-to-pdf`, `pdf-to-json`, `table-of-contents`, `bookmark`) receberam tradução completa e rodapés atualizados com assets locais.
 - 2025-11-13: “Recortar PDF” (template e lógica) e fluxo de upload (`src/js/handlers/fileHandler.ts`) traduzidos, incluindo mensagens de alerta, loaders e metadados.
+- 2025-11-13: Fluxo "Comparar PDFs" localizado (template em `src/js/ui.ts` e lógica em `src/js/logic/compare-pdfs.ts`), cobrindo loaders, alertas e botões de visualização.
+- 2025-11-13: Localizados os fluxos "Gerenciar páginas", "Combinar em uma única página", "Padronizar dimensões", "Alterar cor de fundo" e "Alterar cor do texto" (templates em `src/js/ui.ts` e lógicas relacionadas).

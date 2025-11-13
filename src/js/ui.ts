@@ -1341,55 +1341,55 @@ export const toolTemplates = {
     `,
 
   'duplicate-organize': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Page Manager</h2>
-        <p class="mb-6 text-gray-400">Drag pages to reorder them. Use the <i data-lucide="copy-plus" class="inline-block w-4 h-4 text-green-400"></i> icon to duplicate a page or the <i data-lucide="x-circle" class="inline-block w-4 h-4 text-red-400"></i> icon to delete it.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Gerenciar páginas</h2>
+        <p class="mb-6 text-gray-400">Arraste as páginas para reorganizá-las. Use o ícone <i data-lucide="copy-plus" class="inline-block w-4 h-4 text-green-400"></i> para duplicar e o <i data-lucide="x-circle" class="inline-block w-4 h-4 text-red-400"></i> para excluir.</p>
         ${createFileInputHTML()}
         <div id="file-display-area" class="mt-4 space-y-2"></div>
 
         <div id="page-manager-options" class="hidden mt-6">
              <div id="page-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 my-6">
                 </div>
-             <button id="process-btn" class="btn-gradient w-full mt-6">Save New PDF</button>
+             <button id="process-btn" class="btn-gradient w-full mt-6">Salvar novo PDF</button>
         </div>
     `,
 
   'combine-single-page': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Combine to a Single Page</h2>
-        <p class="mb-6 text-gray-400">Stitch all pages of your PDF together vertically to create one continuous, scrollable page.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Combinar em uma única página</h2>
+        <p class="mb-6 text-gray-400">Una todas as páginas do PDF verticalmente para gerar um único documento rolável.</p>
         ${createFileInputHTML()}
         <div id="file-display-area" class="mt-4 space-y-2"></div>
 
         <div id="combine-options" class="hidden mt-6 space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="page-spacing" class="block mb-2 text-sm font-medium text-gray-300">Spacing Between Pages (in points)</label>
+                    <label for="page-spacing" class="block mb-2 text-sm font-medium text-gray-300">Espaçamento entre páginas (em pontos)</label>
                     <input type="number" id="page-spacing" value="18" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5">
                 </div>
                 <div>
-                    <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Background Color</label>
+                    <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Cor de fundo</label>
                     <input type="color" id="background-color" value="#FFFFFF" class="w-full h-[42px] bg-gray-700 border border-gray-600 rounded-lg p-1 cursor-pointer">
                 </div>
             </div>
             <div>
                 <label class="flex items-center gap-2 text-sm font-medium text-gray-300">
                     <input type="checkbox" id="add-separator" class="w-4 h-4 rounded text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
-                    Draw a separator line between pages
+                    Desenhar uma linha separadora entre as páginas
                 </label>
             </div>
-            <button id="process-btn" class="btn-gradient w-full mt-6">Combine Pages</button>
+            <button id="process-btn" class="btn-gradient w-full mt-6">Combinar páginas</button>
         </div>
     `,
 
   'fix-dimensions': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Standardize Page Dimensions</h2>
-        <p class="mb-6 text-gray-400">Convert all pages in your PDF to a uniform size. Choose a standard format or define a custom dimension.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Padronizar dimensões das páginas</h2>
+        <p class="mb-6 text-gray-400">Converta todas as páginas do PDF para um tamanho uniforme. Escolha um formato conhecido ou defina medidas personalizadas.</p>
         ${createFileInputHTML()}
         <div id="file-display-area" class="mt-4 space-y-2"></div>
 
         <div id="fix-dimensions-options" class="hidden mt-6 space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="target-size" class="block mb-2 text-sm font-medium text-gray-300">Target Size</label>
+                    <label for="target-size" class="block mb-2 text-sm font-medium text-gray-300">Tamanho desejado</label>
                     <select id="target-size" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5">
                         <option value="A4" selected>A4</option>
                         <option value="Letter">Letter</option>
@@ -1397,85 +1397,85 @@ export const toolTemplates = {
                         <option value="Tabloid">Tabloid</option>
                         <option value="A3">A3</option>
                         <option value="A5">A5</option>
-                        <option value="Custom">Custom Size...</option>
+                        <option value="Custom">Tamanho personalizado...</option>
                     </select>
                 </div>
                 <div>
-                    <label for="orientation" class="block mb-2 text-sm font-medium text-gray-300">Orientation</label>
+                    <label for="orientation" class="block mb-2 text-sm font-medium text-gray-300">Orientação</label>
                     <select id="orientation" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2.5">
-                        <option value="portrait" selected>Portrait</option>
-                        <option value="landscape">Landscape</option>
+                        <option value="portrait" selected>Retrato</option>
+                        <option value="landscape">Paisagem</option>
                     </select>
                 </div>
             </div>
 
             <div id="custom-size-wrapper" class="hidden p-4 rounded-lg bg-gray-900 border border-gray-700 grid grid-cols-3 gap-3">
                 <div>
-                    <label for="custom-width" class="block mb-2 text-xs font-medium text-gray-300">Width</label>
+                    <label for="custom-width" class="block mb-2 text-xs font-medium text-gray-300">Largura</label>
                     <input type="number" id="custom-width" value="8.5" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-2">
                 </div>
                 <div>
-                    <label for="custom-height" class="block mb-2 text-xs font-medium text-gray-300">Height</label>
+                    <label for="custom-height" class="block mb-2 text-xs font-medium text-gray-300">Altura</label>
                     <input type="number" id="custom-height" value="11" class="w-full bg-gray-700 border-gray-600 text-white rounded-lg p-2">
                 </div>
                 <div>
-                    <label for="custom-units" class="block mb-2 text-xs font-medium text-gray-300">Units</label>
+                    <label for="custom-units" class="block mb-2 text-xs font-medium text-gray-300">Unidade</label>
                     <select id="custom-units" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2">
-                        <option value="in">Inches</option>
-                        <option value="mm">Millimeters</option>
+                        <option value="in">Polegadas</option>
+                        <option value="mm">Milímetros</option>
                     </select>
                 </div>
             </div>
 
             <div>
-                <label class="block mb-2 text-sm font-medium text-gray-300">Content Scaling Method</label>
+                <label class="block mb-2 text-sm font-medium text-gray-300">Método de dimensionamento do conteúdo</label>
                 <div class="flex gap-4 p-2 rounded-lg bg-gray-900">
                     <label class="flex-1 flex items-center gap-2 p-3 rounded-md hover:bg-gray-700 cursor-pointer">
                         <input type="radio" name="scaling-mode" value="fit" checked class="w-4 h-4 text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
                         <div>
-                            <span class="font-semibold text-white">Fit</span>
-                            <p class="text-xs text-gray-400">Preserves all content, may add white bars.</p>
+                            <span class="font-semibold text-white">Ajustar</span>
+                            <p class="text-xs text-gray-400">Preserva todo o conteúdo, mas pode gerar barras brancas.</p>
                         </div>
                     </label>
                     <label class="flex-1 flex items-center gap-2 p-3 rounded-md hover:bg-gray-700 cursor-pointer">
                         <input type="radio" name="scaling-mode" value="fill" class="w-4 h-4 text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
                          <div>
-                            <span class="font-semibold text-white">Fill</span>
-                            <p class="text-xs text-gray-400">Covers the page, may crop content.</p>
+                            <span class="font-semibold text-white">Preencher</span>
+                            <p class="text-xs text-gray-400">Cobre toda a página, podendo cortar o conteúdo.</p>
                         </div>
                     </label>
                 </div>
             </div>
 
              <div>
-                <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Background Color (for 'Fit' mode)</label>
+                <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Cor de fundo (modo “Ajustar”)</label>
                 <input type="color" id="background-color" value="#FFFFFF" class="w-full h-[42px] bg-gray-700 border border-gray-600 rounded-lg p-1 cursor-pointer">
             </div>
 
-            <button id="process-btn" class="btn-gradient w-full mt-6">Standardize Pages</button>
+            <button id="process-btn" class="btn-gradient w-full mt-6">Padronizar páginas</button>
         </div>
     `,
 
   'change-background-color': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Change Background Color</h2>
-        <p class="mb-6 text-gray-400">Select a new background color for every page of your PDF.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Alterar cor de fundo</h2>
+        <p class="mb-6 text-gray-400">Selecione uma nova cor para todas as páginas do PDF.</p>
         ${createFileInputHTML()}
         <div id="file-display-area" class="mt-4 space-y-2"></div>
         <div id="change-background-color-options" class="hidden mt-6">
-            <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Choose Background Color</label>
+            <label for="background-color" class="block mb-2 text-sm font-medium text-gray-300">Escolha a cor de fundo</label>
             <input type="color" id="background-color" value="#FFFFFF" class="w-full h-[42px] bg-gray-700 border border-gray-600 rounded-lg p-1 cursor-pointer">
-            <button id="process-btn" class="btn-gradient w-full mt-6">Apply Color & Download</button>
+            <button id="process-btn" class="btn-gradient w-full mt-6">Aplicar cor e baixar</button>
         </div>
     `,
 
   'change-text-color': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Change Text Color</h2>
-        <p class="mb-6 text-gray-400">Change the color of dark text in your PDF. This process converts pages to images, so text will not be selectable in the final file.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Alterar cor do texto</h2>
+        <p class="mb-6 text-gray-400">Altere a cor dos textos escuros do PDF. Esse processo converte as páginas em imagens, portanto o texto não ficará selecionável no arquivo final.</p>
         ${createFileInputHTML()}
         <div id="file-display-area" class="mt-4 space-y-2"></div>
         <div id="text-color-options" class="hidden mt-6 space-y-4">
             <div>
-                <label for="text-color-input" class="block mb-2 text-sm font-medium text-gray-300">Select Text Color</label>
+                <label for="text-color-input" class="block mb-2 text-sm font-medium text-gray-300">Selecione a cor do texto</label>
                 <input type="color" id="text-color-input" value="#FF0000" class="w-full h-[42px] bg-gray-700 border border-gray-600 rounded-lg p-1 cursor-pointer">
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -1484,30 +1484,30 @@ export const toolTemplates = {
                     <canvas id="original-canvas" class="w-full h-auto rounded-lg border-2 border-gray-600"></canvas>
                 </div>
                 <div class="text-center">
-                    <h3 class="font-semibold text-white mb-2">Preview</h3>
+                    <h3 class="font-semibold text-white mb-2">Prévia</h3>
                     <canvas id="text-color-canvas" class="w-full h-auto rounded-lg border-2 border-gray-600"></canvas>
                 </div>
             </div>
-            <button id="process-btn" class="btn-gradient w-full mt-6">Apply Color & Download</button>
+            <button id="process-btn" class="btn-gradient w-full mt-6">Aplicar cor e baixar</button>
         </div>
     `,
 
   'compare-pdfs': () => `
-        <h2 class="text-2xl font-bold text-white mb-4">Compare PDFs</h2>
-        <p class="mb-6 text-gray-400">Upload two files to visually compare them using either an overlay or a side-by-side view.</p>
+        <h2 class="text-2xl font-bold text-white mb-4">Comparar PDFs</h2>
+        <p class="mb-6 text-gray-400">Envie dois arquivos para compará-los visualmente usando sobreposição ou visualização lado a lado.</p>
         
         <div id="compare-upload-area" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div id="drop-zone-1" class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer bg-gray-900 hover:bg-gray-700">
                 <div id="file-display-1" class="flex flex-col items-center justify-center pt-5 pb-6">
                     <i data-lucide="file-scan" class="w-10 h-10 mb-3 text-gray-400"></i>
-                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Upload Original PDF</span></p>
+                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Enviar PDF original</span></p>
                 </div>
                 <input id="file-input-1" type="file" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" accept="application/pdf">
             </div>
             <div id="drop-zone-2" class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer bg-gray-900 hover:bg-gray-700">
                 <div id="file-display-2" class="flex flex-col items-center justify-center pt-5 pb-6">
                     <i data-lucide="file-diff" class="w-10 h-10 mb-3 text-gray-400"></i>
-                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Upload Revised PDF</span></p>
+                    <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Enviar PDF revisado</span></p>
                 </div>
                 <input id="file-input-2" type="file" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" accept="application/pdf">
             </div>
@@ -1516,23 +1516,23 @@ export const toolTemplates = {
         <div id="compare-viewer" class="hidden mt-6">
             <div class="flex flex-wrap items-center justify-center gap-4 mb-4 p-3 bg-gray-900 rounded-lg border border-gray-700">
                 <button id="prev-page-compare" class="btn p-2 rounded-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50"><i data-lucide="chevron-left"></i></button>
-                <span class="text-white font-medium">Page <span id="current-page-display-compare">1</span> of <span id="total-pages-display-compare">1</span></span>
+                <span class="text-white font-medium">Página <span id="current-page-display-compare">1</span> de <span id="total-pages-display-compare">1</span></span>
                 <button id="next-page-compare" class="btn p-2 rounded-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50"><i data-lucide="chevron-right"></i></button>
                 <div class="border-l border-gray-600 h-6 mx-2"></div>
                 <div class="bg-gray-700 p-1 rounded-md flex gap-1">
-                    <button id="view-mode-overlay" class="btn bg-indigo-600 px-3 py-1 rounded text-sm font-semibold">Overlay</button>
-                    <button id="view-mode-side" class="btn px-3 py-1 rounded text-sm font-semibold">Side-by-Side</button>
+                    <button id="view-mode-overlay" class="btn bg-indigo-600 px-3 py-1 rounded text-sm font-semibold">Sobreposição</button>
+                    <button id="view-mode-side" class="btn px-3 py-1 rounded text-sm font-semibold">Lado a lado</button>
                 </div>
                 <div class="border-l border-gray-600 h-6 mx-2"></div>
                 <div id="overlay-controls" class="flex items-center gap-2">
-                    <button id="flicker-btn" class="btn bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-md text-sm font-semibold">Flicker</button>
-                    <label for="opacity-slider" class="text-sm font-medium text-gray-300">Opacity:</label>
+                    <button id="flicker-btn" class="btn bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-md text-sm font-semibold">Piscar</button>
+                    <label for="opacity-slider" class="text-sm font-medium text-gray-300">Opacidade:</label>
                     <input type="range" id="opacity-slider" min="0" max="1" step="0.05" value="0.5" class="w-24">
                 </div>
                 <div id="side-by-side-controls" class="hidden flex items-center gap-2">
                     <label class="flex items-center gap-2 text-sm font-medium text-gray-300 cursor-pointer">
                         <input type="checkbox" id="sync-scroll-toggle" checked class="w-4 h-4 rounded text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
-                        Sync Scrolling
+                        Sincronizar rolagem
                     </label>
                 </div>
             </div>

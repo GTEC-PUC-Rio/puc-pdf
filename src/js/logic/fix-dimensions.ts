@@ -34,7 +34,7 @@ export async function fixDimensions() {
     (document.getElementById('background-color') as HTMLInputElement).value
   );
 
-  showLoader('Standardizing pages...');
+  showLoader('Padronizando páginas...');
   try {
     let targetWidth, targetHeight;
 
@@ -103,11 +103,11 @@ export async function fixDimensions() {
     const newPdfBytes = await newDoc.save();
     downloadFile(
       new Blob([new Uint8Array(newPdfBytes)], { type: 'application/pdf' }),
-      'standardized.pdf'
+      'paginas-padronizadas.pdf'
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while standardizing pages.');
+    showAlert('Erro', 'Não foi possível padronizar as páginas.');
   } finally {
     hideLoader();
   }

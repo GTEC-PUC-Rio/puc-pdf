@@ -98,7 +98,7 @@ function showLoading(current: number, total: number) {
   loader.classList.remove('hidden');
   const percentage = Math.round((current / total) * 100);
   progress.style.width = `${percentage}%`;
-  text.textContent = `Rendering pages... ${current} of ${total}`;
+  text.textContent = `Renderizando páginas... ${current} de ${total}`;
 }
 
 function hideLoading() {
@@ -119,7 +119,7 @@ function initializeTool() {
 
   document.getElementById('upload-pdfs-btn')?.addEventListener('click', () => {
     if (isRendering) {
-      showModal('Please Wait', 'Pages are still being rendered. Please wait...', 'info');
+      showModal('Por favor, aguarde', 'As páginas ainda estão sendo renderizadas. Aguarde...', 'info');
       return;
     }
     document.getElementById('pdf-file-input')?.click();
@@ -262,7 +262,7 @@ async function handlePdfUpload(e: Event) {
 
 async function loadPdfs(files: File[]) {
   if (isRendering) {
-    showModal('Please Wait', 'Pages are still being rendered. Please wait...', 'info');
+    showModal('Por favor, aguarde', 'As páginas ainda estão sendo renderizadas. Aguarde...', 'info');
     return;
   }
 
@@ -285,7 +285,7 @@ async function loadPdfs(files: File[]) {
         totalPages += pdfDoc.getPageCount();
       } catch (e) {
         console.error(`Failed to load PDF ${file.name}:`, e);
-        showModal('Error', `Failed to load ${file.name}. The file may be corrupted.`, 'error');
+        showModal('Erro', `Não foi possível carregar ${file.name}. O arquivo pode estar corrompido.`, 'error');
       }
     }
 
@@ -399,7 +399,7 @@ function createPageCard(pageData: PageData, index: number) {
   // Page info
   const info = document.createElement('div');
   info.className = 'text-xs text-gray-400 text-center mb-2';
-  info.textContent = `Page ${index + 1}`;
+  info.textContent = `Página ${index + 1}`;
 
   // Actions toolbar
   const actions = document.createElement('div');
@@ -440,7 +440,7 @@ function createPageCard(pageData: PageData, index: number) {
   const duplicateBtn = document.createElement('button');
   duplicateBtn.className = 'p-1 rounded hover:bg-gray-700';
   duplicateBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-gray-300"></i>';
-  duplicateBtn.title = 'Duplicate this page';
+  duplicateBtn.title = 'Duplicar esta página';
   duplicateBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -451,7 +451,7 @@ function createPageCard(pageData: PageData, index: number) {
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'p-1 rounded hover:bg-gray-700';
   deleteBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>';
-  deleteBtn.title = 'Delete this page';
+  deleteBtn.title = 'Excluir esta página';
   deleteBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -462,7 +462,7 @@ function createPageCard(pageData: PageData, index: number) {
   const insertBtn = document.createElement('button');
   insertBtn.className = 'p-1 rounded hover:bg-gray-700';
   insertBtn.innerHTML = '<i data-lucide="file-plus" class="w-4 h-4 text-gray-300"></i>';
-  insertBtn.title = 'Insert PDF after this page';
+  insertBtn.title = 'Inserir PDF após esta página';
   insertBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -473,7 +473,7 @@ function createPageCard(pageData: PageData, index: number) {
   const splitBtn = document.createElement('button');
   splitBtn.className = 'p-1 rounded hover:bg-gray-700';
   splitBtn.innerHTML = '<i data-lucide="scissors" class="w-4 h-4 text-gray-300"></i>';
-  splitBtn.title = 'Toggle split after this page';
+  splitBtn.title = 'Alternar divisão após esta página';
   splitBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -640,7 +640,7 @@ async function handleInsertPdf(e: Event) {
     updatePageDisplay();
   } catch (e) {
     console.error('Failed to insert PDF:', e);
-    showModal('Error', 'Failed to insert PDF. The file may be corrupted.', 'error');
+    showModal('Erro', 'Não foi possível inserir o PDF. O arquivo pode estar corrompido.', 'error');
   }
 
   input.value = '';
@@ -693,7 +693,7 @@ function addBlankPage() {
 
 function bulkRotate(delta: number) {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to rotate.', 'info');
+    showModal('Sem seleção', 'Selecione páginas para rotacionar.', 'info');
     return;
   }
 
@@ -708,7 +708,7 @@ function bulkRotate(delta: number) {
 
 function bulkDelete() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to delete.', 'info');
+    showModal('Sem seleção', 'Selecione páginas para excluir.', 'info');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -725,7 +725,7 @@ function bulkDelete() {
 
 function bulkDuplicate() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to duplicate.', 'info');
+    showModal('Sem seleção', 'Selecione páginas para duplicar.', 'info');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -738,7 +738,7 @@ function bulkDuplicate() {
 
 function bulkSplit() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to mark for splitting.', 'info');
+    showModal('Sem seleção', 'Selecione páginas para definir a divisão.', 'info');
     return;
   }
   const indices = Array.from(selectedPages);
@@ -754,7 +754,7 @@ function bulkSplit() {
 
 async function bulkDownload() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to download.', 'info');
+    showModal('Sem seleção', 'Selecione páginas para baixar.', 'info');
     return;
   }
   const indices = Array.from(selectedPages);
@@ -763,7 +763,7 @@ async function bulkDownload() {
 
 async function downloadAll() {
   if (allPages.length === 0) {
-    showModal('No Pages', 'Please upload PDFs first.', 'info');
+    showModal('Sem páginas', 'Envie PDFs primeiro.', 'info');
     return;
   }
 
@@ -830,10 +830,10 @@ async function downloadSplitPdfs() {
     const zipBlob = await zip.generateAsync({ type: 'blob' });
     downloadFile(zipBlob, 'split-documents.zip');
 
-    showModal('Success', `Downloaded ${segments.length} PDF files in a ZIP archive.`, 'success');
+    showModal('Sucesso', `Baixados ${segments.length} arquivos PDF em um ZIP.`, 'success');
   } catch (e) {
     console.error('Failed to create split PDFs:', e);
-    showModal('Error', 'Failed to create split PDFs.', 'error');
+    showModal('Erro', 'Não foi possível criar os PDFs divididos.', 'error');
   }
 }
 
@@ -863,7 +863,7 @@ async function downloadPagesAsPdf(indices: number[], filename: string) {
     downloadFile(blob, filename);
   } catch (e) {
     console.error('Failed to create PDF:', e);
-    showModal('Error', 'Failed to create PDF.', 'error');
+    showModal('Erro', 'Não foi possível criar o PDF.', 'error');
   }
 }
 
