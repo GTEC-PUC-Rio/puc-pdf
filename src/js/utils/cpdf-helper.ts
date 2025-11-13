@@ -1,3 +1,5 @@
+import { withBasePath } from './base-path.js';
+
 let cpdfLoaded = false;
 let cpdfLoadPromise: Promise<void> | null = null;
 
@@ -18,7 +20,7 @@ export async function ensureCpdfLoaded(): Promise<void> {
     }
 
     const script = document.createElement('script');
-    script.src = '/coherentpdf.browser.min.js';
+    script.src = withBasePath('coherentpdf.browser.min.js');
     script.onload = () => {
       cpdfLoaded = true;
       resolve();
@@ -39,4 +41,3 @@ export async function getCpdf(): Promise<any> {
   await ensureCpdfLoaded();
   return (window as any).coherentpdf;
 }
-

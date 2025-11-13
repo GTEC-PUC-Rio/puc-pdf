@@ -1,8 +1,9 @@
 import { downloadFile, formatBytes } from '../utils/helpers.js';
 import { state } from '../state.js';
 import JSZip from 'jszip';
+import { withBasePath } from '../utils/base-path.js';
 
-const worker = new Worker('/workers/extract-attachments.worker.js');
+const worker = new Worker(withBasePath('workers/extract-attachments.worker.js'));
 
 interface ExtractAttachmentSuccessResponse {
   status: 'success';

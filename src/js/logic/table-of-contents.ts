@@ -1,6 +1,7 @@
 import { downloadFile, formatBytes } from "../utils/helpers";
+import { withBasePath } from "../utils/base-path.js";
 
-const worker = new Worker('/workers/table-of-contents.worker.js');
+const worker = new Worker(withBasePath('workers/table-of-contents.worker.js'));
 
 let pdfFile: File | null = null;
 
@@ -198,7 +199,7 @@ worker.onerror = (error) => {
 
 if (backToToolsBtn) {
   backToToolsBtn.addEventListener('click', () => {
-    window.location.href = '../../index.html#tools-header';
+    window.location.href = withBasePath('index.html#tools-header');
   });
 }
 

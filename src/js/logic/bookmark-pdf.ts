@@ -5,6 +5,7 @@ import { PDFDocument, PDFName, PDFString, PDFNumber, PDFArray } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import Sortable from 'sortablejs';
 import { createIcons, icons } from 'lucide';
+import { withBasePath } from '../utils/base-path.js';
 import '../../css/bookmark.css';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
@@ -2078,7 +2079,7 @@ async function extractExistingBookmarks(doc) {
 // Back to tools button
 if (backToToolsBtn) {
   backToToolsBtn.addEventListener('click', () => {
-    window.location.href = '../../index.html#tools-header';
+    window.location.href = withBasePath('index.html#tools-header');
   });
 }
 

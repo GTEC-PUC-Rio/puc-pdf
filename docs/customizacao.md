@@ -16,3 +16,19 @@ Para manter o visual alinhado à identidade da PUC-Rio, aplicamos três ajustes 
    - Qualquer alteração nesse crédito pode ser feita editando o bloco do rodapé em cada HTML ou no template simplificado criado em `main.ts`.
 
 Com isso, todo o front-end exibe “PUC PDF” como marca principal, mantendo a atribuição ao BentoPDF.
+
+## Servindo em um subcaminho (ex.: `/puc-pdf/`)
+
+Por padrão, o Vite gera o bundle assumindo que a aplicação está na raiz do domínio (`/`). Para publicar sob um subdiretório (como `https://portal.exemplo.br/puc-pdf/`), basta informar o caminho base no `.env` usado durante o build:
+
+```bash
+VITE_BASE=/puc-pdf/
+```
+
+Regras importantes:
+
+- Inclua a barra inicial e final (`/puc-pdf/`) para evitar links quebrados.
+- Se o valor não for definido, o build assume `/` automaticamente.
+- O mesmo valor deve ser usado localmente e na pipeline (por exemplo, exportando a variável antes do `npm run build` ou passando `--build-arg VITE_BASE=/puc-pdf/` quando usar Docker).
+
+Todos os assets, páginas e links internos usam agora essa base configurada, então não é necessário editar manualmente os caminhos nos HTMLs.

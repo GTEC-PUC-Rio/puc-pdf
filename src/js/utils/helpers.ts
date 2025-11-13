@@ -1,6 +1,7 @@
 import createModule from '@neslinesli93/qpdf-wasm';
 import { showLoader, hideLoader, showAlert } from '../ui';
 import { createIcons } from 'lucide';
+import { withBasePath } from './base-path.js';
 
 const STANDARD_SIZES = {
   A4: { width: 595.28, height: 841.89 },
@@ -163,7 +164,7 @@ export async function initializeQpdf() {
   showLoader('Initializing PDF engine...');
   try {
     qpdfInstance = await createModule({
-      locateFile: () => '/qpdf.wasm',
+      locateFile: () => withBasePath('qpdf.wasm'),
     });
   } catch (error) {
     console.error('Failed to initialize qpdf-wasm:', error);

@@ -7,6 +7,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 import Sortable from 'sortablejs';
 import { downloadFile } from '../utils/helpers';
+import { withBasePath } from '../utils/base-path.js';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -114,7 +115,7 @@ function initializeTool() {
   createIcons({ icons });
 
   document.getElementById('close-tool-btn')?.addEventListener('click', () => {
-    window.location.href = '../../index.html';
+    window.location.href = withBasePath('index.html');
   });
 
   document.getElementById('upload-pdfs-btn')?.addEventListener('click', () => {

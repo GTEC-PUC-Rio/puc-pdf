@@ -1,8 +1,9 @@
 import { showLoader, hideLoader, showAlert } from '../ui.js';
 import { downloadFile, readFileAsArrayBuffer } from '../utils/helpers.js';
 import { state } from '../state.js';
+import { withBasePath } from '../utils/base-path.js';
 
-const worker = new Worker('/workers/edit-attachments.worker.js');
+const worker = new Worker(withBasePath('workers/edit-attachments.worker.js'));
 
 let allAttachments: Array<{ index: number; name: string; page: number; data: Uint8Array }> = [];
 let attachmentsToRemove: Set<number> = new Set();

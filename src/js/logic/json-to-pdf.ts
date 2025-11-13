@@ -1,7 +1,8 @@
 import JSZip from 'jszip'
 import { downloadFile, formatBytes, readFileAsArrayBuffer } from '../utils/helpers';
+import { withBasePath } from '../utils/base-path.js';
 
-const worker = new Worker(new URL('/workers/json-to-pdf.worker.js', import.meta.url));
+const worker = new Worker(withBasePath('workers/json-to-pdf.worker.js'));
 
 let selectedFiles: File[] = []
 
@@ -148,7 +149,7 @@ worker.onmessage = async (e: MessageEvent) => {
 
 if (backToToolsBtn) {
   backToToolsBtn.addEventListener('click', () => {
-    window.location.href = '../../index.html#tools-header'
+    window.location.href = withBasePath('index.html#tools-header')
   })
 }
 
@@ -156,4 +157,3 @@ convertBtn.addEventListener('click', convertJSONsToPDF)
 
 // Initialize
 showStatus('Select JSON files to get started', 'info')
-

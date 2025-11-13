@@ -3,6 +3,7 @@ import { showLoader, hideLoader, showAlert } from '../ui';
 import { readFileAsArrayBuffer, downloadFile } from '../utils/helpers';
 import { state } from '../state';
 import JSZip from 'jszip';
+import { withBasePath } from '../utils/base-path.js';
 
 let qpdfInstance: any = null;
 
@@ -13,7 +14,7 @@ async function initializeQpdf() {
   showLoader('Initializing optimization engine...');
   try {
     qpdfInstance = await createModule({
-      locateFile: () => '/qpdf.wasm',
+      locateFile: () => withBasePath('qpdf.wasm'),
     });
   } catch (error) {
     console.error('Failed to initialize qpdf-wasm:', error);

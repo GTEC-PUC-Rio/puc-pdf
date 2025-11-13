@@ -5,6 +5,7 @@ import { createIcons, icons } from 'lucide';
 import * as pdfjsLib from 'pdfjs-dist';
 import '../css/styles.css';
 import { formatStars } from './utils/helpers.js';
+import { withBasePath } from './utils/base-path.js';
 
 const init = () => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
@@ -25,11 +26,12 @@ const init = () => {
         const simpleNav = document.createElement('nav');
         simpleNav.className =
           'bg-gray-800 border-b border-gray-700 sticky top-0 z-30';
+        const logoSrc = withBasePath('images/logo-puc.png');
         simpleNav.innerHTML = `
           <div class="container mx-auto px-4">
             <div class="flex justify-start items-center h-16">
               <div class="flex-shrink-0 flex items-center">
-                <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto">
+                <img src="${logoSrc}" alt="Logo da PUC-Rio" class="h-8 w-auto">
                 <span class="text-white font-bold text-xl ml-2">PUC PDF</span>
               </div>
             </div>
@@ -84,10 +86,11 @@ const init = () => {
 
         const simpleFooter = document.createElement('footer');
         simpleFooter.className = 'mt-16 border-t-2 border-gray-700 py-8';
+        const logoSrc = withBasePath('images/logo-puc.png');
         simpleFooter.innerHTML = `
           <div class="container mx-auto px-4">
             <div class="flex items-center mb-4">
-              <img src="/images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto mr-2">
+              <img src="${logoSrc}" alt="Logo da PUC-Rio" class="h-8 w-auto mr-2">
               <span class="text-white font-bold text-lg">PUC PDF</span>
             </div>
             <p class="text-gray-500 text-xs mt-2">
@@ -150,7 +153,7 @@ const init = () => {
 
       if (tool.href) {
         toolCard = document.createElement('a');
-        toolCard.href = tool.href;
+        toolCard.href = withBasePath(tool.href);
         toolCard.className =
           'tool-card block bg-gray-800 rounded-xl p-4 cursor-pointer flex flex-col items-center justify-center text-center no-underline hover:shadow-lg transition duration-200';
       } else {
