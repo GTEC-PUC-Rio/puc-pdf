@@ -22,8 +22,8 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 | `src/pages/bookmark.html` | ✅ Concluído | Editor de marcadores traduzido (menus, etiquetas, botões e placeholders). |
 | `src/pages/pdf-multi-tool.html` | ✅ Concluído | Toolbar, instruções e mensagens desta ferramenta avançada traduzidas, mantendo o fluxo em pt-BR. |
 | `src/js/config/tools.ts` | ✅ Concluído | Categorias, nomes e descrições das ferramentas traduzidos. |
-| Templates dinâmicos (`src/js/ui.ts`) | ⏳ Pendente | Necessário traduzir todos os textos das ferramentas e botões exibidos após seleção. |
-| Mensagens de lógica (`src/js/logic/*`) | ⏳ Pendente | Alertas, loaders e erros específicos por ferramenta precisam ser revisados. |
+| Templates dinâmicos (`src/js/ui.ts`) | ⏳ Em andamento | Fluxos principais já localizados; ferramentas restantes estão sendo revisadas. |
+| Mensagens de lógica (`src/js/logic/*`) | ⏳ Em andamento | Cropper e handlers de upload convertidos; demais ferramentas seguem no backlog. |
 | Documentação (`README.md`, etc.) | ⏳ Pendente | Conteúdo permanece em inglês; tradução será feita após camada dinâmica. |
 
 ## Próximos Passos
@@ -38,3 +38,4 @@ Manter este documento atualizado a cada entrega ajudará a garantir transparênc
 - 2025-11-12: Traduzidos também "Cabeçalho/Rodapé", "Alterar permissões", "PDF→Markdown", "Texto→PDF", "Inverter cores", "Ver metadados", "Inverter ordem", "Markdown→PDF", conversões SVG/BMP/HEIC/TIFF e bloco de assinaturas/OCR.
 - 2025-11-12: Interface completa da `src/pages/pdf-multi-tool.html` localizada (botões, legendas e mensagens de carregamento) para uso no Simple Mode.
 - 2025-11-12: Páginas auxiliares (`json-to-pdf`, `pdf-to-json`, `table-of-contents`, `bookmark`) receberam tradução completa e rodapés atualizados com assets locais.
+- 2025-11-13: “Recortar PDF” (template e lógica) e fluxo de upload (`src/js/handlers/fileHandler.ts`) traduzidos, incluindo mensagens de alerta, loaders e metadados.

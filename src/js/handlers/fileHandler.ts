@@ -22,7 +22,7 @@ import {
 import * as pdfjsLib from 'pdfjs-dist';
 
 async function handleSinglePdfUpload(toolId, file) {
-  showLoader('Loading PDF...');
+  showLoader('Carregando PDF...');
   try {
     const pdfBytes = await readFileAsArrayBuffer(file);
     state.pdfDoc = await PDFLibDocument.load(pdfBytes as ArrayBuffer, {
@@ -37,8 +37,8 @@ async function handleSinglePdfUpload(toolId, file) {
       toolId !== 'remove-restrictions'
     ) {
       showAlert(
-        'Protected PDF',
-        'This PDF is password-protected. Please use the Decrypt or Change Permissions tool first.'
+        'PDF protegido',
+        'Este PDF está protegido por senha. Use primeiro as ferramentas Descriptografar ou Alterar Permissões.'
       );
       switchView('grid');
       return;
@@ -118,7 +118,7 @@ async function handleSinglePdfUpload(toolId, file) {
 
     if (toolId === 'view-metadata') {
       const resultsDiv = document.getElementById('metadata-results');
-      showLoader('Analyzing full PDF metadata...');
+      showLoader('Analisando todos os metadados do PDF...');
 
       try {
         const pdfBytes = await readFileAsArrayBuffer(state.files[0]);
@@ -183,21 +183,21 @@ async function handleSinglePdfUpload(toolId, file) {
           }
         };
 
-        const infoSection = createSection('Info Dictionary');
+        const infoSection = createSection('Dicionário de informações');
         if (info && Object.keys(info).length > 0) {
           for (const key in info) {
             let value = info[key];
             let displayValue;
 
             if (value === null || typeof value === 'undefined') {
-              displayValue = '- Not Set -';
+              displayValue = '- Não definido -';
             } else if (typeof value === 'object' && value.name) {
               displayValue = value.name;
             } else if (typeof value === 'object') {
               try {
                 displayValue = JSON.stringify(value);
               } catch {
-                displayValue = '[object Object]';
+                displayValue = '[objeto]';
               }
             } else if (
               (key === 'CreationDate' || key === 'ModDate') &&
@@ -211,21 +211,21 @@ async function handleSinglePdfUpload(toolId, file) {
             infoSection.ul.appendChild(createListItem(key, displayValue));
           }
         } else {
-          infoSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- No Info Dictionary data found -</span></li>`;
+          infoSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- Nenhum dado do dicionário encontrado -</span></li>`;
         }
         resultsDiv.appendChild(infoSection.wrapper);
 
-        const fieldsSection = createSection('Interactive Form Fields');
+        const fieldsSection = createSection('Campos de formulário interativos');
         if (fieldObjects && Object.keys(fieldObjects).length > 0) {
           for (const fieldName in fieldObjects) {
             const field = fieldObjects[fieldName][0];
-            const value = (field as any).fieldValue || '- Not Set -';
+            const value = (field as any).fieldValue || '- Não definido -';
             fieldsSection.ul.appendChild(
               createListItem(fieldName, String(value))
             );
           }
         } else {
-          fieldsSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- No interactive form fields found -</span></li>`;
+          fieldsSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- Nenhum campo de formulário interativo encontrado -</span></li>`;
         }
         resultsDiv.appendChild(fieldsSection.wrapper);
 
@@ -279,7 +279,7 @@ async function handleSinglePdfUpload(toolId, file) {
               continue;
             }
             if (key === 'rdf:Alt') {
-              key = '(alt container)';
+              key = '(container alt)';
             }
 
             if (
@@ -287,7 +287,7 @@ async function handleSinglePdfUpload(toolId, file) {
               elementChildren.length === 0
             ) {
               ulElement.appendChild(
-                createXmpListItem(key, '(Empty Resource)', indentLevel)
+                createXmpListItem(key, '(Recurso vazio)', indentLevel)
               );
               continue;
             }
@@ -309,7 +309,7 @@ async function handleSinglePdfUpload(toolId, file) {
           }
         };
 
-        const xmpSection = createSection('XMP Metadata');
+        const xmpSection = createSection('Metadados XMP');
         if (rawXmpString) {
           try {
             const parser = new DOMParser();
@@ -328,28 +328,28 @@ async function handleSinglePdfUpload(toolId, file) {
             }
 
             if (xmpSection.ul.children.length === 0) {
-              xmpSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- No parseable XMP properties found -</span></li>`;
-            }
-          } catch (xmlError) {
-            console.error('Failed to parse XMP XML:', xmlError);
-            xmpSection.ul.innerHTML = `<li><span class="text-red-500 italic">- Error parsing XMP XML. Displaying raw. -</span></li>`;
-            const pre = document.createElement('pre');
-            pre.className =
-              'text-xs text-gray-300 whitespace-pre-wrap break-all';
-            pre.textContent = rawXmpString;
-            xmpSection.ul.appendChild(pre);
+              xmpSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- Nenhuma propriedade XMP legível encontrada -</span></li>`;
           }
-        } else {
-          xmpSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- No XMP metadata found -</span></li>`;
+        } catch (xmlError) {
+          console.error('Falha ao analisar o XML do XMP:', xmlError);
+          xmpSection.ul.innerHTML = `<li><span class="text-red-500 italic">- Erro ao analisar o XMP. Exibindo conteúdo bruto. -</span></li>`;
+          const pre = document.createElement('pre');
+          pre.className =
+            'text-xs text-gray-300 whitespace-pre-wrap break-all';
+          pre.textContent = rawXmpString;
+          xmpSection.ul.appendChild(pre);
         }
+      } else {
+        xmpSection.ul.innerHTML = `<li><span class="text-gray-500 italic">- Nenhum metadado XMP encontrado -</span></li>`;
+      }
         resultsDiv.appendChild(xmpSection.wrapper);
 
         resultsDiv.classList.remove('hidden');
       } catch (e) {
-        console.error('Failed to view metadata or fields:', e);
+        console.error('Falha ao exibir metadados ou campos:', e);
         showAlert(
-          'Error',
-          'Could not fully analyze the PDF. It may be corrupted or have an unusual structure.'
+          'Erro',
+          'Não foi possível analisar todo o PDF. O arquivo pode estar corrompido ou possuir uma estrutura incomum.'
         );
       } finally {
         hideLoader();
@@ -391,13 +391,13 @@ async function handleSinglePdfUpload(toolId, file) {
 
         const keyInput = document.createElement('input');
         keyInput.type = 'text';
-        keyInput.placeholder = 'Key (e.g., Department)';
+        keyInput.placeholder = 'Chave (ex.: Departamento)';
         keyInput.className =
           'custom-meta-key w-1/3 bg-gray-800 border border-gray-600 text-white rounded-lg p-2';
 
         const valueInput = document.createElement('input');
         valueInput.type = 'text';
-        valueInput.placeholder = 'Value (e.g., Marketing)';
+        valueInput.placeholder = 'Valor (ex.: Marketing)';
         valueInput.className =
           'custom-meta-value flex-grow bg-gray-800 border border-gray-600 text-white rounded-lg p-2';
 
@@ -433,8 +433,8 @@ async function handleSinglePdfUpload(toolId, file) {
   } catch (e) {
     hideLoader();
     showAlert(
-      'Error',
-      'Could not load PDF. The file may be invalid, corrupted, or password-protected.'
+      'Erro',
+      'Não foi possível carregar o PDF. O arquivo pode estar inválido, corrompido ou protegido por senha.'
     );
     console.error(e);
   }
@@ -478,9 +478,9 @@ async function handleMultiFileUpload(toolId) {
         encryptedPDFFileNames.push(encryptedPDF.file.name);
       });
 
-      const errorMessage = `PDFs found that are password-protected\n\nPlease use the Decrypt or Change Permissions tool on these files first:\n\n${encryptedPDFFileNames.join('\n')}`;
+      const errorMessage = `Foram encontrados PDFs protegidos por senha.\n\nUse primeiro as ferramentas Descriptografar ou Alterar Permissões nesses arquivos:\n\n${encryptedPDFFileNames.join('\n')}`;
 
-      showAlert('Protected PDFs', errorMessage);
+      showAlert('PDFs protegidos', errorMessage);
 
       switchView('grid');
 
