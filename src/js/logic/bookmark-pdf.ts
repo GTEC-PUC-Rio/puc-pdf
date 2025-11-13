@@ -6,12 +6,10 @@ import * as pdfjsLib from 'pdfjs-dist';
 import Sortable from 'sortablejs';
 import { createIcons, icons } from 'lucide';
 import { withBasePath } from '../utils/base-path.js';
+import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 import '../../css/bookmark.css';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url
-).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const modalContainer = document.getElementById('modal-container');
 

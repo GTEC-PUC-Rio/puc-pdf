@@ -6,12 +6,10 @@ import * as pdfjsLib from 'pdfjs-dist';
 import '../css/styles.css';
 import { formatStars } from './utils/helpers.js';
 import { withBasePath } from './utils/base-path.js';
+import { pdfWorkerUrl } from './utils/pdfjs-worker.js';
 
 const init = () => {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.js',
-    import.meta.url
-  ).toString();
+  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
   // Handle simple mode - hide branding sections but keep logo and copyright
   if (__SIMPLE_MODE__) {

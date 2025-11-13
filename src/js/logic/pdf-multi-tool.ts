@@ -4,16 +4,14 @@
 import { createIcons, icons } from 'lucide';
 import { degrees, PDFDocument as PDFLibDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 import JSZip from 'jszip';
 import Sortable from 'sortablejs';
 import { downloadFile } from '../utils/helpers';
 import '../../css/styles.css';
 import { withBasePath } from '../utils/base-path.js';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url
-).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 interface PageData {
   pdfIndex: number;

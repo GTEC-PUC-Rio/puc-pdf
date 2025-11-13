@@ -4,6 +4,7 @@ import { state } from '../state.js';
 import Cropper from 'cropperjs';
 import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
+import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 
 // --- Global State for the Cropper Tool ---
 const cropperState = {
@@ -247,10 +248,7 @@ export async function setupCropperTool() {
   const arrayBuffer = await readFileAsArrayBuffer(state.files[0]);
   cropperState.originalPdfBytes = arrayBuffer;
   const arrayBufferForPdfJs = (arrayBuffer as ArrayBuffer).slice(0);
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.js',
-    import.meta.url
-  ).toString();
+  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
   try {
     const loadingTask = pdfjsLib.getDocument({ data: arrayBufferForPdfJs });

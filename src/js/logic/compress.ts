@@ -6,6 +6,7 @@ import {
 } from '../utils/helpers.js';
 import { state } from '../state.js';
 import * as pdfjsLib from 'pdfjs-dist';
+import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 
 import { PDFDocument, PDFName, PDFDict, PDFStream, PDFNumber } from 'pdf-lib';
 
@@ -183,10 +184,7 @@ async function performSmartCompression(arrayBuffer: any, settings: any) {
 }
 
 async function performLegacyCompression(arrayBuffer: any, settings: any) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.js',
-    import.meta.url
-  ).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
   const pdfJsDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const newPdfDoc = await PDFDocument.create();

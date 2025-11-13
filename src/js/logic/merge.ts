@@ -5,11 +5,9 @@ import { state } from '../state.ts';
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import Sortable from 'sortablejs';
+import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url
-).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const mergeState = {
   pdfDocs: {},
