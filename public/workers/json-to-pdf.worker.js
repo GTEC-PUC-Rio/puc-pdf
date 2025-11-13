@@ -1,4 +1,4 @@
-self.importScripts('/coherentpdf.browser.min.js');
+self.importScripts('../coherentpdf.browser.min.js');
 
 function convertJSONsToPDFInWorker(fileBuffers, fileNames) {
   try {
@@ -60,4 +60,3 @@ self.onmessage = (e) => {
     convertJSONsToPDFInWorker(e.data.fileBuffers, e.data.fileNames);
   }
 };
-

@@ -1,4 +1,4 @@
-self.importScripts('/coherentpdf.browser.min.js');
+self.importScripts('../coherentpdf.browser.min.js');
 
 function convertPDFsToJSONInWorker(fileBuffers, fileNames) {
   try {
@@ -48,4 +48,3 @@ self.onmessage = (e) => {
     convertPDFsToJSONInWorker(e.data.fileBuffers, e.data.fileNames);
   }
 };
-

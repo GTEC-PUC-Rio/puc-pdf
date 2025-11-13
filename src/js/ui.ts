@@ -1825,8 +1825,8 @@ export const toolTemplates = {
 `,
 
   cropper: () => `
-    <h2 class="text-2xl font-bold text-white mb-4">PDF Cropper</h2>
-    <p class="mb-6 text-gray-400">Upload a PDF to visually crop one or more pages. This tool offers a live preview and two distinct cropping modes.</p>
+    <h2 class="text-2xl font-bold text-white mb-4">Recortar PDF</h2>
+    <p class="mb-6 text-gray-400">Envie um PDF para recortar visualmente uma ou mais páginas. A ferramenta oferece pré-visualização em tempo real e dois modos de corte distintos.</p>
     
     ${createFileInputHTML()}
     <div id="file-display-area" class="mt-4 space-y-2"></div>
@@ -1836,35 +1836,35 @@ export const toolTemplates = {
         <div class="p-3 bg-gray-900 rounded-lg border border-gray-700 mb-6">
             <p class="text-sm text-gray-300"><strong class="text-white">Como funciona:</strong></p>
             <ul class="list-disc list-inside text-xs text-gray-400 mt-1 space-y-1">
-                <li><strong class="text-white">Live Preview:</strong> See your crop selection in real-time before you apply it.</li>
-                <li><strong class="text-white">Non-Destructive Mode:</strong> This is the default mode. It simply "hides" the cropped content by adjusting the page's boundaries. The original text and data are preserved in the file.</li>
-                <li><strong class="text-white">Destructive Mode:</strong> This option permanently removes the cropped content by flattening the PDF. Use this for maximum security and smaller file size, but note that it will remove selectable text.</li>
+                <li><strong class="text-white">Pré-visualização:</strong> veja a área de corte em tempo real antes de aplicar.</li>
+                <li><strong class="text-white">Modo não destrutivo:</strong> padrão. Ajusta os limites da página e “esconde” o conteúdo recortado, mantendo texto e dados originais.</li>
+                <li><strong class="text-white">Modo destrutivo:</strong> remove o conteúdo definitivamente ao achatar o PDF. Ideal para máxima privacidade e arquivos menores, porém remove texto selecionável.</li>
             </ul>
         </div>
         
         <div class="flex flex-col sm:flex-row items-center justify-between flex-wrap gap-4 mb-4 p-3 bg-gray-900 rounded-lg border border-gray-700">
             <div class="flex items-center gap-2">
                  <button id="prev-page" class="btn p-2 rounded-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                <span id="page-info" class="text-white font-medium">Page 0 of 0</span>
+                <span id="page-info" class="text-white font-medium">Página 0 de 0</span>
                 <button id="next-page" class="btn p-2 rounded-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
             </div>
             
             <div class="flex flex-col sm:flex-row items-center gap-4 flex-wrap">
                  <label class="flex items-center gap-2 text-sm font-medium text-gray-300">
                     <input type="checkbox" id="destructive-crop-toggle" class="w-4 h-4 rounded text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
-                    Enable Destructive Crop
+                    Ativar corte destrutivo
                 </label>
                  <label class="flex items-center gap-2 text-sm font-medium text-gray-300">
                     <input type="checkbox" id="apply-to-all-toggle" class="w-4 h-4 rounded text-indigo-600 bg-gray-700 border-gray-600 focus:ring-indigo-500">
-                    Apply to all pages
+                    Aplicar em todas as páginas
                 </label>
             </div>
         </div>
         
-        <div id="status" class="text-center italic text-gray-400 mb-4">Please select a PDF file to begin.</div>
+        <div id="status" class="text-center italic text-gray-400 mb-4">Selecione um arquivo PDF para começar.</div>
         <div id="cropper-container" class="w-full relative overflow-hidden flex items-center justify-center bg-gray-900 rounded-lg border border-gray-600 min-h-[500px]"></div>
         
-        <button id="crop-button" class="btn-gradient w-full mt-6" disabled>Crop & Download</button>
+        <button id="crop-button" class="btn-gradient w-full mt-6" disabled>Cortar e baixar</button>
     </div>
 `,
 
