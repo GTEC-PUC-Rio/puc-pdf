@@ -184,7 +184,7 @@ async function performSmartCompression(arrayBuffer: any, settings: any) {
 
 async function performLegacyCompression(arrayBuffer: any, settings: any) {
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
+    'pdfjs-dist/build/pdf.worker.min.js',
     import.meta.url
   ).toString();
 

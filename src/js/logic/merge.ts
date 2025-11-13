@@ -7,7 +7,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import Sortable from 'sortablejs';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
+  'pdfjs-dist/build/pdf.worker.min.js',
   import.meta.url
 ).toString();
 

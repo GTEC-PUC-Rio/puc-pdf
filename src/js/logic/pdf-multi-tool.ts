@@ -7,10 +7,11 @@ import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 import Sortable from 'sortablejs';
 import { downloadFile } from '../utils/helpers';
+import '../../css/styles.css';
 import { withBasePath } from '../utils/base-path.js';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
+  'pdfjs-dist/build/pdf.worker.min.js',
   import.meta.url
 ).toString();
 
