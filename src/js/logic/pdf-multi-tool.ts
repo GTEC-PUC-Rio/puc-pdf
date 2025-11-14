@@ -10,8 +10,70 @@ import Sortable from 'sortablejs';
 import { downloadFile } from '../utils/helpers';
 import '../../css/styles.css';
 import { withBasePath } from '../utils/base-path.js';
-import { initI18n } from '../../i18n/index.js';
+import { initI18n, t } from '../../i18n/index.js';
 import { applyLayoutTranslations } from '../utils/layout-translations.js';
+
+const multiToolT = (
+  key: string,
+  options?: Record<string, unknown>
+) => t(`multiTool.${key}`, { ns: 'tools', ...(options ?? {}) });
+
+const setMultiToolText = (
+  elementId: string,
+  key: string,
+  options?: Record<string, unknown>
+) => {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.textContent = multiToolT(key, options);
+  }
+};
+
+const applyMultiToolTranslations = () => {
+  document.title = multiToolT('meta.title');
+
+  const elements: Array<[string, string]> = [
+    ['upload-pdfs-btn-label', 'toolbar.upload.label'],
+    ['upload-pdfs-btn-short', 'toolbar.upload.short'],
+    ['add-blank-page-label', 'toolbar.addBlank'],
+    ['toolbar-edit-label', 'toolbar.groups.edit'],
+    ['undo-btn-label', 'toolbar.edit.undo'],
+    ['redo-btn-label', 'toolbar.edit.redo'],
+    ['reset-btn-label', 'toolbar.edit.reset'],
+    ['toolbar-selection-label', 'toolbar.groups.selection'],
+    ['select-all-btn-label', 'toolbar.selection.selectAll'],
+    ['deselect-all-btn-label', 'toolbar.selection.clear'],
+    ['toolbar-rotate-label', 'toolbar.groups.rotate'],
+    ['bulk-rotate-left-label', 'toolbar.rotate.left'],
+    ['bulk-rotate-right-label', 'toolbar.rotate.right'],
+    ['bulk-duplicate-btn-label', 'toolbar.actions.duplicate'],
+    ['bulk-split-btn-label', 'toolbar.actions.split'],
+    ['toolbar-cleanup-label', 'toolbar.groups.cleanup'],
+    ['bulk-delete-btn-label', 'toolbar.delete'],
+    ['toolbar-download-label', 'toolbar.groups.download'],
+    ['bulk-download-btn-label', 'toolbar.downloadSelected'],
+    ['export-pdf-btn-label', 'toolbar.exportPdf'],
+    ['upload-area-title', 'uploadArea.title'],
+    ['upload-area-description', 'uploadArea.description'],
+    ['upload-area-cta', 'uploadArea.cta'],
+    ['loading-text', 'loading.initial'],
+  ];
+
+  elements.forEach(([elementId, key]) => setMultiToolText(elementId, key));
+
+  const modalCloseBtn = document.getElementById('modal-close-btn');
+  if (modalCloseBtn) {
+    modalCloseBtn.textContent = t('actions.close');
+  }
+};
+
+const showNoSelectionMessage = (messageKey: string) => {
+  showModal(
+    multiToolT('messages.noSelectionTitle'),
+    multiToolT(`messages.${messageKey}`),
+    'info'
+  );
+};
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
@@ -98,9 +160,9 @@ function showLoading(current: number, total: number) {
   if (!loader || !progress || !text) return;
 
   loader.classList.remove('hidden');
-  const percentage = Math.round((current / total) * 100);
+  const percentage = total > 0 ? Math.round((current / total) * 100) : 0;
   progress.style.width = `${percentage}%`;
-  text.textContent = `Renderizando páginas... ${current} de ${total}`;
+  text.textContent = multiToolT('loading.progress', { current, total });
 }
 
 function hideLoading() {
@@ -112,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initI18n()
     .then(() => {
       applyLayoutTranslations();
+      applyMultiToolTranslations();
       initializeTool();
     })
     .catch(() => {
@@ -128,7 +191,11 @@ function initializeTool() {
 
   document.getElementById('upload-pdfs-btn')?.addEventListener('click', () => {
     if (isRendering) {
-      showModal('Por favor, aguarde', 'As páginas ainda estão sendo renderizadas. Aguarde...', 'info');
+      showModal(
+        multiToolT('messages.waitTitle'),
+        multiToolT('messages.waitBody'),
+        'info'
+      );
       return;
     }
     document.getElementById('pdf-file-input')?.click();
@@ -271,7 +338,11 @@ async function handlePdfUpload(e: Event) {
 
 async function loadPdfs(files: File[]) {
   if (isRendering) {
-    showModal('Por favor, aguarde', 'As páginas ainda estão sendo renderizadas. Aguarde...', 'info');
+    showModal(
+      multiToolT('messages.waitTitle'),
+      multiToolT('messages.waitBody'),
+      'info'
+    );
     return;
   }
 
@@ -294,7 +365,11 @@ async function loadPdfs(files: File[]) {
         totalPages += pdfDoc.getPageCount();
       } catch (e) {
         console.error(`Failed to load PDF ${file.name}:`, e);
-        showModal('Erro', `Não foi possível carregar ${file.name}. O arquivo pode estar corrompido.`, 'error');
+        showModal(
+          t('errorTitle', { ns: 'alerts' }),
+          multiToolT('errors.loadPdf', { file: file.name }),
+          'error'
+        );
       }
     }
 
@@ -408,7 +483,7 @@ function createPageCard(pageData: PageData, index: number) {
   // Page info
   const info = document.createElement('div');
   info.className = 'text-xs text-gray-400 text-center mb-2';
-  info.textContent = `Página ${index + 1}`;
+  info.textContent = multiToolT('card.pageLabel', { page: index + 1 });
 
   // Actions toolbar
   const actions = document.createElement('div');
@@ -449,7 +524,7 @@ function createPageCard(pageData: PageData, index: number) {
   const duplicateBtn = document.createElement('button');
   duplicateBtn.className = 'p-1 rounded hover:bg-gray-700';
   duplicateBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-gray-300"></i>';
-  duplicateBtn.title = 'Duplicar esta página';
+  duplicateBtn.title = multiToolT('card.actions.duplicate');
   duplicateBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -460,7 +535,7 @@ function createPageCard(pageData: PageData, index: number) {
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'p-1 rounded hover:bg-gray-700';
   deleteBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>';
-  deleteBtn.title = 'Excluir esta página';
+  deleteBtn.title = multiToolT('card.actions.delete');
   deleteBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -471,7 +546,7 @@ function createPageCard(pageData: PageData, index: number) {
   const insertBtn = document.createElement('button');
   insertBtn.className = 'p-1 rounded hover:bg-gray-700';
   insertBtn.innerHTML = '<i data-lucide="file-plus" class="w-4 h-4 text-gray-300"></i>';
-  insertBtn.title = 'Inserir PDF após esta página';
+  insertBtn.title = multiToolT('card.actions.insertAfter');
   insertBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -482,7 +557,7 @@ function createPageCard(pageData: PageData, index: number) {
   const splitBtn = document.createElement('button');
   splitBtn.className = 'p-1 rounded hover:bg-gray-700';
   splitBtn.innerHTML = '<i data-lucide="scissors" class="w-4 h-4 text-gray-300"></i>';
-  splitBtn.title = 'Alternar divisão após esta página';
+  splitBtn.title = multiToolT('card.actions.toggleSplit');
   splitBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -649,7 +724,11 @@ async function handleInsertPdf(e: Event) {
     updatePageDisplay();
   } catch (e) {
     console.error('Failed to insert PDF:', e);
-    showModal('Erro', 'Não foi possível inserir o PDF. O arquivo pode estar corrompido.', 'error');
+    showModal(
+      t('errorTitle', { ns: 'alerts' }),
+      multiToolT('errors.insertPdf'),
+      'error'
+    );
   }
 
   input.value = '';
@@ -702,7 +781,7 @@ function addBlankPage() {
 
 function bulkRotate(delta: number) {
   if (selectedPages.size === 0) {
-    showModal('Sem seleção', 'Selecione páginas para rotacionar.', 'info');
+    showNoSelectionMessage('selectToRotate');
     return;
   }
 
@@ -717,7 +796,7 @@ function bulkRotate(delta: number) {
 
 function bulkDelete() {
   if (selectedPages.size === 0) {
-    showModal('Sem seleção', 'Selecione páginas para excluir.', 'info');
+    showNoSelectionMessage('selectToDelete');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -734,7 +813,7 @@ function bulkDelete() {
 
 function bulkDuplicate() {
   if (selectedPages.size === 0) {
-    showModal('Sem seleção', 'Selecione páginas para duplicar.', 'info');
+    showNoSelectionMessage('selectToDuplicate');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -747,7 +826,7 @@ function bulkDuplicate() {
 
 function bulkSplit() {
   if (selectedPages.size === 0) {
-    showModal('Sem seleção', 'Selecione páginas para definir a divisão.', 'info');
+    showNoSelectionMessage('selectToSplit');
     return;
   }
   const indices = Array.from(selectedPages);
@@ -763,16 +842,20 @@ function bulkSplit() {
 
 async function bulkDownload() {
   if (selectedPages.size === 0) {
-    showModal('Sem seleção', 'Selecione páginas para baixar.', 'info');
+    showNoSelectionMessage('selectToDownload');
     return;
   }
   const indices = Array.from(selectedPages);
-  await downloadPagesAsPdf(indices, 'selected-pages.pdf');
+  await downloadPagesAsPdf(indices, multiToolT('files.selected'));
 }
 
 async function downloadAll() {
   if (allPages.length === 0) {
-    showModal('Sem páginas', 'Envie PDFs primeiro.', 'info');
+    showModal(
+      multiToolT('messages.noPagesTitle'),
+      multiToolT('messages.uploadFirst'),
+      'info'
+    );
     return;
   }
 
@@ -783,7 +866,7 @@ async function downloadAll() {
   } else {
     // Download as single PDF
     const indices = Array.from({ length: allPages.length }, (_, i) => i);
-    await downloadPagesAsPdf(indices, 'all-pages.pdf');
+    await downloadPagesAsPdf(indices, multiToolT('files.all'));
   }
 }
 
@@ -837,12 +920,20 @@ async function downloadSplitPdfs() {
 
     // Generate and download ZIP
     const zipBlob = await zip.generateAsync({ type: 'blob' });
-    downloadFile(zipBlob, 'split-documents.zip');
+    downloadFile(zipBlob, multiToolT('files.splitZip'));
 
-    showModal('Sucesso', `Baixados ${segments.length} arquivos PDF em um ZIP.`, 'success');
+    showModal(
+      t('successTitle', { ns: 'alerts' }),
+      multiToolT('success.splitDownload', { count: segments.length }),
+      'success'
+    );
   } catch (e) {
     console.error('Failed to create split PDFs:', e);
-    showModal('Erro', 'Não foi possível criar os PDFs divididos.', 'error');
+    showModal(
+      t('errorTitle', { ns: 'alerts' }),
+      multiToolT('errors.splitCreation'),
+      'error'
+    );
   }
 }
 
@@ -872,7 +963,11 @@ async function downloadPagesAsPdf(indices: number[], filename: string) {
     downloadFile(blob, filename);
   } catch (e) {
     console.error('Failed to create PDF:', e);
-    showModal('Erro', 'Não foi possível criar o PDF.', 'error');
+    showModal(
+      t('errorTitle', { ns: 'alerts' }),
+      multiToolT('errors.pdfCreation'),
+      'error'
+    );
   }
 }
 

@@ -953,5 +953,88 @@
       },
       "submit": "Aplicar assinaturas e baixar PDF"
     }
+  },
+  "multiTool": {
+    "meta": {
+      "title": "Ferramenta completa de PDF - PUC PDF"
+    },
+    "toolbar": {
+      "upload": {
+        "label": "Enviar PDFs",
+        "short": "Enviar"
+      },
+      "addBlank": "Adicionar página em branco",
+      "groups": {
+        "edit": "Edição:",
+        "selection": "Seleção:",
+        "rotate": "Girar:",
+        "cleanup": "Limpar:",
+        "download": "Baixar:"
+      },
+      "edit": {
+        "undo": "Desfazer",
+        "redo": "Refazer",
+        "reset": "Reiniciar"
+      },
+      "selection": {
+        "selectAll": "Selecionar tudo",
+        "clear": "Limpar seleção"
+      },
+      "rotate": {
+        "left": "Esquerda",
+        "right": "Direita"
+      },
+      "actions": {
+        "duplicate": "Duplicar",
+        "split": "Dividir"
+      },
+      "delete": "Excluir",
+      "downloadSelected": "Baixar selecionados",
+      "exportPdf": "Exportar PDF"
+    },
+    "uploadArea": {
+      "title": "Envie arquivos PDF",
+      "description": "Arraste PDFs para cá ou clique para selecionar",
+      "cta": "Selecionar arquivos"
+    },
+    "loading": {
+      "initial": "Gerando visualização das páginas...",
+      "progress": "Renderizando páginas... {{current}} de {{total}}"
+    },
+    "card": {
+      "pageLabel": "Página {{page}}",
+      "actions": {
+        "duplicate": "Duplicar esta página",
+        "delete": "Excluir esta página",
+        "insertAfter": "Inserir PDF após esta página",
+        "toggleSplit": "Alternar divisão após esta página"
+      }
+    },
+    "messages": {
+      "waitTitle": "Por favor, aguarde",
+      "waitBody": "As páginas ainda estão sendo renderizadas. Aguarde...",
+      "noSelectionTitle": "Sem seleção",
+      "noPagesTitle": "Sem páginas",
+      "selectToRotate": "Selecione páginas para rotacionar.",
+      "selectToDelete": "Selecione páginas para excluir.",
+      "selectToDuplicate": "Selecione páginas para duplicar.",
+      "selectToSplit": "Selecione páginas para definir a divisão.",
+      "selectToDownload": "Selecione páginas para baixar.",
+      "uploadFirst": "Envie PDFs primeiro."
+    },
+    "success": {
+      "splitDownload": "Baixados {{count}} arquivos PDF em um ZIP."
+    },
+    "errors": {
+      "loadPdf": "Não foi possível carregar {{file}}. O arquivo pode estar corrompido.",
+      "insertPdf": "Não foi possível inserir o PDF. O arquivo pode estar corrompido.",
+      "splitCreation": "Não foi possível criar os PDFs divididos.",
+      "pdfCreation": "Não foi possível criar o PDF."
+    },
+    "files": {
+      "selected": "paginas-selecionadas.pdf",
+      "all": "todas-as-paginas.pdf",
+      "splitZip": "pdfs-divididos.zip"
+    }
   }
 }

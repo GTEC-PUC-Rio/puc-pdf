@@ -62,8 +62,8 @@
         <button id="upload-pdfs-btn"
           class="flex items-center gap-1 sm:gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="upload" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden sm:inline">Enviar PDFs</span>
-          <span class="sm:hidden">Enviar</span>
+          <span id="upload-pdfs-btn-label" class="hidden sm:inline">Enviar PDFs</span>
+          <span id="upload-pdfs-btn-short" class="sm:hidden">Enviar</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
@@ -72,63 +72,63 @@
         <button id="add-blank-page-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="file-plus" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden sm:inline">Adicionar página em branco</span>
+          <span id="add-blank-page-label" class="hidden sm:inline">Adicionar página em branco</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
-        <span class="text-gray-400 text-xs sm:text-sm hidden md:inline">Edição:</span>
+        <span id="toolbar-edit-label" class="text-gray-400 text-xs sm:text-sm hidden md:inline">Edição:</span>
 
 
         <!-- Desfazer / Refazer / Reiniciar -->
         <button id="undo-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="rotate-ccw" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden lg:inline">Desfazer</span>
+          <span id="undo-btn-label" class="hidden lg:inline">Desfazer</span>
         </button>
 
         <button id="redo-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="rotate-cw" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden lg:inline">Refazer</span>
+          <span id="redo-btn-label" class="hidden lg:inline">Refazer</span>
         </button>
 
         <button id="reset-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="refresh-ccw" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden lg:inline">Reiniciar</span>
+          <span id="reset-btn-label" class="hidden lg:inline">Reiniciar</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
 
         <!-- Selection -->
-        <span class="text-gray-400 text-xs sm:text-sm hidden md:inline">Seleção:</span>
+        <span id="toolbar-selection-label" class="text-gray-400 text-xs sm:text-sm hidden md:inline">Seleção:</span>
 
         <button id="select-all-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="check-square" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden lg:inline">Selecionar tudo</span>
+          <span id="select-all-btn-label" class="hidden lg:inline">Selecionar tudo</span>
         </button>
 
         <button id="deselect-all-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="square" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden lg:inline">Limpar seleção</span>
+          <span id="deselect-all-btn-label" class="hidden lg:inline">Limpar seleção</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
 
         <!-- Rotate -->
-        <span class="text-gray-400 text-xs sm:text-sm hidden md:inline">Girar:</span>
+        <span id="toolbar-rotate-label" class="text-gray-400 text-xs sm:text-sm hidden md:inline">Girar:</span>
         <button id="bulk-rotate-left-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="rotate-ccw" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Esquerda</span>
+          <span id="bulk-rotate-left-label" class="hidden xl:inline">Esquerda</span>
         </button>
 
         <button id="bulk-rotate-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="rotate-cw" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Direita</span>
+          <span id="bulk-rotate-right-label" class="hidden xl:inline">Direita</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
@@ -137,40 +137,40 @@
         <button id="bulk-duplicate-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="copy" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Duplicar</span>
+          <span id="bulk-duplicate-btn-label" class="hidden xl:inline">Duplicar</span>
         </button>
 
         <button id="bulk-split-btn"
           class="flex items-center gap-1 sm:gap-2 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="scissors" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Dividir</span>
+          <span id="bulk-split-btn-label" class="hidden xl:inline">Dividir</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
-        <span class="text-gray-400 text-xs sm:text-sm hidden md:inline">Limpar:</span>
+        <span id="toolbar-cleanup-label" class="text-gray-400 text-xs sm:text-sm hidden md:inline">Limpar:</span>
 
 
         <!-- Excluir -->
         <button id="bulk-delete-btn"
           class="flex items-center gap-1 sm:gap-2 bg-red-500 hover:bg-red-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="trash-2" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Excluir</span>
+          <span id="bulk-delete-btn-label" class="hidden xl:inline">Excluir</span>
         </button>
 
         <div class="border-l border-gray-600 h-5 sm:h-6 mx-1"></div>
 
         <!-- Download -->
-        <span class="text-gray-400 text-xs sm:text-sm hidden md:inline">Baixar:</span>
+        <span id="toolbar-download-label" class="text-gray-400 text-xs sm:text-sm hidden md:inline">Baixar:</span>
         <button id="bulk-download-btn"
           class="flex items-center gap-1 sm:gap-2 bg-green-600 hover:bg-green-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="download" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Baixar selecionados</span>
+          <span id="bulk-download-btn-label" class="hidden xl:inline">Baixar selecionados</span>
         </button>
 
         <button id="export-pdf-btn"
           class="flex items-center gap-1 sm:gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
           <i data-lucide="download" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-          <span class="hidden xl:inline">Exportar PDF</span>
+          <span id="export-pdf-btn-label" class="hidden xl:inline">Exportar PDF</span>
         </button>
       </div>
     </div>
@@ -180,12 +180,12 @@
       <div id="upload-area"
         class="hidden border-2 border-dashed border-gray-600 rounded-lg p-6 sm:p-12 text-center max-w-full">
         <i data-lucide="upload-cloud" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto text-gray-400 mb-3 sm:mb-4"></i>
-        <p class="text-gray-300 text-base sm:text-lg mb-1 sm:mb-2">Envie arquivos PDF</p>
-        <p class="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">Arraste PDFs para cá ou clique para selecionar</p>
+        <p id="upload-area-title" class="text-gray-300 text-base sm:text-lg mb-1 sm:mb-2">Envie arquivos PDF</p>
+        <p id="upload-area-description" class="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">Arraste PDFs para cá ou clique para selecionar</p>
         <input type="file" id="pdf-file-input" accept="application/pdf" multiple class="hidden">
         <button onclick="document.getElementById('pdf-file-input').click()"
           class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 sm:px-6 py-2 rounded text-sm sm:text-base">
-          Selecionar arquivos
+          <span id="upload-area-cta">Selecionar arquivos</span>
         </button>
       </div>
 

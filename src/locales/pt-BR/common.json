@@ -18,7 +18,8 @@
     "placeholder": "Busque uma ferramenta (ex.: 'dividir', 'organizar'...)"
   },
   "actions": {
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Fechar"
   },
   "preview": {
     "title": "Prévia do documento",
