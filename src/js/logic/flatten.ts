@@ -9,10 +9,10 @@ export function flattenFormsInDoc(pdfDoc) {
 
 export async function flatten() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'PDF not loaded.');
+    showAlert('Erro', 'Nenhum PDF carregado.');
     return;
   }
-  showLoader('Flattening PDF...');
+  showLoader('Achatando PDF...');
   try {
     flattenFormsInDoc(state.pdfDoc);
 
@@ -25,11 +25,11 @@ export async function flatten() {
     console.error(e);
     if (e.message.includes('getForm')) {
       showAlert(
-        'No Form Found',
-        'This PDF does not contain any form fields to flatten.'
+        'Nenhum formulário',
+        'Este PDF não contém campos de formulário para achatar.'
       );
     } else {
-      showAlert('Error', 'Could not flatten the PDF.');
+      showAlert('Erro', 'Não foi possível achatar o PDF.');
     }
   } finally {
     hideLoader();

@@ -13,7 +13,7 @@ export async function decrypt() {
   )?.value;
 
   if (!password) {
-    showAlert('Input Required', 'Please enter the PDF password.');
+    showAlert('Entrada obrigatória', 'Informe a senha do PDF.');
     return;
   }
 
@@ -22,16 +22,16 @@ export async function decrypt() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing decryption...');
+    showLoader('Inicializando descriptografia...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading encrypted PDF...');
+    showLoader('Lendo o PDF criptografado...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Decrypting PDF...');
+    showLoader('Descriptografando PDF...');
 
     const args = [inputPath, '--password=' + password, '--decrypt', outputPath];
 
@@ -49,11 +49,11 @@ export async function decrypt() {
       throw qpdfError;
     }
 
-    showLoader('Preparing download...');
+    showLoader('Preparando download...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (outputFile.length === 0) {
-      throw new Error('Decryption resulted in an empty file.');
+      throw new Error('A descriptografia resultou em um arquivo vazio.');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -61,8 +61,8 @@ export async function decrypt() {
 
     hideLoader();
     showAlert(
-      'Success',
-      'PDF decrypted successfully! Your download has started.'
+      'Sucesso',
+      'PDF descriptografado com sucesso! O download foi iniciado.'
     );
   } catch (error: any) {
     console.error('Error during PDF decryption:', error);
@@ -70,18 +70,18 @@ export async function decrypt() {
 
     if (error.message === 'INVALID_PASSWORD') {
       showAlert(
-        'Incorrect Password',
-        'The password you entered is incorrect. Please try again.'
+        'Senha incorreta',
+        'A senha informada está errada. Tente novamente.'
       );
     } else if (error.message?.includes('password')) {
       showAlert(
-        'Password Error',
-        'Unable to decrypt the PDF with the provided password.'
+        'Erro de senha',
+        'Não foi possível descriptografar o PDF com a senha fornecida.'
       );
     } else {
       showAlert(
-        'Decryption Failed',
-        `An error occurred: ${error.message || 'The password you entered is wrong or the file is corrupted.'}`
+        'Falha na descriptografia',
+        `Ocorreu um erro: ${error.message || 'A senha pode estar incorreta ou o arquivo está corrompido.'}`
       );
     }
   } finally {

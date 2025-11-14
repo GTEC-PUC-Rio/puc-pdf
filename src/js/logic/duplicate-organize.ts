@@ -71,8 +71,8 @@ function attachEventListeners(element: any) {
       initializePageGridSortable();
     } else {
       showAlert(
-        'Cannot Delete',
-        'You cannot delete the last page of the document.'
+        'Não é possível remover',
+        'Você não pode excluir a última página do documento.'
       );
     }
   });
@@ -82,7 +82,7 @@ export async function renderDuplicateOrganizeThumbnails() {
   const grid = document.getElementById('page-grid');
   if (!grid) return;
 
-  showLoader('Rendering page previews...');
+  showLoader('Gerando prévias das páginas...');
   const pdfData = await state.pdfDoc.save();
   // @ts-expect-error TS(2304) FIXME: Cannot find name 'pdfjsLib'.
   const pdfjsDoc = await pdfjsLib.getDocument({ data: pdfData }).promise;
@@ -124,7 +124,7 @@ export async function renderDuplicateOrganizeThumbnails() {
     const duplicateBtn = document.createElement('button');
     duplicateBtn.className =
       'duplicate-btn bg-green-600 hover:bg-green-700 text-white rounded-full w-8 h-8 flex items-center justify-center';
-    duplicateBtn.title = 'Duplicate Page';
+    duplicateBtn.title = 'Duplicar página';
     const duplicateIcon = document.createElement('i');
     duplicateIcon.setAttribute('data-lucide', 'copy-plus');
     duplicateIcon.className = 'w-5 h-5';
@@ -133,7 +133,7 @@ export async function renderDuplicateOrganizeThumbnails() {
     const deleteBtn = document.createElement('button');
     deleteBtn.className =
       'delete-btn bg-red-600 hover:bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center';
-    deleteBtn.title = 'Delete Page';
+    deleteBtn.title = 'Excluir página';
     const deleteIcon = document.createElement('i');
     deleteIcon.setAttribute('data-lucide', 'x-circle');
     deleteIcon.className = 'w-5 h-5';
@@ -151,7 +151,7 @@ export async function renderDuplicateOrganizeThumbnails() {
 }
 
 export async function processAndSave() {
-  showLoader('Building new PDF...');
+  showLoader('Gerando novo PDF...');
   try {
     const grid = document.getElementById('page-grid');
     const finalPageElements = grid.querySelectorAll('.page-thumbnail');
@@ -171,7 +171,7 @@ export async function processAndSave() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to save the new PDF.');
+    showAlert('Erro', 'Não foi possível salvar o novo PDF.');
   } finally {
     hideLoader();
   }

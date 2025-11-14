@@ -8,11 +8,11 @@ import { PDFName } from 'pdf-lib';
 
 export async function sanitizePdf() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'No PDF document loaded.');
+    showAlert('Erro', 'Nenhum PDF carregado.');
     return;
   }
 
-  showLoader('Sanitizing PDF...');
+  showLoader('Sanitizando PDF...');
   try {
     const pdfDoc = state.pdfDoc;
 
@@ -565,8 +565,8 @@ export async function sanitizePdf() {
 
     if (!changesMade) {
       showAlert(
-        'No Changes',
-        'No items were selected for removal or none were found in the PDF.'
+        'Sem alterações',
+        'Nenhum item foi selecionado para remoção ou não foi encontrado no PDF.'
       );
       hideLoader();
       return;
@@ -577,10 +577,10 @@ export async function sanitizePdf() {
       new Blob([sanitizedPdfBytes], { type: 'application/pdf' }),
       'sanitized.pdf'
     );
-    showAlert('Success', 'PDF has been sanitized and downloaded.');
+    showAlert('Sucesso', 'O PDF foi sanitizado e baixado.');
   } catch (e) {
     console.error('Sanitization Error:', e);
-    showAlert('Error', `An error occurred during sanitization: ${e.message}`);
+    showAlert('Erro', `Ocorreu um erro durante a sanitização: ${e.message}`);
   } finally {
     hideLoader();
   }

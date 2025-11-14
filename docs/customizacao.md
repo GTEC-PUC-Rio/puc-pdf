@@ -12,7 +12,7 @@ Para manter o visual alinhado à identidade da PUC-Rio, aplicamos três ajustes 
    - Para uso offline, não há mais dependência de CDN; todos os assets ficam no repositório.
 
 3. **Links institucionais**  
-   - O rodapé agora aponta para o repositório `https://github.com/orgs/GTEC-PUC-Rio/puc-pdf` e credita o projeto original BentoPDF (`https://github.com/alam00000/bentopdf`).  
+   - O rodapé agora aponta para o repositório `https://github.com/GTEC-PUC-Rio/puc-pdf` e credita o projeto original BentoPDF (`https://github.com/alam00000/bentopdf`).  
    - Qualquer alteração nesse crédito pode ser feita editando o bloco do rodapé em cada HTML ou no template simplificado criado em `main.ts`.
 
 Com isso, todo o front-end exibe “PUC PDF” como marca principal, mantendo a atribuição ao BentoPDF.

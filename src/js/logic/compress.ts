@@ -271,7 +271,7 @@ export async function compress() {
 
   try {
     if (state.files.length === 0) {
-      showAlert('No Files', 'Please select at least one PDF file.');
+      showAlert('Nenhum arquivo', 'Selecione pelo menos um PDF.');
       hideLoader();
       return;
     }
@@ -284,15 +284,15 @@ export async function compress() {
       let usedMethod;
 
       if (algorithm === 'vector') {
-        showLoader('Running Vector (Smart) compression...');
+        showLoader('Executando compressão Vetorial (smart)...');
         resultBytes = await performSmartCompression(arrayBuffer, smartSettings);
         usedMethod = 'Vector';
       } else if (algorithm === 'photon') {
-        showLoader('Running Photon (Rasterize) compression...');
+        showLoader('Executando compressão Photon (rasterização)...');
         resultBytes = await performLegacyCompression(arrayBuffer, legacySettings);
         usedMethod = 'Photon';
       } else {
-        showLoader('Running Automatic (Vector first)...');
+        showLoader('Executando modo automático (prioriza Vetorial)...');
         const vectorResultBytes = await performSmartCompression(
           arrayBuffer,
           smartSettings
@@ -302,8 +302,8 @@ export async function compress() {
           resultBytes = vectorResultBytes;
           usedMethod = 'Vector (Automatic)';
         } else {
-          showAlert('Vector failed to reduce size. Trying Photon...', 'info');
-          showLoader('Running Automatic (Photon fallback)...');
+          showAlert('A compressão Vetorial não reduziu o tamanho. Tentando Photon...', 'info');
+          showLoader('Executando modo automático (fallback Photon)...');
           resultBytes = await performLegacyCompression(
             arrayBuffer,
             legacySettings
@@ -320,15 +320,15 @@ export async function compress() {
 
       if (savings > 0) {
         showAlert(
-          'Compression Complete',
-          `Method: **${usedMethod}**. ` +
-            `File size reduced from ${originalSize} to ${compressedSize} (Saved ${savingsPercent}%).`
+          'Compressão concluída',
+          `Método: **${usedMethod}**. ` +
+            `O tamanho passou de ${originalSize} para ${compressedSize} (economia de ${savingsPercent}%).`
         );
       } else {
         showAlert(
-          'Compression Finished',
-          `Method: **${usedMethod}**. ` +
-            `Could not reduce file size. Original: ${originalSize}, New: ${compressedSize}.`,
+          'Compressão finalizada',
+          `Método: **${usedMethod}**. ` +
+            `Não foi possível reduzir o tamanho. Original: ${originalSize}, novo: ${compressedSize}.`,
           // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 3.
           'warning'
         );
@@ -339,7 +339,7 @@ export async function compress() {
         'compressed-final.pdf'
       );
     } else {
-      showLoader('Compressing multiple PDFs...');
+      showLoader('Comprimindo múltiplos PDFs...');
       const JSZip = (await import('jszip')).default;
       const zip = new JSZip();
       let totalOriginalSize = 0;
@@ -347,7 +347,7 @@ export async function compress() {
 
       for (let i = 0; i < state.files.length; i++) {
         const file = state.files[i];
-        showLoader(`Compressing ${i + 1}/${state.files.length}: ${file.name}...`);
+        showLoader(`Comprimindo ${i + 1}/${state.files.length}: ${file.name}...`);
         const arrayBuffer = await readFileAsArrayBuffer(file);
         totalOriginalSize += file.size;
 
@@ -380,15 +380,15 @@ export async function compress() {
 
       if (totalSavings > 0) {
         showAlert(
-          'Compression Complete',
-          `Compressed ${state.files.length} PDF(s). ` +
-            `Total size reduced from ${formatBytes(totalOriginalSize)} to ${formatBytes(totalCompressedSize)} (Saved ${totalSavingsPercent}%).`
+          'Compressão concluída',
+          `Comprimidos ${state.files.length} PDF(s). ` +
+            `Tamanho total reduzido de ${formatBytes(totalOriginalSize)} para ${formatBytes(totalCompressedSize)} (economia de ${totalSavingsPercent}%).`
         );
       } else {
         showAlert(
-          'Compression Finished',
-          `Compressed ${state.files.length} PDF(s). ` +
-            `Total size: ${formatBytes(totalCompressedSize)}.`
+          'Compressão finalizada',
+          `Comprimidos ${state.files.length} PDF(s). ` +
+            `Tamanho total: ${formatBytes(totalCompressedSize)}.`
         );
       }
 
@@ -396,8 +396,8 @@ export async function compress() {
     }
   } catch (e) {
     showAlert(
-      'Error',
-      `An error occurred during compression. Error: ${e.message}`
+      'Erro',
+      `Ocorreu um erro durante a compressão: ${e.message}`
     );
   } finally {
     hideLoader();

@@ -30,7 +30,7 @@ export async function nUpTool() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const borderColor = hexToRgb(document.getElementById('border-color').value);
 
-  showLoader('Creating N-Up PDF...');
+  showLoader('Criando PDF N-Up...');
   try {
     const sourceDoc = state.pdfDoc;
     const newDoc = await PDFLibDocument.create();
@@ -61,7 +61,7 @@ export async function nUpTool() {
 
     // Loop through the source pages in chunks of 'n'
     for (let i = 0; i < sourcePages.length; i += n) {
-      showLoader(`Processing sheet ${Math.floor(i / n) + 1}...`);
+      showLoader(`Processando folha ${Math.floor(i / n) + 1}...`);
       const chunk = sourcePages.slice(i, i + n);
       const outputPage = newDoc.addPage([pageWidth, pageHeight]);
 
@@ -121,7 +121,7 @@ export async function nUpTool() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while creating the N-Up PDF.');
+    showAlert('Erro', 'Ocorreu um erro ao criar o PDF N-Up.');
   } finally {
     hideLoader();
   }

@@ -32,7 +32,7 @@ export async function pdfToPng() {
     downloadFile(zipBlob, 'converted_pngs.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to convert PDF to PNG.');
+    showAlert('Erro', 'Não foi possível converter o PDF para PNG.');
   } finally {
     hideLoader();
   }

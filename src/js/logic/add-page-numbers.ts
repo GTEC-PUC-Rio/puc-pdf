@@ -127,10 +127,10 @@ export async function addPageNumbers() {
       new Blob([newPdfBytes], { type: 'application/pdf' }),
       'paginated.pdf'
     );
-    showAlert('Success', 'Page numbers added successfully!');
+    showAlert('Sucesso', 'Numeração adicionada com sucesso!');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not add page numbers.');
+    showAlert('Erro', 'Não foi possível adicionar a numeração das páginas.');
   } finally {
     hideLoader();
   }

@@ -11,7 +11,7 @@ async function initializeQpdf() {
   if (qpdfInstance) {
     return qpdfInstance;
   }
-  showLoader('Initializing optimization engine...');
+  showLoader('Inicializando o mecanismo de otimização...');
   try {
     qpdfInstance = await createModule({
       locateFile: () => withBasePath('qpdf.wasm'),
@@ -19,8 +19,8 @@ async function initializeQpdf() {
   } catch (error) {
     console.error('Failed to initialize qpdf-wasm:', error);
     showAlert(
-      'Initialization Error',
-      'Could not load the optimization engine. Please refresh the page and try again.'
+      'Erro de inicialização',
+      'Não foi possível carregar o mecanismo de otimização. Atualize a página e tente novamente.'
     );
     throw error;
   } finally {
@@ -35,11 +35,11 @@ export async function linearizePdf() {
     (file: File) => file.type === 'application/pdf'
   );
   if (!pdfFiles || pdfFiles.length === 0) {
-    showAlert('No PDF Files', 'Please upload at least one PDF file.');
+    showAlert('Nenhum PDF enviado', 'Envie ao menos um arquivo PDF.');
     return;
   }
 
-  showLoader('Optimizing PDFs for web view (linearizing)...');
+  showLoader('Otimizando PDFs para visualização rápida...');
   const zip = new JSZip(); // Create a JSZip instance
   let qpdf: any;
   let successCount = 0;
@@ -53,7 +53,7 @@ export async function linearizePdf() {
       const inputPath = `/input_${i}.pdf`;
       const outputPath = `/output_${i}.pdf`;
 
-      showLoader(`Optimizing ${file.name} (${i + 1}/${pdfFiles.length})...`);
+      showLoader(`Otimizando ${file.name} (${i + 1}/${pdfFiles.length})...`);
 
       try {
         const fileBuffer = await readFileAsArrayBuffer(file);
@@ -70,7 +70,7 @@ export async function linearizePdf() {
           console.error(
             `Linearization resulted in an empty file for ${file.name}.`
           );
-          throw new Error(`Processing failed for ${file.name}.`);
+          throw new Error(`Falha ao processar ${file.name}.`);
         }
 
         zip.file(`linearized-${file.name}`, outputFile, { binary: true });
@@ -100,23 +100,23 @@ export async function linearizePdf() {
     }
 
     if (successCount === 0) {
-      throw new Error('No PDF files could be linearized.');
+      throw new Error('Não foi possível linearizar nenhum PDF.');
     }
 
-    showLoader('Generating ZIP file...');
+    showLoader('Gerando arquivo ZIP...');
     const zipBlob = await zip.generateAsync({ type: 'blob' });
     downloadFile(zipBlob, 'linearized-pdfs.zip');
 
-    let alertMessage = `${successCount} PDF(s) linearized successfully.`;
+    let alertMessage = `${successCount} PDF(s) linearizados com sucesso.`;
     if (errorCount > 0) {
-      alertMessage += ` ${errorCount} file(s) failed.`;
+      alertMessage += ` ${errorCount} arquivo(s) falharam.`;
     }
-    showAlert('Processing Complete', alertMessage);
+    showAlert('Processo concluído', alertMessage);
   } catch (error: any) {
     console.error('Linearization process error:', error);
     showAlert(
-      'Linearization Failed',
-      `An error occurred: ${error.message || 'Unknown error'}.`
+      'Falha na linearização',
+      `Ocorreu um erro: ${error.message || 'Erro desconhecido'}.`
     );
   } finally {
     hideLoader();

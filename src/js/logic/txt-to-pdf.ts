@@ -188,7 +188,7 @@ export async function txtToPdf() {
           `${baseName}.pdf`
         );
       } else {
-        showLoader('Creating PDFs and ZIP archive...');
+        showLoader('Gerando PDFs e arquivo ZIP...');
         const zip = new JSZip();
 
         for (const file of state.files) {
@@ -211,7 +211,7 @@ export async function txtToPdf() {
       // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
       const text = document.getElementById('text-input').value;
       if (!text.trim()) {
-        showAlert('Input Required', 'Please enter some text to convert.');
+        showAlert('Entrada obrigatória', 'Digite algum texto para converter.');
         hideLoader();
         return;
       }
@@ -230,7 +230,7 @@ export async function txtToPdf() {
     }
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to create PDF from text.');
+    showAlert('Erro', 'Não foi possível criar o PDF a partir do texto.');
   } finally {
     hideLoader();
   }

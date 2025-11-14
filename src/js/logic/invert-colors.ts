@@ -5,10 +5,10 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function invertColors() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'PDF not loaded.');
+    showAlert('Erro', 'Nenhum PDF carregado.');
     return;
   }
-  showLoader('Inverting PDF colors...');
+  showLoader('Invertendo cores do PDF...');
   try {
     const newPdfDoc = await PDFLibDocument.create();
     const pdfBytes = await state.pdfDoc.save();
@@ -58,7 +58,7 @@ export async function invertColors() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not invert PDF colors.');
+    showAlert('Erro', 'Não foi possível inverter as cores do PDF.');
   } finally {
     hideLoader();
   }

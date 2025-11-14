@@ -108,7 +108,7 @@ async function updateAnalysisUI() {
     }
   } else {
     analysisText.textContent =
-      'No blank pages found at this sensitivity level.';
+      'Nenhuma página em branco encontrada para esta sensibilidade.';
     previewContainer.classList.remove('hidden');
   }
 }
@@ -141,8 +141,8 @@ export async function removeBlankPages() {
     if (indicesToKeep.length === 0) {
       hideLoader();
       showAlert(
-        'No Content Found',
-        'All pages were identified as blank at the current sensitivity setting. No new file was created. Try lowering the sensitivity if you believe this is an error.'
+        'Nenhum conteúdo encontrado',
+        'Todas as páginas foram identificadas como em branco na sensibilidade atual. Nenhum arquivo foi gerado. Reduza a sensibilidade se acreditar que há um erro.'
       );
       return;
     }
@@ -150,8 +150,8 @@ export async function removeBlankPages() {
     if (indicesToKeep.length === state.pdfDoc.getPageCount()) {
       hideLoader();
       showAlert(
-        'No Pages Removed',
-        'No pages were identified as blank at the current sensitivity level.'
+        'Nenhuma página removida',
+        'Nenhuma página foi identificada como vazia no nível de sensibilidade atual.'
       );
       return;
     }
@@ -167,7 +167,7 @@ export async function removeBlankPages() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not remove blank pages.');
+    showAlert('Erro', 'Não foi possível remover as páginas em branco.');
   } finally {
     hideLoader();
   }

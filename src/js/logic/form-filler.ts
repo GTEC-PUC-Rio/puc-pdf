@@ -343,15 +343,15 @@ export async function setupFormFiller() {
   } catch (e) {
     console.error('Critical error setting up form filler:', e);
     showAlert(
-      'Error',
-      'Failed to read PDF form data. The file may be corrupt or not a valid form.'
+      'Erro',
+      'Não foi possível ler os dados do formulário. O arquivo pode estar corrompido ou não ser um formulário válido.'
     );
     hideLoader();
   }
 }
 
 export async function processAndDownloadForm() {
-  showLoader('Applying form data...');
+  showLoader('Aplicando dados do formulário...');
   try {
     const form = state.pdfDoc.getForm();
 
@@ -391,10 +391,10 @@ export async function processAndDownloadForm() {
       'filled-form.pdf'
     );
 
-    showAlert('Success', 'Form has been filled and downloaded.');
+    showAlert('Sucesso', 'O formulário foi preenchido e baixado.');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to save the filled form.');
+    showAlert('Erro', 'Não foi possível salvar o formulário preenchido.');
   } finally {
     hideLoader();
   }

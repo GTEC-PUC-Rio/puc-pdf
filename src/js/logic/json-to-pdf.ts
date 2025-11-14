@@ -64,7 +64,7 @@ jsonFilesInput.addEventListener('change', (e) => {
     updateFileList()
     
     if (selectedFiles.length === 0) {
-      showStatus('Please select at least 1 JSON file', 'info')
+      showStatus('Selecione pelo menos 1 arquivo JSON', 'info')
     } else {
       showStatus(`${selectedFiles.length} file(s) selected. Ready to convert!`, 'info')
     }
@@ -73,7 +73,7 @@ jsonFilesInput.addEventListener('change', (e) => {
 
 async function convertJSONsToPDF() {
   if (selectedFiles.length === 0) {
-    showStatus('Please select at least 1 JSON file', 'error')
+    showStatus('Selecione pelo menos 1 arquivo JSON', 'error')
     return
   }
 
@@ -95,7 +95,7 @@ async function convertJSONsToPDF() {
 
   } catch (error) {
     console.error('Error reading files:', error)
-    showStatus(`❌ Error reading files: ${error instanceof Error ? error.message : 'Unknown error'}`, 'error')
+    showStatus(`❌ Erro ao ler arquivos: ${error instanceof Error ? error.message : 'Erro desconhecido'}`, 'error')
     convertBtn.disabled = false
   }
 }
@@ -107,7 +107,7 @@ worker.onmessage = async (e: MessageEvent) => {
         const pdfFiles = e.data.pdfFiles as Array<{ name: string, data: ArrayBuffer }>;
         
         try {
-          showStatus('Creating ZIP file...', 'info')
+          showStatus('Criando arquivo ZIP...', 'info')
           
           const zip = new JSZip()
           pdfFiles.forEach(({ name, data }) => {
@@ -123,7 +123,7 @@ worker.onmessage = async (e: MessageEvent) => {
           a.download = 'jsons-to-pdf.zip'
           downloadFile(zipBlob, 'jsons-to-pdf.zip')
 
-          showStatus('✅ JSONs converted to PDF successfully! ZIP download started.', 'success')
+          showStatus('✅ JSONs convertidos para PDF! Download do ZIP iniciado.', 'success')
           
           selectedFiles = []
           jsonFilesInput.value = ''
@@ -137,13 +137,13 @@ worker.onmessage = async (e: MessageEvent) => {
 
         } catch (error) {
           console.error('Error creating ZIP:', error)
-          showStatus(`❌ Error creating ZIP: ${error instanceof Error ? error.message : 'Unknown error'}`, 'error')
+          showStatus(`❌ Erro ao criar o ZIP: ${error instanceof Error ? error.message : 'Erro desconhecido'}`, 'error')
         }
 
     } else if (e.data.status === 'error') {
-        const errorMessage = e.data.message || 'Unknown error occurred in worker.';
+        const errorMessage = e.data.message || 'Erro desconhecido no worker.';
         console.error('Worker Error:', errorMessage);
-        showStatus(`❌ Worker Error: ${errorMessage}`, 'error');
+        showStatus(`❌ Erro no worker: ${errorMessage}`, 'error');
     }
 };
 

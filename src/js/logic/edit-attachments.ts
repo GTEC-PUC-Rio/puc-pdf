@@ -25,7 +25,7 @@ async function loadAttachmentsList() {
   allAttachments = [];
 
   try {
-    showLoader('Loading attachments...');
+    showLoader('Carregando anexos...');
 
     const file = state.files[0];
     const fileBuffer = await readFileAsArrayBuffer(file);
@@ -40,7 +40,7 @@ async function loadAttachmentsList() {
   } catch (error) {
     console.error('Error loading attachments:', error);
     hideLoader();
-    showAlert('Error', 'Failed to load attachments from PDF.');
+    showAlert('Erro', 'Não foi possível carregar os anexos do PDF.');
   }
 }
 
@@ -65,17 +65,17 @@ worker.onmessage = (e) => {
       `edited-attachments-${data.fileName}`
     );
 
-    showAlert('Success', 'Attachments updated successfully!');
+    showAlert('Sucesso', 'Anexos atualizados com sucesso!');
   } else if (data.status === 'error') {
     hideLoader();
-    showAlert('Error', data.message || 'Unknown error occurred.');
+    showAlert('Erro', data.message || 'Erro desconhecido.');
   }
 };
 
 worker.onerror = (error) => {
   hideLoader();
   console.error('Worker error:', error);
-  showAlert('Error', 'Worker error occurred. Check console for details.');
+  showAlert('Erro', 'Ocorreu um erro no worker. Verifique o console para mais detalhes.');
 };
 
 function displayAttachments(attachments) {
@@ -91,7 +91,7 @@ function displayAttachments(attachments) {
   if (attachments.length === 0) {
     const noAttachments = document.createElement('p');
     noAttachments.className = 'text-gray-400 text-center py-4';
-    noAttachments.textContent = 'No attachments found in this PDF.';
+    noAttachments.textContent = 'Nenhum anexo encontrado neste PDF.';
     attachmentsList.appendChild(noAttachments);
     return;
   }
@@ -100,7 +100,7 @@ function displayAttachments(attachments) {
   controlsContainer.className = 'attachments-controls mb-4 flex justify-end';
   const removeAllBtn = document.createElement('button');
   removeAllBtn.className = 'btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm';
-  removeAllBtn.textContent = 'Remove All Attachments';
+  removeAllBtn.textContent = 'Remover todos os anexos';
   removeAllBtn.onclick = () => {
     if (allAttachments.length === 0) return;
 
@@ -119,7 +119,7 @@ function displayAttachments(attachments) {
           }
         }
       });
-      removeAllBtn.textContent = 'Remove All Attachments';
+      removeAllBtn.textContent = 'Remover todos os anexos';
     } else {
       allAttachments.forEach(attachment => {
         attachmentsToRemove.add(attachment.index);
@@ -133,7 +133,7 @@ function displayAttachments(attachments) {
           }
         }
       });
-      removeAllBtn.textContent = 'Deselect All';
+      removeAllBtn.textContent = 'Limpar seleção';
     }
   };
 
@@ -155,9 +155,9 @@ function displayAttachments(attachments) {
     const levelSpan = document.createElement('span');
     levelSpan.className = 'text-gray-400 text-sm block';
     if (attachment.page === 0) {
-      levelSpan.textContent = 'Document-level attachment';
+      levelSpan.textContent = 'Anexo no documento inteiro';
     } else {
-      levelSpan.textContent = `Page ${attachment.page} attachment`;
+      levelSpan.textContent = `Anexo da página ${attachment.page}`;
     }
 
     infoDiv.append(nameSpan, levelSpan);
@@ -168,7 +168,7 @@ function displayAttachments(attachments) {
     const removeBtn = document.createElement('button');
     removeBtn.className = `btn ${attachmentsToRemove.has(attachment.index) ? 'bg-gray-600' : 'bg-red-600'} hover:bg-red-700 text-white px-3 py-1 rounded text-sm`;
     removeBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4"></i>';
-    removeBtn.title = 'Remove attachment';
+    removeBtn.title = 'Remover anexo';
     removeBtn.onclick = () => {
       if (attachmentsToRemove.has(attachment.index)) {
         attachmentsToRemove.delete(attachment.index);
@@ -182,7 +182,7 @@ function displayAttachments(attachments) {
         removeBtn.classList.remove('bg-red-600');
       }
       const allSelected = allAttachments.every(attachment => attachmentsToRemove.has(attachment.index));
-      removeAllBtn.textContent = allSelected ? 'Deselect All' : 'Remove All Attachments';
+      removeAllBtn.textContent = allSelected ? 'Limpar seleção' : 'Remover todos os anexos';
     };
 
     actionsDiv.append(removeBtn);
@@ -193,11 +193,11 @@ function displayAttachments(attachments) {
 
 export async function editAttachments() {
   if (!state.files || state.files.length === 0) {
-    showAlert('Error', 'No PDF file loaded.');
+    showAlert('Erro', 'Nenhum PDF foi carregado.');
     return;
   }
 
-  showLoader('Processing attachments...');
+  showLoader('Processando anexos...');
 
   try {
     const file = state.files[0];
@@ -214,6 +214,6 @@ export async function editAttachments() {
   } catch (error) {
     console.error('Error editing attachments:', error);
     hideLoader();
-    showAlert('Error', 'Failed to edit attachments.');
+    showAlert('Erro', 'Não foi possível editar os anexos.');
   }
 }

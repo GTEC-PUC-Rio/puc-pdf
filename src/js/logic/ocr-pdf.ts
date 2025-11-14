@@ -93,8 +93,8 @@ async function runOCR() {
 
   if (selectedLangs.length === 0) {
     showAlert(
-      'No Languages Selected',
-      'Please select at least one language for OCR.'
+      'Nenhum idioma selecionado',
+      'Selecione ao menos um idioma para o OCR.'
     );
     return;
   }
@@ -127,7 +127,7 @@ async function runOCR() {
 
     for (let i = 1; i <= pdf.numPages; i++) {
       updateProgress(
-        `Processing page ${i} of ${pdf.numPages}`,
+        `Processando página ${i} de ${pdf.numPages}`,
         (i - 1) / pdf.numPages
       );
       const page = await pdf.getPage(i);
@@ -264,8 +264,8 @@ async function runOCR() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'OCR Error',
-      'An error occurred during the OCR process. The worker may have failed to load. Please try again.'
+      'Erro de OCR',
+      'Ocorreu um erro durante o processo de OCR. O worker pode não ter carregado. Tente novamente.'
     );
     document.getElementById('ocr-options').classList.remove('hidden');
     document.getElementById('ocr-progress').classList.add('hidden');

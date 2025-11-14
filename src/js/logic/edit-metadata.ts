@@ -84,8 +84,8 @@ export async function editMetadata() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Could not update metadata. Please check that date formats are correct.'
+      'Erro',
+      'Não foi possível atualizar os metadados. Verifique se os formatos de data estão corretos.'
     );
   } finally {
     hideLoader();

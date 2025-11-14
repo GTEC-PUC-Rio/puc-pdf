@@ -23,18 +23,18 @@ async function convertImageToPngBytes(file: any) {
         const pngBytes = await pngBlob.arrayBuffer();
         resolve(pngBytes);
       };
-      img.onerror = () => reject(new Error('Failed to load image.'));
+      img.onerror = () => reject(new Error('Não foi possível carregar a imagem.'));
       // @ts-expect-error TS(2322) FIXME: Type 'string | ArrayBuffer' is not assignable to t... Remove this comment to see the full error message
       img.src = e.target.result;
     };
-    reader.onerror = () => reject(new Error('Failed to read file.'));
+    reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.'));
     reader.readAsDataURL(file);
   });
 }
 
 export async function bmpToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one BMP file.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos um arquivo BMP.');
     return;
   }
   showLoader('Converting BMP to PDF...');
@@ -59,8 +59,8 @@ export async function bmpToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert BMP to PDF. One of the files may be invalid.'
+      'Erro',
+      'Não foi possível converter BMP para PDF. Algum arquivo pode estar inválido.'
     );
   } finally {
     hideLoader();

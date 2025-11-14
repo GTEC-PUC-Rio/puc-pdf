@@ -6,7 +6,7 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function webpToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one WebP file.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos um arquivo WebP.');
     return;
   }
   showLoader('Converting WebP to PDF...');
@@ -47,8 +47,8 @@ export async function webpToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert WebP to PDF. Ensure all files are valid WebP images.'
+      'Erro',
+      'Não foi possível converter WebP para PDF. Verifique se todos os arquivos são WebP válidos.'
     );
   } finally {
     hideLoader();

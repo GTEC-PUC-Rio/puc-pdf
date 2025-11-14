@@ -94,7 +94,7 @@ export async function addWatermark() {
         document.getElementById('image-watermark-input') as HTMLInputElement
       ).files?.[0];
       if (!imageFile)
-        throw new Error('Please select an image file for the watermark.');
+        throw new Error('Selecione uma imagem para a marca d\'água.');
 
       const imageBytes = await readFileAsArrayBuffer(imageFile);
       if (imageFile.type === 'image/png') {
@@ -103,7 +103,7 @@ export async function addWatermark() {
         watermarkAsset = await state.pdfDoc.embedJpg(imageBytes);
       } else {
         throw new Error(
-          'Unsupported Image. Please use a PNG or JPG for the watermark.'
+          'Imagem não suportada. Utilize um PNG ou JPG para a marca d\'água.'
         );
       }
     }
@@ -115,7 +115,7 @@ export async function addWatermark() {
         // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
         const text = document.getElementById('watermark-text').value;
         if (!text.trim())
-          throw new Error('Please enter text for the watermark.');
+          throw new Error('Digite um texto para a marca d\'água.');
 
         const fontSize =
           parseInt(
@@ -186,8 +186,8 @@ export async function addWatermark() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      e.message || 'Could not add the watermark. Please check your inputs.'
+      'Erro',
+      e.message || 'Não foi possível adicionar a marca d\'água. Verifique os dados informados.'
     );
   } finally {
     hideLoader();

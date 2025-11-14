@@ -36,8 +36,8 @@ export async function pdfToJpg() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert PDF to JPG. The file might be corrupted.'
+      'Erro',
+      'Não foi possível converter o PDF para JPG. O arquivo pode estar corrompido.'
     );
   } finally {
     hideLoader();

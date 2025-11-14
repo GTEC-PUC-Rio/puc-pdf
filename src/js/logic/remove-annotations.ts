@@ -86,7 +86,7 @@ export async function removeAnnotations() {
     } else {
       // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
       const rangeInput = document.getElementById('page-range-input').value;
-      if (!rangeInput.trim()) throw new Error('Please enter a page range.');
+      if (!rangeInput.trim()) throw new Error('Informe um intervalo de páginas.');
       const ranges = rangeInput.split(',');
       for (const range of ranges) {
         const trimmedRange = range.trim();
@@ -111,7 +111,7 @@ export async function removeAnnotations() {
     }
 
     if (targetPageIndices.length === 0)
-      throw new Error('No valid pages were selected.');
+      throw new Error('Nenhuma página válida foi selecionada.');
 
     const typesToRemove = new Set(
       Array.from(document.querySelectorAll('.annot-checkbox:checked')).map(
@@ -120,7 +120,7 @@ export async function removeAnnotations() {
     );
 
     if (typesToRemove.size === 0)
-      throw new Error('Please select at least one annotation type to remove.');
+      throw new Error('Selecione pelo menos um tipo de anotação para remover.');
 
     removeAnnotationsFromDoc(state.pdfDoc, targetPageIndices, typesToRemove);
 
@@ -132,8 +132,8 @@ export async function removeAnnotations() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      e.message || 'Could not remove annotations. Please check your page range.'
+      'Erro',
+      e.message || 'Não foi possível remover as anotações. Verifique o intervalo informado.'
     );
   } finally {
     hideLoader();

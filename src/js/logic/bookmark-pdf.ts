@@ -815,12 +815,12 @@ resetBtn.addEventListener('click', async () => {
 // Delete all bookmarks button
 deleteAllBtn.addEventListener('click', async () => {
   if (bookmarkTree.length === 0) {
-    await showAlertModal('Info', 'No bookmarks to delete.');
+    await showAlertModal('Aviso', 'Não há marcadores para excluir.');
     return;
   }
 
   const confirmed = await showConfirmModal(
-    `Delete all ${bookmarkTree.length} bookmark(s)?`
+    `Excluir todos os ${bookmarkTree.length} marcador(es)?`
   );
   if (confirmed) {
     bookmarkTree = [];
@@ -1091,11 +1091,11 @@ jsonInput.addEventListener('change', async (e) => {
   try {
     jsonBookmarks = JSON.parse(text);
     await showAlertModal(
-      'JSON Loaded',
-      'Loaded bookmarks from JSON. Now upload your PDF.'
+      'JSON carregado',
+      'Marcadores importados do JSON. Agora envie o seu PDF.'
     );
   } catch (err) {
-    await showAlertModal('Error', 'Invalid JSON format');
+    await showAlertModal('Erro', 'Formato JSON inválido.');
   }
 });
 
@@ -1652,7 +1652,7 @@ function createNodeElement(node, level = 0) {
 addTopLevelBtn.addEventListener('click', async () => {
   const title = titleInput.value.trim();
   if (!title) {
-    await showAlertModal('Error', 'Please enter a title.');
+    await showAlertModal('Erro', 'Informe um título.');
     return;
   }
 
@@ -1699,7 +1699,7 @@ csvImportHidden.addEventListener('change', async (e) => {
     bookmarkTree = imported;
     saveState();
     renderBookmarkTree();
-    await showAlertModal('Success', `Imported ${imported.length} bookmarks!`);
+    await showAlertModal('Sucesso', `Importados ${imported.length} marcadores!`);
   }
 
   csvImportHidden.value = '';
@@ -1709,7 +1709,7 @@ exportCsvBtn.addEventListener('click', () => {
   exportDropdown.classList.add('hidden');
 
   if (bookmarkTree.length === 0) {
-    showAlertModal('Error', 'No bookmarks to export!');
+    showAlertModal('Erro', 'Não há marcadores para exportar!');
     return;
   }
 
@@ -1776,9 +1776,9 @@ jsonImportHidden.addEventListener('change', async (e) => {
     bookmarkTree = imported;
     saveState();
     renderBookmarkTree();
-    await showAlertModal('Success', 'Bookmarks imported from JSON!');
+    await showAlertModal('Sucesso', 'Marcadores importados do JSON!');
   } catch (err) {
-    await showAlertModal('Error', 'Invalid JSON format');
+    await showAlertModal('Erro', 'Formato JSON inválido.');
   }
 
   jsonImportHidden.value = '';
@@ -1788,7 +1788,7 @@ exportJsonBtn.addEventListener('click', () => {
   exportDropdown.classList.add('hidden');
 
   if (bookmarkTree.length === 0) {
-    showAlertModal('Error', 'No bookmarks to export!');
+    showAlertModal('Erro', 'Não há marcadores para exportar!');
     return;
   }
 
@@ -1808,7 +1808,7 @@ extractExistingBtn.addEventListener('click', async () => {
   const extracted = await extractExistingBookmarks(pdfLibDoc);
   if (extracted.length > 0) {
     const confirmed = await showConfirmModal(
-      `Found ${extracted.length} existing bookmarks. Replace current bookmarks?`
+      `Encontrados ${extracted.length} marcadores existentes. Deseja substituir os atuais?`
     );
     if (confirmed) {
       bookmarkTree = extracted;
@@ -1816,7 +1816,7 @@ extractExistingBtn.addEventListener('click', async () => {
       renderBookmarkTree();
     }
   } else {
-    await showAlertModal('Info', 'No existing bookmarks found in this PDF.');
+    await showAlertModal('Aviso', 'Nenhum marcador existente foi encontrado neste PDF.');
   }
 });
 
@@ -2226,7 +2226,7 @@ downloadBtn.addEventListener('click', async () => {
     a.click();
     URL.revokeObjectURL(url);
 
-    await showAlertModal('Success', 'PDF saved successfully!');
+    await showAlertModal('Sucesso', 'PDF salvo com sucesso!');
 
     // Reset to uploader after successful save
     setTimeout(() => {
@@ -2235,8 +2235,8 @@ downloadBtn.addEventListener('click', async () => {
   } catch (err) {
     console.error(err);
     await showAlertModal(
-      'Error',
-      'Error saving PDF. Check console for details.'
+      'Erro',
+      'Erro ao salvar o PDF. Verifique o console para mais detalhes.'
     );
   }
 });

@@ -31,7 +31,7 @@ export async function pdfToWebp() {
     downloadFile(zipBlob, 'converted_webp.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to convert PDF to WebP.');
+    showAlert('Erro', 'Não foi possível converter o PDF para WebP.');
   } finally {
     hideLoader();
   }

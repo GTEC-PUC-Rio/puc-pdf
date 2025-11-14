@@ -73,7 +73,7 @@ async function renderVisualSelector() {
     }
   } catch (error) {
     console.error('Error rendering visual selector:', error);
-    showAlert('Error', 'Failed to render page previews.');
+    showAlert('Erro', 'Não foi possível renderizar as prévias das páginas.');
     // 4. ADDED: Reset the flag on error so the user can try again.
     visualSelectorRendered = false;
   } finally {
@@ -173,7 +173,7 @@ export async function split() {
       case 'range':
         // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
         const pageRangeInput = document.getElementById('page-range').value;
-        if (!pageRangeInput) throw new Error('Please enter a page range.');
+        if (!pageRangeInput) throw new Error('Informe um intervalo de páginas.');
         const ranges = pageRangeInput.split(',');
         for (const range of ranges) {
           const trimmedRange = range.trim();
@@ -200,7 +200,7 @@ export async function split() {
         const choiceElement = document.querySelector(
           'input[name="even-odd-choice"]:checked'
         );
-        if (!choiceElement) throw new Error('Please select even or odd pages.');
+        if (!choiceElement) throw new Error('Selecione páginas pares ou ímpares.');
         // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'Element'.
         const choice = choiceElement.value;
         for (let i = 0; i < totalPages; i++) {
@@ -243,7 +243,7 @@ export async function split() {
         cpdf.deletePdf(pdf);
 
         if (splitPages.length === 0) {
-          throw new Error('No bookmarks found at the selected level.');
+          throw new Error('Nenhum marcador encontrado no nível selecionado.');
         }
 
         splitPages.sort((a, b) => a - b);
@@ -293,7 +293,7 @@ export async function split() {
 
     const uniqueIndices = [...new Set(indicesToExtract)];
     if (uniqueIndices.length === 0 && splitMode !== 'bookmarks' && splitMode !== 'n-times') {
-      throw new Error('No pages were selected for splitting.');
+      throw new Error('Nenhuma página foi selecionada para divisão.');
     }
 
     if (
@@ -334,8 +334,8 @@ export async function split() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      e.message || 'Failed to split PDF. Please check your selection.'
+      'Erro',
+      e.message || 'Não foi possível dividir o PDF. Verifique a seleção.'
     );
   } finally {
     hideLoader();

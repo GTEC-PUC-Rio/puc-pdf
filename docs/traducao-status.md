@@ -22,14 +22,14 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 | `src/pages/bookmark.html` | ✅ Concluído | Editor de marcadores traduzido (menus, etiquetas, botões e placeholders). |
 | `src/pages/pdf-multi-tool.html` | ✅ Concluído | Toolbar, instruções e mensagens desta ferramenta avançada traduzidas, mantendo o fluxo em pt-BR. |
 | `src/js/config/tools.ts` | ✅ Concluído | Categorias, nomes e descrições das ferramentas traduzidos. |
-| Templates dinâmicos (`src/js/ui.ts`) | ⏳ Em andamento | Fluxos principais já localizados; ferramentas restantes estão sendo revisadas. |
-| Mensagens de lógica (`src/js/logic/*`) | ⏳ Em andamento | Cropper e handlers de upload convertidos; demais ferramentas seguem no backlog. |
+| Templates dinâmicos (`src/js/ui.ts`) | ✅ Concluído | Todos os formulários, botões e descrições das ferramentas do Simple Mode estão em pt-BR, incluindo estados vazios e tooltips. |
+| Mensagens de lógica (`src/js/logic/*`) | ✅ Concluído | Loaders, alertas e mensagens de erro/sucesso traduzidos em todos os módulos. Novas strings devem seguir o mesmo padrão. |
 | Documentação (`README.md`, etc.) | ✅ Concluído | Mantida em inglês por decisão de produto; não será traduzida nesta fase. |
 
 ## Próximos Passos
-1. Mapear e traduzir as strings dos templates em `src/js/ui.ts` (grid de ferramentas e formulários de cada módulo).
-2. Revisar arquivos em `src/js/logic` para alinhar mensagens de erro/sucesso.
-3. Localizar documentação Markdown (README, CONTRIBUTING, SECURITY, etc.).
+1. Monitorar pull requests futuros para garantir que novas ferramentas/strings em `src/js/ui.ts` cheguem já traduzidas.
+2. Revisar periodicamente `src/js/logic` para manter consistência caso novas mensagens sejam adicionadas.
+3. Localizar documentação Markdown (README, CONTRIBUTING, SECURITY, etc.) se o produto decidir migrar esses textos para pt-BR.
 
 Manter este documento atualizado a cada entrega ajudará a garantir transparência sobre o que já foi traduzido e o que ainda falta.
 - 2025-11-12: Templates dos fluxos "Unir PDF", "Dividir PDF", "Proteger PDF", "Remover senha", "Organizar", "Girar", "Adicionar numeração", "PDF↔JPG", "Compressão" e componentes gerais (upload, modais) traduzidos em `src/js/ui.ts`.
@@ -41,3 +41,4 @@ Manter este documento atualizado a cada entrega ajudará a garantir transparênc
 - 2025-11-13: “Recortar PDF” (template e lógica) e fluxo de upload (`src/js/handlers/fileHandler.ts`) traduzidos, incluindo mensagens de alerta, loaders e metadados.
 - 2025-11-13: Fluxo "Comparar PDFs" localizado (template em `src/js/ui.ts` e lógica em `src/js/logic/compare-pdfs.ts`), cobrindo loaders, alertas e botões de visualização.
 - 2025-11-13: Localizados os fluxos "Gerenciar páginas", "Combinar em uma única página", "Padronizar dimensões", "Alterar cor de fundo" e "Alterar cor do texto" (templates em `src/js/ui.ts` e lógicas relacionadas).
+- 2025-11-14: Concluída a revisão final dos templates em `src/js/ui.ts` e de todas as mensagens em `src/js/logic/*`, garantindo paridade total com o front estático.

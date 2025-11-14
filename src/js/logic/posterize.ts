@@ -277,10 +277,10 @@ export async function posterize() {
       new Blob([new Uint8Array(newPdfBytes)], { type: 'application/pdf' }),
       'posterized.pdf'
     );
-    showAlert('Success', 'Your PDF has been posterized.');
+    showAlert('Sucesso', 'Seu PDF foi transformado em pôster.');
   } catch (e) {
     console.error(e);
-    showAlert('Error', e.message || 'Could not posterize the PDF.');
+    showAlert('Erro', e.message || 'Não foi possível transformar o PDF em pôster.');
   } finally {
     hideLoader();
   }

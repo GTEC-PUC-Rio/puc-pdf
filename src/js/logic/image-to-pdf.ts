@@ -12,7 +12,7 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function imageToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one image file.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos uma imagem.');
     return;
   }
 
@@ -56,7 +56,7 @@ export async function imageToPdf() {
         state.files = filesByType[type] as File[];
         await heicToPdf();
       } else {
-        showLoader('Converting images to PDF...');
+        showLoader('Convertendo imagens em PDF...');
         try {
 
           const pdfDoc = await PDFLibDocument.create();
@@ -91,7 +91,7 @@ export async function imageToPdf() {
           );
         } catch (e) {
           console.error(e);
-          showAlert('Error', 'Failed to convert images to PDF.');
+          showAlert('Erro', 'Não foi possível converter as imagens em PDF.');
         } finally {
           hideLoader();
         }
@@ -102,7 +102,7 @@ export async function imageToPdf() {
     return;
   }
 
-  showLoader('Converting mixed image types to PDF...');
+  showLoader('Convertendo diferentes formatos em PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
 
@@ -150,7 +150,7 @@ export async function imageToPdf() {
 
     if (pdfDoc.getPageCount() === 0) {
       throw new Error(
-        'No valid images could be processed. Please check your files.'
+        'Nenhuma imagem válida pôde ser processada. Verifique seus arquivos.'
       );
     }
 
@@ -161,7 +161,7 @@ export async function imageToPdf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', e.message || 'Failed to create PDF from images.');
+    showAlert('Erro', e.message || 'Não foi possível criar o PDF a partir das imagens.');
   } finally {
     hideLoader();
   }

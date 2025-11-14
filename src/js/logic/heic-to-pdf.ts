@@ -6,7 +6,7 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function heicToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one HEIC file.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos um arquivo HEIC.');
     return;
   }
   showLoader('Converting HEIC to PDF...');
@@ -39,8 +39,8 @@ export async function heicToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert HEIC to PDF. One of the files may be invalid or unsupported.'
+      'Erro',
+      'Não foi possível converter HEIC para PDF. Algum arquivo pode estar inválido ou não ser suportado.'
     );
   } finally {
     hideLoader();

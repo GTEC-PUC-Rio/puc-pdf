@@ -90,7 +90,7 @@ function renderFileDisplay(file: File) {
 
 function handleFileSelect(file: File) {
   if (file.type !== 'application/pdf') {
-    showStatus('Please select a PDF file.', 'error');
+    showStatus('Selecione um arquivo PDF.', 'error');
     return;
   }
 
@@ -126,7 +126,7 @@ fileInput.addEventListener('change', (e) => {
 
 async function generateTableOfContents() {
   if (!pdfFile) {
-    showStatus('Please select a PDF file first.', 'error');
+    showStatus('Selecione primeiro um arquivo PDF.', 'error');
     return;
   }
 
@@ -156,7 +156,7 @@ async function generateTableOfContents() {
   } catch (error) {
     console.error('Error reading file:', error);
     showStatus(
-      `Error reading file: ${error instanceof Error ? error.message : 'Unknown error occurred'}`,
+      `Erro ao ler o arquivo: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
       'error'
     );
     generateBtn.disabled = false;
@@ -174,7 +174,7 @@ worker.onmessage = (e: MessageEvent<TOCWorkerResponse>) => {
     downloadFile(blob, pdfFile?.name.replace('.pdf', '_with_toc.pdf') || 'output_with_toc.pdf');
 
     showStatus(
-      'Table of contents generated successfully! Download started.',
+      'Sumário gerado com sucesso! Download iniciado.',
       'success'
     );
 
@@ -185,9 +185,9 @@ worker.onmessage = (e: MessageEvent<TOCWorkerResponse>) => {
     fileDisplayArea.classList.add('hidden');
     generateBtn.disabled = true;
   } else if (e.data.status === 'error') {
-    const errorMessage = e.data.message || 'Unknown error occurred in worker.';
+    const errorMessage = e.data.message || 'Erro desconhecido no worker.';
     console.error('Worker Error:', errorMessage);
-    showStatus(`Error: ${errorMessage}`, 'error');
+    showStatus(`Erro: ${errorMessage}`, 'error');
   }
 };
 

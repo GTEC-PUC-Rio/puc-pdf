@@ -17,16 +17,16 @@ export async function removeRestrictions() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing...');
+    showLoader('Inicializando...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading PDF...');
+    showLoader('Lendo o PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Removing restrictions...');
+    showLoader('Removendo restrições...');
 
     const args = [inputPath];
 
@@ -45,21 +45,21 @@ export async function removeRestrictions() {
         qpdfError.message?.includes('encrypt')
       ) {
         throw new Error(
-          'Failed to remove restrictions. The PDF may require the correct owner password.'
+          'Não foi possível remover as restrições. Talvez seja necessário informar a senha correta do proprietário.'
         );
       }
 
       throw new Error(
-        'Failed to remove restrictions: ' +
-          (qpdfError.message || 'Unknown error')
+        'Não foi possível remover as restrições: ' +
+          (qpdfError.message || 'Erro desconhecido')
       );
     }
 
-    showLoader('Preparing download...');
+    showLoader('Preparando download...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {
-      throw new Error('Operation resulted in an empty file.');
+      throw new Error('A operação resultou em um arquivo vazio.');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -68,15 +68,15 @@ export async function removeRestrictions() {
     hideLoader();
 
     showAlert(
-      'Success',
-      'PDF restrictions removed successfully! The file is now fully editable and printable.'
+      'Sucesso',
+      'Restrições removidas com sucesso! O arquivo agora está totalmente liberado para edição e impressão.'
     );
   } catch (error: any) {
     console.error('Error during restriction removal:', error);
     hideLoader();
     showAlert(
-      'Operation Failed',
-      `An error occurred: ${error.message || 'The PDF might be corrupted or password-protected.'}`
+      'Falha na operação',
+      `Ocorreu um erro: ${error.message || 'O PDF pode estar corrompido ou protegido por senha.'}`
     );
   } finally {
     try {

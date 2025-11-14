@@ -19,14 +19,14 @@ type ExtractAttachmentResponse = ExtractAttachmentSuccessResponse | ExtractAttac
 
 export async function extractAttachments() {
   if (state.files.length === 0) {
-    showStatus('No Files', 'error');
+    showStatus('Nenhum arquivo selecionado.', 'error');
     return;
   }
 
   document.getElementById('process-btn')?.classList.add('opacity-50', 'cursor-not-allowed');
   document.getElementById('process-btn')?.setAttribute('disabled', 'true');
   
-  showStatus('Reading files (Main Thread)...', 'info');
+  showStatus('Lendo arquivos (thread principal)...', 'info');
 
   try {
     const fileBuffers: ArrayBuffer[] = [];
@@ -38,7 +38,7 @@ export async function extractAttachments() {
       fileNames.push(file.name);
     }
 
-    showStatus(`Extracting attachments from ${state.files.length} file(s)...`, 'info');
+    showStatus(`Extraindo anexos de ${state.files.length} arquivo(s)...`, 'info');
 
     const message: ExtractAttachmentsMessage = {
       command: 'extract-attachments',
@@ -52,7 +52,7 @@ export async function extractAttachments() {
   } catch (error) {
     console.error('Error reading files:', error);
     showStatus(
-      `Error reading files: ${error instanceof Error ? error.message : 'Unknown error occurred'}`,
+      `Erro ao ler arquivos: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
       'error'
     );
     document.getElementById('process-btn')?.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -78,7 +78,7 @@ worker.onmessage = (e: MessageEvent<ExtractAttachmentResponse>) => {
     zip.generateAsync({ type: 'blob' }).then((zipBlob) => {
       downloadFile(zipBlob, 'extracted-attachments.zip');
       showStatus(
-        `Extraction completed! ${attachments.length} attachment(s) in zip file (${formatBytes(totalSize)}). Download started.`,
+        `Extração concluída! ${attachments.length} anexo(s) no ZIP (${formatBytes(totalSize)}). Download iniciado.`,
         'success'
       );
 
@@ -96,15 +96,15 @@ worker.onmessage = (e: MessageEvent<ExtractAttachmentResponse>) => {
       document.getElementById('process-btn')?.setAttribute('disabled', 'true');
     });
   } else if (e.data.status === 'error') {
-    const errorMessage = e.data.message || 'Unknown error occurred in worker.';
+    const errorMessage = e.data.message || 'Erro desconhecido no worker.';
     console.error('Worker Error:', errorMessage);
-    showStatus(`Error: ${errorMessage}`, 'error');
+    showStatus(`Erro: ${errorMessage}`, 'error');
   }
 };
 
 worker.onerror = (error) => {
   console.error('Worker error:', error);
-  showStatus('Worker error occurred. Check console for details.', 'error');
+  showStatus('Ocorreu um erro no worker. Veja os detalhes no console.', 'error');
   document.getElementById('process-btn')?.classList.remove('opacity-50', 'cursor-not-allowed');
   document.getElementById('process-btn')?.removeAttribute('disabled');
 };

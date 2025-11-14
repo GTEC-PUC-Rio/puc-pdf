@@ -26,7 +26,7 @@ function sanitizeImageAsJpeg(imageBytes: any) {
       canvas.toBlob(
         async (jpegBlob) => {
           if (!jpegBlob) {
-            return reject(new Error('Canvas toBlob conversion failed.'));
+            return reject(new Error('Falha na conversão do canvas para blob.'));
           }
           const arrayBuffer = await jpegBlob.arrayBuffer();
           resolve(new Uint8Array(arrayBuffer));
@@ -41,7 +41,7 @@ function sanitizeImageAsJpeg(imageBytes: any) {
       URL.revokeObjectURL(imageUrl);
       reject(
         new Error(
-          'The provided file could not be loaded as an image. It may be corrupted.'
+          'Não foi possível carregar o arquivo como imagem. Talvez ele esteja corrompido.'
         )
       );
     };
@@ -52,10 +52,10 @@ function sanitizeImageAsJpeg(imageBytes: any) {
 
 export async function jpgToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one JPG file.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos um arquivo JPG.');
     return;
   }
-  showLoader('Creating PDF from JPGs...');
+  showLoader('Criando PDF a partir dos JPGs...');
   try {
     const pdfDoc = await PDFLibDocument.create();
 
@@ -68,7 +68,7 @@ export async function jpgToPdf() {
       } catch (e) {
         // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
         showAlert(
-          `Direct JPG embedding failed for ${file.name}, attempting to sanitize...`
+          `A incorporação direta de ${file.name} falhou. Tentando sanitizar...`
         );
         try {
           const sanitizedBytes = await sanitizeImageAsJpeg(originalBytes);
@@ -79,7 +79,7 @@ export async function jpgToPdf() {
             fallbackError
           );
           throw new Error(
-            `Could not process "${file.name}". The file may be corrupted.`
+            `Não foi possível processar "${file.name}". O arquivo pode estar corrompido.`
           );
         }
       }
@@ -100,7 +100,7 @@ export async function jpgToPdf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Conversion Error', e.message);
+    showAlert('Erro de conversão', e.message);
   } finally {
     hideLoader();
   }

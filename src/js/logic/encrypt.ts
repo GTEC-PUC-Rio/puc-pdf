@@ -16,7 +16,7 @@ export async function encrypt() {
       ?.value || '';
 
   if (!userPassword) {
-    showAlert('Input Required', 'Please enter a user password.');
+    showAlert('Entrada obrigatória', 'Informe a senha de usuário.');
     return;
   }
 
@@ -28,16 +28,16 @@ export async function encrypt() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing encryption...');
+    showLoader('Inicializando criptografia...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading PDF...');
+    showLoader('Lendo o PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Encrypting PDF with 256-bit AES...');
+    showLoader('Criptografando PDF com AES de 256 bits...');
 
     const args = [inputPath, '--encrypt', userPassword, ownerPassword, '256'];
 
@@ -62,15 +62,15 @@ export async function encrypt() {
     } catch (qpdfError: any) {
       console.error('qpdf execution error:', qpdfError);
       throw new Error(
-        'Encryption failed: ' + (qpdfError.message || 'Unknown error')
+        'Falha na criptografia: ' + (qpdfError.message || 'Erro desconhecido')
       );
     }
 
-    showLoader('Preparing download...');
+    showLoader('Preparando download...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {
-      throw new Error('Encryption resulted in an empty file.');
+      throw new Error('A criptografia resultou em um arquivo vazio.');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -78,19 +78,19 @@ export async function encrypt() {
 
     hideLoader();
 
-    let successMessage = 'PDF encrypted successfully with 256-bit AES!';
+    let successMessage = 'PDF criptografado com sucesso com AES de 256 bits!';
     if (!hasDistinctOwnerPassword) {
       successMessage +=
-        ' Note: Without a separate owner password, the PDF has no usage restrictions.';
+        ' Observação: sem uma senha de proprietário distinta, o PDF ficará sem restrições de uso.';
     }
 
-    showAlert('Success', successMessage);
+    showAlert('Sucesso', successMessage);
   } catch (error: any) {
     console.error('Error during PDF encryption:', error);
     hideLoader();
     showAlert(
-      'Encryption Failed',
-      `An error occurred: ${error.message || 'The PDF might be corrupted.'}`
+      'Falha na criptografia',
+      `Ocorreu um erro: ${error.message || 'O PDF pode estar corrompido.'}`
     );
   } finally {
     try {

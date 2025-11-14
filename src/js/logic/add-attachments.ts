@@ -5,27 +5,27 @@ let attachments: File[] = [];
 
 export async function addAttachments() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'Main PDF is not loaded.');
+    showAlert('Erro', 'O PDF principal não está carregado.');
     return;
   }
   if (attachments.length === 0) {
-    showAlert('No Files', 'Please select at least one file to attach.');
+    showAlert('Nenhum arquivo', 'Selecione pelo menos um arquivo para anexar.');
     return;
   }
 
-  showLoader('Embedding files into PDF...');
+  showLoader('Incorporando arquivos ao PDF...');
   try {
     const pdfDoc = state.pdfDoc;
 
     for (let i = 0; i < attachments.length; i++) {
       const file = attachments[i];
-      showLoader(`Attaching ${file.name} (${i + 1}/${attachments.length})...`);
+      showLoader(`Anexando ${file.name} (${i + 1}/${attachments.length})...`);
 
       const fileBytes = await readFileAsArrayBuffer(file);
 
       await pdfDoc.attach(fileBytes as ArrayBuffer, file.name, {
         mimeType: file.type || 'application/octet-stream',
-        description: `Attached file: ${file.name}`,
+        description: `Arquivo anexado: ${file.name}`,
         creationDate: new Date(),
         modificationDate: new Date(file.lastModified),
       });
@@ -38,12 +38,12 @@ export async function addAttachments() {
     );
 
     showAlert(
-      'Success',
-      `${attachments.length} file(s) attached successfully.`
+      'Sucesso',
+      `${attachments.length} arquivo(s) anexado(s) com sucesso.`
     );
   } catch (error: any) {
     console.error('Error attaching files:', error);
-    showAlert('Error', `Failed to attach files: ${error.message}`);
+    showAlert('Erro', `Não foi possível anexar os arquivos: ${error.message}`);
   } finally {
     hideLoader();
     clearAttachments();
