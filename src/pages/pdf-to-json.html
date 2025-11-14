@@ -5,55 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversor de PDF para JSON - PUC PDF</title>
     <link rel="icon" type="image/png" href="%BASE_URL%images/puc-favicon.ico" />
+  <style>
+    body[data-loading] {
+      visibility: hidden;
+    }
+  </style>
+  <script>
+    (function () {
+      const reveal = () => document.body?.removeAttribute('data-loading');
+      window.addEventListener('DOMContentLoaded', reveal, { once: true });
+      window.addEventListener('load', reveal, { once: true });
+      window.setTimeout(reveal, 3000);
+    })();
+  </script>
+
   </head>
-  <body class="antialiased bg-gray-900">
-    <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-      <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex-shrink-0 flex items-center cursor-pointer" id="home-logo">
-            <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-8" />
-            <span class="text-white font-bold text-xl ml-2">
-              <a href="../../index.html">PUC PDF</a>
-            </span>
-          </div>
-
-          <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center space-x-8 text-white">
-            <a href="../../index.html" class="nav-link">Início</a>
-            <a href="../../about.html" class="nav-link">Sobre</a>
-            <a href="../../contact.html" class="nav-link">Contato</a>
-            <a href="../../index.html#tools-header" class="nav-link">Todas as ferramentas</a>
-          </div>
-
-          <!-- Mobile Hamburger Button -->
-          <div class="md:hidden flex items-center">
-            <button id="mobile-menu-button" type="button"
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
-              aria-controls="mobile-menu" aria-expanded="false">
-              <span class="sr-only">Abrir menu principal</span>
-              <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-              <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
+  <body data-loading="true" class="antialiased bg-gray-900">
+      <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
+    <div class="container mx-auto px-4 h-16 flex items-center">
+      <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
+      <div class="ml-3">
+        <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
+        <p class="text-gray-400 text-sm leading-tight">Ferramentas privadas de PDF da PUC-Rio</p>
       </div>
+    </div>
+  </nav>
 
-      <!-- Mobile Menu Dropdown -->
-      <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
-        <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-          <a href="../../index.html" class="mobile-nav-link">Início</a>
-          <a href="../../about.html" class="mobile-nav-link">Sobre</a>
-          <a href="../../contact.html" class="mobile-nav-link">Contato</a>
-          <a href="../../index.html#tools-header" class="mobile-nav-link">Todas as ferramentas</a>
-        </div>
-      </div>
-    </nav>
 
     <div class="min-h-screen flex items-center justify-center p-4 bg-gray-900">
       <div class="bg-gray-800 rounded-xl shadow-xl p-8 max-w-2xl w-full text-gray-200 border border-gray-700">
@@ -159,6 +136,5 @@
 
     <script type="module" src="../js/logic/pdf-to-json.ts"></script>
     <script type="module" src="../js/utils/lucide-init.ts"></script>
-    <script type="module" src="../js/mobileMenu.ts"></script>
   </body>
 </html>

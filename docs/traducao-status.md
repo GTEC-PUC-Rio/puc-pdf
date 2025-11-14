@@ -26,11 +26,6 @@ Este documento acompanha o progresso da localização do BentoPDF para portuguê
 | Mensagens de lógica (`src/js/logic/*`) | ✅ Concluído | Loaders, alertas e mensagens de erro/sucesso traduzidos em todos os módulos. Novas strings devem seguir o mesmo padrão. |
 | Documentação (`README.md`, etc.) | ✅ Concluído | Mantida em inglês por decisão de produto; não será traduzida nesta fase. |
 
-## Próximos Passos
-1. Monitorar pull requests futuros para garantir que novas ferramentas/strings em `src/js/ui.ts` cheguem já traduzidas.
-2. Revisar periodicamente `src/js/logic` para manter consistência caso novas mensagens sejam adicionadas.
-3. Localizar documentação Markdown (README, CONTRIBUTING, SECURITY, etc.) se o produto decidir migrar esses textos para pt-BR.
-
 Manter este documento atualizado a cada entrega ajudará a garantir transparência sobre o que já foi traduzido e o que ainda falta.
 - 2025-11-12: Templates dos fluxos "Unir PDF", "Dividir PDF", "Proteger PDF", "Remover senha", "Organizar", "Girar", "Adicionar numeração", "PDF↔JPG", "Compressão" e componentes gerais (upload, modais) traduzidos em `src/js/ui.ts`.
 - 2025-11-12: Fluxos "Excluir páginas", "Adicionar página em branco", "Extrair páginas", "Marca d’água", "Imagens → PDF", "PDF → imagens (PNG/WebP)", "PNG/WebP → PDF" e "PDF em tons de cinza/ZIP" traduzidos em `src/js/ui.ts`.

@@ -20,16 +20,6 @@ docker build -t bentopdf .
 docker run -p 8080:8080 bentopdf
 ```
 
-#### Simple Mode
-
-```bash
-# Build with simple mode enabled
-docker build --build-arg SIMPLE_MODE=true -t bentopdf-simple .
-
-# Run the container
-docker run -p 8080:8080 bentopdf-simple
-```
-
 #### Kubernetes Example
 
 ```yaml
@@ -60,8 +50,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        SIMPLE_MODE: false
     ports:
       - '8080:8080'
     security_opt:

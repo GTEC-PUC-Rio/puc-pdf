@@ -5,10 +5,6 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 
-# Build without type checking (vite build only)
-# Pass SIMPLE_MODE environment variable if provided
-ARG SIMPLE_MODE=false
-ENV SIMPLE_MODE=$SIMPLE_MODE
 RUN npm run build -- --mode production
 
 # Production stage
@@ -36,9 +32,6 @@ CMD ["nginx", "-g", "daemon off;"]
 # COPY . .
 
 # # Build without type checking (vite build only)
-# # Pass SIMPLE_MODE environment variable if provided
-# ARG SIMPLE_MODE=false
-# ENV SIMPLE_MODE=$SIMPLE_MODE
 # RUN npm run build -- --mode production
 
 # # Production stage

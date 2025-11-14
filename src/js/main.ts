@@ -4,133 +4,11 @@ import { setupToolInterface } from './handlers/toolSelectionHandler.js';
 import { createIcons, icons } from 'lucide';
 import * as pdfjsLib from 'pdfjs-dist';
 import '../css/styles.css';
-import { formatStars } from './utils/helpers.js';
 import { withBasePath } from './utils/base-path.js';
 import { pdfWorkerUrl } from './utils/pdfjs-worker.js';
 
 const init = () => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
-
-  // Handle simple mode - hide branding sections but keep logo and copyright
-  if (__SIMPLE_MODE__) {
-    const hideBrandingSections = () => {
-      // Hide navigation but keep logo
-      const nav = document.querySelector('nav');
-      if (nav) {
-        // Hide the entire nav but we'll create a minimal one with just logo
-        nav.style.display = 'none';
-
-        // Create a simple nav with just logo on the right
-        const simpleNav = document.createElement('nav');
-        simpleNav.className =
-          'bg-gray-800 border-b border-gray-700 sticky top-0 z-30';
-        const logoSrc = withBasePath('images/logo-puc.png');
-        simpleNav.innerHTML = `
-          <div class="container mx-auto px-4">
-            <div class="flex justify-start items-center h-16">
-              <div class="flex-shrink-0 flex items-center">
-                <img src="${logoSrc}" alt="Logo da PUC-Rio" class="h-8 w-auto">
-                <span class="text-white font-bold text-xl ml-2">PUC PDF</span>
-              </div>
-            </div>
-          </div>
-        `;
-        document.body.insertBefore(simpleNav, document.body.firstChild);
-      }
-
-      const heroSection = document.getElementById('hero-section');
-      if (heroSection) {
-        heroSection.style.display = 'none';
-      }
-
-      const githubLink = document.querySelector('a[href*="github.com/alam00000/bentopdf"]');
-      if (githubLink) {
-        (githubLink as HTMLElement).style.display = 'none';
-      }
-
-      const featuresSection = document.getElementById('features-section');
-      if (featuresSection) {
-        featuresSection.style.display = 'none';
-      }
-
-      const securitySection = document.getElementById(
-        'security-compliance-section'
-      );
-      if (securitySection) {
-        securitySection.style.display = 'none';
-      }
-
-      const faqSection = document.getElementById('faq-accordion');
-      if (faqSection) {
-        faqSection.style.display = 'none';
-      }
-
-      const testimonialsSection = document.getElementById(
-        'testimonials-section'
-      );
-      if (testimonialsSection) {
-        testimonialsSection.style.display = 'none';
-      }
-
-      const supportSection = document.getElementById('support-section');
-      if (supportSection) {
-        supportSection.style.display = 'none';
-      }
-
-      // Hide footer but keep copyright
-      const footer = document.querySelector('footer');
-      if (footer) {
-        footer.style.display = 'none';
-
-        const simpleFooter = document.createElement('footer');
-        simpleFooter.className = 'mt-16 border-t-2 border-gray-700 py-8';
-        const logoSrc = withBasePath('images/logo-puc.png');
-        simpleFooter.innerHTML = `
-          <div class="container mx-auto px-4">
-            <div class="flex items-center mb-4">
-              <img src="${logoSrc}" alt="Logo da PUC-Rio" class="h-8 w-auto mr-2">
-              <span class="text-white font-bold text-lg">PUC PDF</span>
-            </div>
-            <p class="text-gray-500 text-xs mt-2">
-              <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
-            </p>
-            <p class="text-gray-500 text-xs">
-              Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
-            </p>
-          </div>
-        `;
-        document.body.appendChild(simpleFooter);
-      }
-
-      const sectionDividers = document.querySelectorAll('.section-divider');
-      sectionDividers.forEach((divider) => {
-        (divider as HTMLElement).style.display = 'none';
-      });
-
-      document.title = 'PUC PDF - Ferramentas de PDF';
-
-      const toolsHeader = document.getElementById('tools-header');
-      if (toolsHeader) {
-        const title = toolsHeader.querySelector('h2');
-        const subtitle = toolsHeader.querySelector('p');
-        if (title) {
-          title.textContent = 'Ferramentas de PDF';
-          title.className = 'text-4xl md:text-5xl font-bold text-white mb-3';
-        }
-        if (subtitle) {
-          subtitle.textContent = 'Escolha uma ferramenta para começar';
-          subtitle.className = 'text-lg text-gray-400';
-        }
-      }
-
-      const app = document.getElementById('app');
-      if (app) {
-        app.style.paddingTop = '1rem';
-      }
-    };
-
-    hideBrandingSections();
-  }
 
   dom.toolGrid.textContent = '';
 
@@ -247,42 +125,8 @@ const init = () => {
   dom.backToGridBtn.addEventListener('click', () => switchView('grid'));
   dom.alertOkBtn.addEventListener('click', hideAlert);
 
-  const faqAccordion = document.getElementById('faq-accordion');
-  if (faqAccordion) {
-    faqAccordion.addEventListener('click', (e) => {
-      // @ts-expect-error TS(2339) FIXME: Property 'closest' does not exist on type 'EventTa... Remove this comment to see the full error message
-      const questionButton = e.target.closest('.faq-question');
-      if (!questionButton) return;
-
-      const faqItem = questionButton.parentElement;
-      const answer = faqItem.querySelector('.faq-answer');
-
-      faqItem.classList.toggle('open');
-
-      if (faqItem.classList.contains('open')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      } else {
-        answer.style.maxHeight = '0px';
-      }
-    });
-  }
-
   createIcons({ icons });
   console.log('Compartilhe o PUC PDF com quem precisa de ferramentas privadas!');
-
-  const githubStarsElement = document.getElementById('github-stars');
-  if (githubStarsElement && !__SIMPLE_MODE__) {
-    fetch('https://api.github.com/repos/alam00000/bentopdf')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.stargazers_count !== undefined) {
-          githubStarsElement.textContent = formatStars(data.stargazers_count);
-        }
-      })
-      .catch(() => {
-        githubStarsElement.textContent = '-';
-      });
-  }
 };
 
 document.addEventListener('DOMContentLoaded', init);

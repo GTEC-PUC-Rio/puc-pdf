@@ -26,9 +26,6 @@ export default defineConfig(({ mode }) => ({
       },
     }),
   ],
-  define: {
-    __SIMPLE_MODE__: JSON.stringify(process.env.SIMPLE_MODE === 'true'),
-  },
   resolve: {
     alias: {
       stream: 'stream-browserify',

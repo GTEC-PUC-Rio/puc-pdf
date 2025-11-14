@@ -8,6 +8,9 @@
   <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
 
   <style>
+    body[data-loading] {
+      visibility: hidden;
+    }
     /* Hide scrollbar for toolbar overflow */
     .scrollbar-hide::-webkit-scrollbar {
       display: none;
@@ -18,28 +21,34 @@
       scrollbar-width: none;
     }
   </style>
+  <script>
+    (function () {
+      const reveal = () => document.body?.removeAttribute('data-loading');
+      window.addEventListener('DOMContentLoaded', reveal, { once: true });
+      window.addEventListener('load', reveal, { once: true });
+      window.setTimeout(reveal, 3000);
+    })();
+  </script>
 </head>
 
-<body class="antialiased bg-gray-900 h-screen overflow-hidden">
+<body class="antialiased bg-gray-900 h-screen overflow-hidden" data-loading="true">
 
   <!-- Navigation -->
   <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0 flex items-center">
-          <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
-          <span class="text-white font-bold text-xl ml-2">
-            <a href="../../index.html">PUC PDF</a>
-          </span>
-          <span class="text-gray-400 ml-3 text-sm sm:text-base">Ferramenta completa de PDF</span>
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
+        <div class="ml-3">
+          <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
+          <p class="text-gray-400 text-sm leading-tight">Ferramentas privadas de PDF da PUC-Rio</p>
         </div>
-        <button id="close-tool-btn"
-          class="flex items-center gap-1 bg-gray-700 hover:bg-gray-600 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded text-xs sm:text-sm md:text-base">
-          <i data-lucide="x" class="w-4 h-4 sm:w-5 sm:h-5"></i> Fechar
-        </button>
       </div>
+      <button id="close-tool-btn" class="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">
+        <i data-lucide="x" class="w-4 h-4"></i> Fechar
+      </button>
     </div>
   </nav>
+
 
   <!-- Main Container -->
   <div class="flex flex-col h-[calc(100vh-4rem)]">
@@ -216,7 +225,6 @@
 
   <!-- Scripts -->
   <script type="module" src="../js/utils/lucide-init.ts"></script>
-  <script type="module" src="../js/mobileMenu.ts"></script>
   <script type="module" src="../js/logic/pdf-multi-tool.ts"></script>
 </body>
 

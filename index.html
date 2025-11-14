@@ -6,186 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PUC PDF - A suíte de PDF focada em privacidade</title>
   <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
+  <style>
+    body[data-loading] {
+      visibility: hidden;
+    }
+  </style>
+  <script>
+    (function () {
+      const reveal = () => document.body?.removeAttribute('data-loading');
+      window.addEventListener('DOMContentLoaded', reveal, { once: true });
+      window.addEventListener('load', reveal, { once: true });
+      window.setTimeout(reveal, 3000);
+    })();
+  </script>
 </head>
 
-<body class="antialiased">
+<body class="antialiased" data-loading="true">
   <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0 flex items-center cursor-pointer" id="home-logo">
-          <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
-          <span class="text-white font-bold text-xl ml-2">
-            <a href="index.html">PUC PDF</a>
-          </span>
-        </div>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="index.html" class="nav-link">Início</a>
-          <a href="./about.html" class="nav-link">Sobre</a>
-          <a href="./contact.html" class="nav-link">Contato</a>
-          <a href="index.html#tools-header" class="nav-link">Todas as Ferramentas</a>
-        </div>
-
-        <!-- Mobile Hamburger Button -->
-        <div class="md:hidden flex items-center">
-          <button id="mobile-menu-button" type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
-            aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Abrir menu principal</span>
-            <!-- Hamburger Icon -->
-            <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!-- Close Icon -->
-            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
-      <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-        <a href="index.html" class="mobile-nav-link">Início</a>
-        <a href="./about.html" class="mobile-nav-link">Sobre</a>
-        <a href="./contact.html" class="mobile-nav-link">Contato</a>
-        <a href="index.html#tools-header" class="mobile-nav-link">Todas as Ferramentas</a>
+    <div class="container mx-auto px-4 h-16 flex items-center">
+      <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
+      <div class="ml-3">
+        <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
+        <p class="text-gray-400 text-sm leading-tight">
+          Ferramentas privadas de PDF da PUC-Rio
+        </p>
       </div>
     </div>
   </nav>
   <div id="app" class="min-h-screen container mx-auto p-4 md:p-8">
-    <section id="hero-section" class="text-center py-20">
-      <h1 class="text-4xl md:text-7xl font-bold text-white mb-4">
-        A <span class="marker-slanted"> Caixa de Ferramentas de PDF </span> feita para a
-        privacidade<span
-          class="text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">.</span>
+    <header id="tools-header" class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">
+        Ferramentas de PDF
       </h1>
-      <p class="text-lg text-gray-400 mb-8">Rápido, seguro e gratuito para sempre.</p>
-      <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4 mb-8">
-        <span
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 border border-indigo-500/30 text-indigo-300 text-sm font-medium backdrop-blur-sm">
-          <i data-lucide="check-circle" class="w-4 h-4"></i>
-          Sem cadastro
-        </span>
-        <span
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 border border-indigo-500/30 text-indigo-300 text-sm font-medium backdrop-blur-sm">
-          <i data-lucide="check-circle" class="w-4 h-4"></i>
-          Uso ilimitado
-        </span>
-        <span
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 border border-indigo-500/30 text-indigo-300 text-sm font-medium backdrop-blur-sm">
-          <i data-lucide="check-circle" class="w-4 h-4"></i>
-          Funciona offline
-        </span>
-      </div>
-
-      <div class="flex flex-col items-center gap-4">
-        <a href="#tools-header"
-          class="inline-block px-8 py-3 rounded-full bg-gradient-to-b from-indigo-500 to-indigo-600 text-white font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-indigo-400 hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-200 transform hover:-translate-y-1">Comece
-          a usar - grátis para sempre</a>
-        <a href="https://github.com/alam00000/bentopdf/stargazers" target="_blank" rel="noopener noreferrer" class="
-            inline-flex items-center gap-1.5 text-sm font-medium
-            bg-white text-gray-800 border border-gray-300
-            dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600
-            pl-2.5 pr-3 py-1
-            rounded-full transition-colors duration-200
-            shadow-sm hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-700
-          ">
-          <svg class="w-4 h-4 flex-shrink-0 text-gray-800 dark:text-gray-200" fill="currentColor" viewBox="0 0 24 24"
-            aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              clip-rule="evenodd" />
-          </svg>
-
-          <span id="github-stars">-</span>
-        </a>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="features-section" class="py-20">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-        Por que <span class="marker-slanted">o PUC PDF?</span>
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="user-plus" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Sem registro</h3>
-          </div>
-          <p class="text-gray-400 pl-14">
-            Comece na hora, sem contas ou e-mails.
-          </p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="shield" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Sem uploads</h3>
-          </div>
-          <p class="text-gray-400 pl-14">
-            100% no seu navegador, seus arquivos nunca deixam o seu dispositivo.
-          </p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="badge-dollar-sign" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Gratuito para sempre</h3>
-          </div>
-          <p class="text-gray-400 pl-14">
-            Todas as ferramentas, sem testes ou paywalls.
-          </p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="infinity" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Sem limites</h3>
-          </div>
-          <p class="text-gray-400 pl-14">
-            Use quanto quiser, sem restrições escondidas.
-          </p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="layers" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Processamento em lote</h3>
-          </div>
-          <p class="text-gray-400 pl-14">Trate quantos PDFs quiser de uma só vez.</p>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg">
-          <div class="flex items-center gap-4 mb-3">
-            <i data-lucide="zap" class="w-10 h-10 text-indigo-400 flex-shrink-0"></i>
-            <h3 class="text-xl font-bold text-white">Velocidade instantânea</h3>
-          </div>
-          <p class="text-gray-400 pl-14">
-            Processe PDFs na hora, sem filas ou atrasos.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <div id="tools-header" class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
-        Comece com as <span class="marker-slanted ml-2"> Ferramentas</span>
-      </h2>
-      <p class="text-gray-400">Clique em uma ferramenta para abrir o envio de arquivos</p>
-    </div>
-
+      <p class="text-gray-400">Selecione uma ferramenta para começar.</p>
+    </header>
     <div id="grid-view">
       <div class="mb-8 max-w-lg mx-auto">
         <div class="relative">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
           </span>
-          <input type="text" id="search-bar"
+          <input type="text" id="search-bar" autocomplete="off"
             class="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Busque uma ferramenta (ex.: 'dividir', 'organizar'...)" />
           <span class="absolute inset-y-0 right-0 flex items-center rounded-lg pr-2">
@@ -251,324 +112,13 @@
       </div>
     </div>
 
-    <div class="section-divider hide-section mb-20 mt-10"></div>
-
-    <!-- COMPLIANCE SECTION START -->
-    <section id="security-compliance-section" class="py-20 hide-section">
-      <div class="mb-8 text-center">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 text-balance">
-          Seus dados nunca saem do seu dispositivo
-          <span class="inline-flex items-center gap-2">
-            <i data-lucide="shield" class="w-8 h-8 md:w-10 md:h-10 text-indigo-400 bg-indigo-900 rounded-lg p-1.5"></i>
-            Mantemos
-          </span>
-          <br class="hidden sm:block" />
-          <span
-            class="inline-block border-2 border-indigo-400 bg-indigo-900 text-indigo-300 px-4 py-2 rounded-full mx-2 text-2xl md:text-3xl lg:text-4xl font-bold">
-            suas informações seguras
-          </span>
-          seguindo padrões globais de segurança.
-        </h2>
-      </div>
-      <div class="mb-16 text-center">
-        <span class="inline-flex items-center gap-2 text-indigo-400 text-lg font-medium transition-colors">
-          Todo o processamento acontece localmente no seu dispositivo.
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4">
-        <!-- GDPR Compliance -->
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-600 flex items-center justify-center mb-4">
-            <img src="%BASE_URL%images/gdpr.svg" alt="GDPR compliance" class="w-full h-full" />
-          </div>
-          <h3 class="text-lg md:text-xl font-bold text-white mb-3">
-            Conformidade com a GDPR
-          </h3>
-          <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-xs">
-            Protege os dados pessoais e a privacidade de indivíduos dentro da
-            União Europeia.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-600 flex items-center justify-center mb-4">
-            <img src="%BASE_URL%images/ccpa.svg" alt="CCPA compliance" class="w-full h-full" />
-          </div>
-          <h3 class="text-lg md:text-xl font-bold text-white mb-3">
-            Conformidade com a CCPA
-          </h3>
-          <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-xs">
-            Garante aos residentes da Califórnia direitos sobre como suas
-            informações pessoais são coletadas, usadas e compartilhadas.
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-600 flex items-center justify-center mb-4">
-            <img src="%BASE_URL%images/hipaa.svg" alt="HIPAA compliance" class="w-full h-full" />
-          </div>
-          <h3 class="text-lg md:text-xl font-bold text-white mb-3">
-            Conformidade com a HIPAA
-          </h3>
-          <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-xs">
-            Define salvaguardas para lidar com informações de saúde sensíveis no
-            sistema de saúde dos Estados Unidos.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMPLAINCE SECTION END -->
-
-    <div class="section-divider hide-section"></div>
-
-    <section id="faq-accordion" class="space-y-4 hide-section">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12 mt-8">
-        Perguntas <span class="marker-slanted">Frequentes</span>
-      </h2>
-      <!-- Existing FAQs here... -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">O PUC PDF é realmente gratuito?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Sim, completamente. Todas as ferramentas do PUC PDF são 100% gratuitas, sem limites de arquivos, sem cadastros
-            e sem marcas-d&rsquo;água. Acreditamos que todo mundo merece acesso a ferramentas de PDF simples e poderosas
-            sem um paywall.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">Meus arquivos estão seguros? Onde eles são processados?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Seus arquivos ficam o mais seguros possível porque eles <strong>nunca saem do seu computador</strong>. Todo o
-            processamento acontece diretamente no seu navegador (client-side). Nós nunca enviamos seus arquivos para um
-            servidor, então você mantém total privacidade e controle sobre seus documentos.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">Funciona em Mac, Windows e celular?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Sim! Como o PUC PDF roda inteiramente no navegador, ele funciona em qualquer sistema operacional com um
-            navegador moderno, incluindo Windows, macOS, Linux, iOS e Android.
-          </p>
-        </div>
-      </div>
-
-      <!-- New FAQ: GDPR Compliance -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">O PUC PDF está em conformidade com a GDPR?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Sim. O PUC PDF segue totalmente a GDPR. Como todo o processamento ocorre localmente no seu navegador e nós
-            nunca coletamos ou transmitimos arquivos para um servidor, não temos acesso aos seus dados. Isso garante que
-            você esteja sempre no controle dos seus documentos.
-          </p>
-        </div>
-      </div>
-
-      <!-- New FAQ: Data Storage -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">Vocês armazenam ou rastreiam meus arquivos?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Não. Nós nunca armazenamos, rastreamos ou registramos seus arquivos. Tudo que você faz no PUC PDF fica na
-            memória do seu navegador e desaparece assim que você fecha a página. Não há uploads, registros de histórico
-            nem servidores envolvidos.
-          </p>
-        </div>
-      </div>
-
-      <!-- New FAQ: Privacy -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">O que torna o PUC PDF diferente de outras ferramentas de PDF?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            A maioria das ferramentas de PDF envia seus arquivos para um servidor para processá-los. O PUC PDF nunca faz
-            isso. Usamos tecnologia web moderna e segura para processar seus arquivos diretamente no navegador. Isso
-            significa mais velocidade, mais privacidade e tranquilidade total.
-          </p>
-        </div>
-      </div>
-
-      <!-- New FAQ: Browser-Based -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">Como o processamento direto no navegador me mantém seguro?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Ao rodar totalmente dentro do seu navegador, o PUC PDF garante que seus arquivos nunca saiam do seu
-            dispositivo. Isso elimina riscos de invasões a servidores, vazamentos de dados ou acessos não autorizados. Seus
-            arquivos continuam sendo seus &mdash; sempre.
-          </p>
-        </div>
-      </div>
-
-      <!-- New FAQ: Analytics -->
-      <div class="faq-item bg-gray-800 rounded-lg border border-gray-700">
-        <button class="faq-question w-full flex justify-between items-center text-left p-6">
-          <span class="text-lg font-semibold text-white">Vocês usam cookies ou analytics para me rastrear?</span>
-          <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-gray-400 transition-transform"></i>
-        </button>
-        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-          <p class="p-6 pt-0 text-gray-400">
-            Nós nos importamos com a sua privacidade. O PUC PDF não rastreia informações pessoais. Usamos o
-            <a href="https://simpleanalytics.com" class="text-indigo-400 hover:underline" target="_blank"
-              rel="noopener noreferrer">Simple Analytics</a>
-            apenas para ver contagens anônimas de visitas. Isso significa que sabemos quantas pessoas acessam o site, mas
-            <strong>nunca sabemos quem é você</strong>. O Simple Analytics é totalmente compatível com a GDPR e respeita a
-            sua privacidade.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider hide-section"></div>
-
-    <section id="testimonials-section" class="py-20 hide-section">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-        O que nossos <span class="marker-slanted">usuários</span> dizem
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">Sarah L.</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★★★★★
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Essa é a ferramenta que eu procurava! É rápida, gratuita e adoro o fato de que meus documentos confidenciais
-            nunca sobem para algum servidor aleatório. Um salva-vidas para o meu trabalho como freelancer."
-          </p>
-        </div>
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">Mark Chen</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★★★★★
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Finalmente, um editor de PDF que simplesmente funciona. Sem anúncios, sem cadastros, sem enrolação. A
-            ferramenta de mesclar é surpreendentemente poderosa. Já favoritei em todos os meus dispositivos."
-          </p>
-        </div>
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">Anonymous User A-35Z</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★☆☆☆☆
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Horrível. Não me deixa enviar meus arquivos para a nuvem. Como o meu Grande Senhor dos Dados vai saber que eu
-            assinei a autorização do passeio da escola do meu filho? Inútil para o meu perfil de dados."
-          </p>
-        </div>
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">Dr. Brickson</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★★★★★
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Como pesquisadora, privacidade de dados é tudo. O modelo de processamento no próprio navegador do PUC PDF é
-            exatamente o que a minha instituição recomenda. É robusto, confiável e seguro. Um recurso fantástico."
-          </p>
-        </div>
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">AdTracker Pro</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★☆☆☆☆
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Esse site está quebrado. Meu bloqueador de anúncios diz que não bloqueou nenhum tracker. Como vou saber se um
-            produto é bom se ele não me persegue pela internet por uma semana? 1 estrela."
-          </p>
-        </div>
-        <div class="testimonial-card">
-          <div class="flex items-center mb-4">
-            <div>
-              <p class="font-bold text-white">Raj P.</p>
-              <div class="text-yellow-400 flex items-center text-sm">
-                ★★★★★
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            "Simples, elegante e poderoso. Precisei mesclar 50 relatórios e ele fez isso na hora sem travar o navegador.
-            Isso sim é como uma ferramenta web deveria ser. Recomendo demais."
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-    <section id="support-section" class="py-20">
-      <div class="max-w-4xl mx-auto text-center bg-gray-800 p-8 md:p-12 rounded-xl border border-gray-700 shadow-2xl">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          Curte o meu trabalho?
-        </h2>
-        <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
-          O PUC PDF é um projeto feito por paixão, criado para oferecer uma caixa de ferramentas de PDF gratuita,
-          privada e poderosa para todo mundo. Se ele for útil para você, considere apoiar o desenvolvimento. Cada café
-          ajuda!
-        </p>
-
-        <a href="https://ko-fi.com/alio01" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-gradient-to-b from-indigo-500 to-indigo-600 text-white font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-indigo-400 hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-200 transform hover:-translate-y-1 mt-5">
-          <i data-lucide="coffee" class="w-7 h-7"></i>
-          <span>Me pague um café</span>
-        </a>
-      </div>
-    </section>
-
     <div id="signature-ghost" class="hidden"></div>
   </div>
 
   <footer class="mt-16 border-t-2 border-gray-700 py-8">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-        <div class="mb-8 md:mb-0">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
+        <div>
           <div class="flex items-center justify-center md:justify-start mb-4">
             <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-10 w-auto mr-3" />
             <span class="text-xl font-bold text-white">PUC PDF</span>
@@ -581,36 +131,9 @@
           </p>
         </div>
 
-        <div>
-          <h3 class="font-bold text-white mb-4">Empresa</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>
-              <a href="./about.html" class="hover:text-indigo-400">Sobre nós</a>
-            </li>
-            <li>
-              <a href="./faq.html" class="hover:text-indigo-400">Perguntas frequentes</a>
-            </li>
-            <li>
-              <a href="./contact.html" class="hover:text-indigo-400">Fale conosco</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white mb-4">Jurídico</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>
-              <a href="./terms.html" class="hover:text-indigo-400">Termos e Condições</a>
-            </li>
-            <li>
-              <a href="./privacy.html" class="hover:text-indigo-400">Política de Privacidade</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
+        <div class="text-center md:text-right">
           <h3 class="font-bold text-white mb-4">Siga-nos</h3>
-          <div class="flex justify-center md:justify-start space-x-4">
+          <div class="flex justify-center md:justify-end space-x-4">
             <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" target="_blank" rel="noopener noreferrer"
               class="text-gray-400 hover:text-indigo-400" title="GitHub">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -641,7 +164,6 @@
 
   <script type="module" src="src/js/utils/lucide-init.ts"></script>
   <script type="module" src="src/js/main.ts"></script>
-  <script type="module" src="src/js/mobileMenu.ts"></script>
 </body>
 
 </html>

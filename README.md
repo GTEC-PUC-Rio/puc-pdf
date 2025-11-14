@@ -20,29 +20,16 @@ Este repositório é um fork do [BentoPDF original](https://github.com/alam00000
 # 1. Instalar dependências
 npm install
 
-# 2. Rodar o Vite em modo desenvolvimento já no Simple Mode
-SIMPLE_MODE=true npm run dev
+# 2. Rodar o Vite em modo desenvolvimento
+npm run dev
 ```
 O Vite expõe o app em `http://localhost:5173`. Qualquer alteração em HTML/CSS/JS e na pasta `public/` é refletida automaticamente, permitindo validar traduções, logos e textos.
 
 Para inspecionar o build final (minificado):
 ```bash
-SIMPLE_MODE=true npm run build
 npm run preview -- --host 0.0.0.0 --port 4173
 ```
 O preview serve o conteúdo gerado em `dist/`, replicando o comportamento de produção.
-
-## Rodando em container (Simple Mode)
-O Dockerfile já aceita o argumento `SIMPLE_MODE`. Basta seguir:
-
-```bash
-# Build da imagem personalizada
-docker build -t puc-bentopdf --build-arg SIMPLE_MODE=true .
-
-# Execução (nginx expõe na porta 8080 do container)
-docker run --rm -p 3000:8080 puc-bentopdf
-```
-A aplicação ficará disponível em `http://localhost:3000`. Caso precise atualizar logos ou traduções sem rebuild, monte um volume com `public/images` ou gere nova imagem com os arquivos desejados.
 
 ## Customizações comuns
 | Ajuste | Como fazer |
