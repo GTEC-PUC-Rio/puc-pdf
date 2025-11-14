@@ -37,8 +37,10 @@
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
 
     /* Disable strict checks for now */
     "strict": false,

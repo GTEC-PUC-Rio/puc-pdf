@@ -1,6 +1,7 @@
 import { showLoader, hideLoader, showAlert } from '../ui.js';
 import { readFileAsArrayBuffer } from '../utils/helpers.js';
 import { icons, createIcons } from 'lucide';
+import { t } from '../../i18n/index.js';
 
 const state = {
   pdfDoc1: null,
@@ -43,7 +44,12 @@ async function renderPage(
 async function renderBothPages() {
   if (!state.pdfDoc1 || !state.pdfDoc2) return;
 
-  showLoader(`Carregando página ${state.currentPage}...`);
+  showLoader(
+    t('alerts.comparePdfs.loadingPage', {
+      ns: 'alerts',
+      page: state.currentPage,
+    })
+  );
 
   const canvas1 = document.getElementById('canvas-compare-1');
   const canvas2 = document.getElementById('canvas-compare-2');
@@ -98,7 +104,10 @@ async function setupFileInput(inputId: any, docKey: any, displayId: any) {
 
   const handleFile = async (file: any) => {
     if (!file || file.type !== 'application/pdf')
-      return showAlert('Arquivo inválido', 'Selecione um arquivo PDF válido.');
+      return showAlert(
+        t('alerts.comparePdfs.invalidFileTitle', { ns: 'alerts' }),
+        t('alerts.comparePdfs.invalidFileMessage', { ns: 'alerts' })
+      );
 
     const displayDiv = document.getElementById(displayId);
     displayDiv.textContent = '';
@@ -120,7 +129,12 @@ async function setupFileInput(inputId: any, docKey: any, displayId: any) {
     createIcons({ icons });
 
     try {
-      showLoader(`Carregando ${file.name}...`);
+      showLoader(
+        t('alerts.comparePdfs.loadingFile', {
+          ns: 'alerts',
+          file: file.name,
+        })
+      );
       const pdfBytes = await readFileAsArrayBuffer(file);
       // @ts-expect-error TS(2304) FIXME: Cannot find name 'pdfjsLib'.
       state[docKey] = await pdfjsLib.getDocument(pdfBytes).promise;
@@ -132,8 +146,8 @@ async function setupFileInput(inputId: any, docKey: any, displayId: any) {
       }
     } catch (e) {
       showAlert(
-        'Erro',
-        'Não foi possível carregar o PDF. Ele pode estar corrompido ou protegido por senha.'
+        t('alerts.errorTitle', { ns: 'alerts' }),
+        t('alerts.comparePdfs.loadError', { ns: 'alerts' })
       );
       console.error(e);
     } finally {

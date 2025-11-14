@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { resolve } from 'path';
 
@@ -16,6 +17,7 @@ export default defineConfig(({ mode }) => ({
       '/'
   ),
   plugins: [
+    react(),
     tailwindcss(),
     nodePolyfills({
       include: ['buffer', 'stream', 'util', 'zlib', 'process'],

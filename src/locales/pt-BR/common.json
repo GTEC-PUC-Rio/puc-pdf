@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "PUC PDF - Ferramentas de PDF",
+    "tagline": "Ferramentas privadas de PDF da PUC-Rio"
+  },
+  "nav": {
+    "brand": "PUC PDF",
+    "tagline": "Ferramentas privadas de PDF da PUC-Rio",
+    "closeButton": "Fechar"
+  },
+  "footer": {
+    "codeLink": "Código-fonte",
+    "creditLabel": "Baseado em",
+    "creditLink": "BentoPDF",
+    "followUs": "Siga-nos"
+  },
+  "search": {
+    "placeholder": "Busque uma ferramenta (ex.: 'dividir', 'organizar'...)"
+  },
+  "actions": {
+    "ok": "OK"
+  },
+  "preview": {
+    "title": "Prévia do documento",
+    "download": "Baixar como PDF",
+    "close": "Fechar"
+  },
+  "upload": {
+    "ctaPrimary": "Clique para selecionar",
+    "ctaSecondary": "ou arraste e solte",
+    "multiHint": "PDFs ou imagens",
+    "singleHint": "Um único arquivo PDF",
+    "privacy": "Seus arquivos nunca saem do seu dispositivo.",
+    "addMore": "Adicionar mais arquivos",
+    "clearAll": "Limpar tudo"
+  }
+}

@@ -13,7 +13,6 @@ Este repositório é um fork do [BentoPDF original](https://github.com/alam00000
 ## Pré-requisitos
 - [Node.js 18+](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) (ou compatível)
-- Docker (opcional, para distribuição em container)
 
 ## Executando localmente (modo Simple)
 ```bash

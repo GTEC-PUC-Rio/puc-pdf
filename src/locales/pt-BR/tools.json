@@ -1,0 +1,957 @@
+{
+  "grid": {
+    "title": "Ferramentas de PDF",
+    "subtitle": "Selecione uma ferramenta para começar.",
+    "noResults": "Nenhuma ferramenta encontrada."
+  },
+  "cta": {
+    "backToTools": "Voltar às ferramentas"
+  },
+  "templates": {
+    "merge": {
+      "title": "Unir PDFs",
+      "description": "Una arquivos completos ou escolha páginas específicas para formar um novo documento.",
+      "modeToggle": {
+        "file": "Modo arquivo",
+        "page": "Modo página"
+      },
+      "fileMode": {
+        "heading": "Como funciona:",
+        "tips": [
+          "Clique e arraste o ícone {{icon}} para alterar a ordem dos arquivos.",
+          "Na coluna \"Páginas\" de cada arquivo, informe intervalos (ex.: \"1-3, 5\") para unir somente essas páginas.",
+          "Deixe o campo vazio para incluir todas as páginas daquele arquivo."
+        ]
+      },
+      "pageMode": {
+        "heading": "Como funciona:",
+        "tips": [
+          "Todas as páginas dos PDFs enviados aparecem abaixo.",
+          "Arraste e solte as miniaturas para definir exatamente a ordem desejada no novo arquivo."
+        ]
+      }
+    },
+    "split": {
+      "title": "Dividir PDF",
+      "description": "Extraia páginas de um PDF utilizando diversos métodos.",
+      "modeLabel": "Modo de divisão",
+      "modeOptions": {
+        "range": "Extrair por intervalo (padrão)",
+        "evenOdd": "Separar por páginas pares/ímpares",
+        "all": "Dividir todas as páginas em arquivos separados",
+        "visual": "Selecionar páginas visualmente",
+        "bookmarks": "Dividir por marcadores",
+        "nTimes": "Dividir em N partes"
+      },
+      "rangePanel": {
+        "heading": "Como funciona:",
+        "tips": [
+          "Informe números de página separados por vírgula (ex.: 2, 8, 14).",
+          "Use hífen para intervalos (ex.: 5-10).",
+          "Combine os formatos para seleções complexas (ex.: 1-3, 7, 12-15)."
+        ],
+        "totalPages": "Total de páginas:",
+        "inputLabel": "Informe o intervalo:",
+        "placeholder": "ex.: 1-5, 8"
+      },
+      "evenOddPanel": {
+        "heading": "Como funciona:",
+        "description": "Cria um novo PDF contendo apenas as páginas pares ou apenas as páginas ímpares do documento original.",
+        "oddOption": "Somente páginas ímpares",
+        "evenOption": "Somente páginas pares"
+      },
+      "visualPanel": {
+        "heading": "Como funciona:",
+        "description": "Clique nas miniaturas abaixo para selecioná-las. Clique novamente para remover a seleção. Todas as páginas marcadas serão extraídas."
+      },
+      "allPagesPanel": {
+        "heading": "Como funciona:",
+        "description": "Este modo cria um PDF separado para cada página do documento e faz o download de todos em um único arquivo ZIP."
+      },
+      "bookmarksPanel": {
+        "heading": "Como funciona:",
+        "description": "Divide o PDF nos pontos onde existirem marcadores. Cada marcador inicia um novo arquivo.",
+        "levelLabel": "Nível de marcador",
+        "options": {
+          "level0": "Nível 0 (somente topo)",
+          "level1": "Nível 1",
+          "level2": "Nível 2",
+          "level3": "Nível 3",
+          "all": "Todos os níveis"
+        },
+        "helper": "Escolha qual nível de hierarquia será usado na divisão."
+      },
+      "nTimesPanel": {
+        "heading": "Como funciona:",
+        "description": "Divide o PDF em N partes iguais. Ex.: um PDF de 40 páginas com N=5 gera 8 PDFs com 5 páginas.",
+        "label": "Número de páginas por divisão (N)",
+        "inputHelper": "Cada PDF resultante terá N páginas (exceto, talvez, o último).",
+        "warningLabel": "Observação:"
+      },
+      "zipOption": "Baixar páginas como arquivos individuais em um ZIP",
+      "submit": "Dividir PDF"
+    },
+    "encrypt": {
+      "title": "Proteger PDF com senha",
+      "description": "Ative uma proteção AES 256 bits para o seu PDF.",
+      "inputs": {
+        "userLabel": "Senha do usuário",
+        "userPlaceholder": "Senha para abrir o PDF",
+        "userHelper": "Obrigatória para abrir e visualizar o PDF.",
+        "ownerLabel": "Senha do proprietário (opcional)",
+        "ownerPlaceholder": "Senha para permissões completas (recomendado)",
+        "ownerHelper": "Permite alterar permissões e remover a criptografia."
+      },
+      "restrictions": {
+        "heading": "🔒 Restrinja permissões do PDF",
+        "description": "Escolha quais ações serão bloqueadas:",
+        "options": {
+          "modify": "Bloquear qualquer modificação (--modify=none)",
+          "extract": "Bloquear extração de texto/imagem (--extract=n)",
+          "print": "Bloquear impressão (--print=none)",
+          "accessibility": "Bloquear cópia para acessibilidade (--accessibility=n)",
+          "annotate": "Bloquear anotações (--annotate=n)",
+          "assemble": "Bloquear montagem de páginas (--assemble=n)",
+          "form": "Bloquear preenchimento de formulários (--form=n)",
+          "modifyOther": "Bloquear outras modificações (--modify-other=n)"
+        }
+      },
+      "securityCallout": {
+        "title": "⚠️ Recomendação de segurança",
+        "body": "Para máxima segurança, defina as duas senhas. Sem a senha de proprietário, restrições (impressão, cópia etc.) podem ser contornadas."
+      },
+      "qualityCallout": {
+        "title": "✓ Criptografia de alta qualidade",
+        "body": "Criptografia AES 256 bits sem perda de qualidade. O texto continua selecionável e pesquisável."
+      },
+      "submit": "Criptografar e baixar"
+    },
+    "decrypt": {
+      "title": "Remover senha do PDF",
+      "description": "Envie um PDF protegido e informe a senha atual para gerar uma cópia desbloqueada.",
+      "passwordLabel": "Digite a senha atual",
+      "passwordPlaceholder": "Informe a senha correta",
+      "submit": "Desbloquear e baixar"
+    },
+    "organize": {
+      "title": "Organizar PDF",
+      "description": "Reordene, gire ou exclua páginas arrastando e soltando.",
+      "submit": "Salvar alterações"
+    },
+    "compress": {
+      "title": "Comprimir PDF",
+      "description": "Reduza o tamanho escolhendo o método de compressão ideal. Suporta vários PDFs.",
+      "levelLabel": "Nível de compressão",
+      "levelOptions": {
+        "balanced": "Equilibrado (recomendado)",
+        "highQuality": "Alta qualidade (arquivo maior)",
+        "smallSize": "Menor tamanho (qualidade reduzida)",
+        "extreme": "Extremo (qualidade muito baixa)"
+      },
+      "algorithmLabel": "Algoritmo de compressão",
+      "algorithmOptions": {
+        "vector": "Vector (PDFs com muito texto)",
+        "photon": "Photon (imagens digitalizadas/desenhos)"
+      },
+      "algorithmHelper": "Use “Vector” para PDFs focados em texto ou “Photon” para arquivos escaneados e com muitas imagens.",
+      "submit": "Comprimir PDF"
+    },
+    "pdfToGreyscale": {
+      "title": "PDF para tons de cinza",
+      "description": "Converta todas as páginas para preto e branco. Cada página é renderizada, recebe um filtro e o PDF é reconstruído.",
+      "submit": "Converter para tons de cinza"
+    },
+    "pdfToZip": {
+      "title": "Compactar PDFs em ZIP",
+      "description": "Selecione vários PDFs para baixar tudo junto em um único arquivo ZIP.",
+      "submit": "Gerar arquivo ZIP"
+    },
+    "imageToPdf": {
+      "title": "Imagens para PDF",
+      "description": "Combine várias imagens em um único PDF. Arraste e solte para ordenar.",
+      "qualityLabel": "Qualidade das imagens no PDF",
+      "qualityNote": "Mais qualidade = PDF maior.",
+      "qualityValue": "90%",
+      "submit": "Converter para PDF"
+    },
+    "jpgToPdf": {
+      "title": "JPG para PDF",
+      "description": "Converta uma ou mais imagens JPG em um único PDF.",
+      "qualityLabel": "Qualidade do PDF",
+      "qualityOptions": {
+        "high": "Alta qualidade (arquivo maior)",
+        "medium": "Média (equilíbrio)",
+        "low": "Baixa qualidade (arquivo menor)"
+      },
+      "qualityNote": "Controla a compressão das imagens ao incorporá-las no PDF.",
+      "submit": "Converter para PDF"
+    },
+    "pngToPdf": {
+      "title": "PNG para PDF",
+      "description": "Converta uma ou mais imagens PNG em um único PDF.",
+      "qualityLabel": "Qualidade do PDF",
+      "qualityOptions": {
+        "high": "Alta qualidade (arquivo maior)",
+        "medium": "Qualidade média (equilíbrio)",
+        "low": "Baixa qualidade (arquivo menor)"
+      },
+      "qualityNote": "Controla a compressão das imagens ao incorporá-las no PDF.",
+      "submit": "Converter para PDF"
+    },
+    "pdfToJpg": {
+      "title": "PDF para JPG",
+      "description": "Converta cada página do PDF em uma imagem JPG de alta qualidade.",
+      "qualityLabel": "Qualidade da imagem",
+      "qualityNote": "Qualidade maior = arquivos maiores.",
+      "helper": "Clique em “Baixar tudo como ZIP” para obter as imagens de todas as páginas.",
+      "submit": "Baixar tudo como ZIP"
+    },
+    "pdfToPng": {
+      "title": "PDF para PNG",
+      "description": "Converta cada página do PDF em uma imagem PNG de alta qualidade.",
+      "qualityLabel": "Qualidade da imagem (escala)",
+      "qualityNote": "Escala maior = qualidade melhor, porém arquivos maiores.",
+      "helper": "Seu arquivo está pronto. Clique para baixar um ZIP com todas as imagens PNG.",
+      "submit": "Baixar tudo como ZIP"
+    },
+    "pdfToWebp": {
+      "title": "PDF para WebP",
+      "description": "Converta cada página em uma imagem WebP moderna.",
+      "qualityLabel": "Qualidade da imagem",
+      "qualityNote": "Mais qualidade = arquivos maiores.",
+      "helper": "Arquivo pronto! Clique para baixar um ZIP com todas as imagens WebP.",
+      "submit": "Baixar tudo como ZIP"
+    },
+    "webpToPdf": {
+      "title": "WebP para PDF",
+      "description": "Converta uma ou mais imagens WebP em um único PDF.",
+      "submit": "Converter para PDF"
+    },
+    "pdfToBmp": {
+      "title": "PDF para BMP",
+      "description": "Transforme cada página do PDF em imagem BMP. O download será feito em um ZIP.",
+      "submit": "Converter para BMP e baixar ZIP"
+    },
+    "pdfToTiff": {
+      "title": "PDF para TIFF",
+      "description": "Converta cada página do PDF em imagem TIFF de alta qualidade. O download será feito em um ZIP.",
+      "submit": "Converter para TIFF e baixar ZIP"
+    },
+    "tiffToPdf": {
+      "title": "TIFF para PDF",
+      "description": "Converta imagens TIFF (simples ou multipágina) em um único PDF.",
+      "submit": "Converter para PDF"
+    },
+    "svgToPdf": {
+      "title": "SVG para PDF",
+      "description": "Converta uma ou mais imagens SVG em um único PDF.",
+      "submit": "Converter para PDF"
+    },
+    "bmpToPdf": {
+      "title": "BMP para PDF",
+      "description": "Converta imagens BMP em um PDF único.",
+      "submit": "Converter para PDF"
+    },
+    "heicToPdf": {
+      "title": "HEIC para PDF",
+      "description": "Converta imagens HEIC do iPhone ou câmera em um PDF único.",
+      "submit": "Converter para PDF"
+    },
+    "txtToPdf": {
+      "title": "Texto para PDF",
+      "description": "Envie arquivos .txt ou digite/cole o conteúdo abaixo para gerar um PDF formatado.",
+      "tabs": {
+        "upload": "Enviar arquivos",
+        "text": "Digitar texto"
+      },
+      "textareaPlaceholder": "Comece a digitar aqui...",
+      "form": {
+        "fontFamily": "Família de fonte",
+        "fontSize": "Tamanho da fonte",
+        "pageSize": "Tamanho da página",
+        "textColor": "Cor do texto"
+      },
+      "submit": "Criar PDF"
+    },
+    "mdToPdf": {
+      "title": "Markdown para PDF",
+      "description": "Escreva em Markdown, escolha as opções de formatação e gere um PDF de alta qualidade.<br><strong class=\"text-gray-300\">Observação:</strong> imagens hospedadas na web (https://...) precisam de conexão para serem renderizadas.",
+      "options": {
+        "pageFormat": "Formato da página",
+        "orientation": "Orientação",
+        "margins": "Margens"
+      },
+      "editorLabel": "Editor Markdown",
+      "editorPlaceholder": "# Bem-vindo ao Markdown...",
+      "submit": "Gerar PDF a partir do Markdown"
+    },
+    "watermark": {
+      "title": "Adicionar marca d’água",
+      "description": "Aplique uma marca d’água em texto ou imagem em todas as páginas do PDF.",
+      "mode": {
+        "text": "Texto",
+        "image": "Imagem"
+      },
+      "textOptions": {
+        "label": "Texto da marca d’água",
+        "placeholder": "ex.: CONFIDENCIAL",
+        "fontSize": "Tamanho da fonte",
+        "textColor": "Cor do texto",
+        "opacity": "Opacidade",
+        "angle": "Ângulo"
+      },
+      "imageOptions": {
+        "label": "Envie a imagem da marca d’água",
+        "opacity": "Opacidade",
+        "angle": "Ângulo"
+      },
+      "submit": "Aplicar marca d’água e baixar"
+    },
+    "headerFooter": {
+      "title": "Adicionar cabeçalho e rodapé",
+      "description": "Insira textos personalizados nas margens superior e inferior de cada página.",
+      "formatting": "Opções de formatação",
+      "pageRange": {
+        "label": "Intervalo de páginas (opcional)",
+        "placeholder": "ex.: 1-3, 5",
+        "total": "Total de páginas:"
+      },
+      "fontSize": "Tamanho da fonte",
+      "fontColor": "Cor da fonte",
+      "headers": {
+        "left": "Cabeçalho esquerdo",
+        "center": "Cabeçalho central",
+        "right": "Cabeçalho direito"
+      },
+      "footers": {
+        "left": "Rodapé esquerdo",
+        "center": "Rodapé central",
+        "right": "Rodapé direito"
+      },
+      "submit": "Aplicar cabeçalho/rodapé"
+    },
+    "deletePages": {
+      "title": "Excluir páginas",
+      "description": "Remova páginas específicas ou intervalos inteiros do PDF.",
+      "total": "Total de páginas:",
+      "inputLabel": "Informe as páginas a excluir (ex.: 2, 4-6, 9):",
+      "placeholder": "ex.: 2, 4-6, 9",
+      "submit": "Excluir e baixar"
+    },
+    "addBlankPage": {
+      "title": "Adicionar páginas em branco",
+      "description": "Insira páginas vazias em qualquer posição do documento.",
+      "total": "Total de páginas:",
+      "afterLabel": "Inserir páginas após o número:",
+      "countLabel": "Quantidade de páginas em branco:",
+      "afterPlaceholder": "Use 0 para inserir no início",
+      "countPlaceholder": "Informe o número de páginas",
+      "submit": "Adicionar páginas e baixar"
+    },
+    "extractPages": {
+      "title": "Extrair páginas",
+      "description": "Exporte páginas específicas em arquivos separados. O download será feito em um ZIP.",
+      "total": "Total de páginas:",
+      "inputLabel": "Informe as páginas para extrair (ex.: 2, 4-6, 9):",
+      "placeholder": "ex.: 2, 4-6, 9",
+      "submit": "Extrair e baixar ZIP"
+    },
+    "invertColors": {
+      "title": "Inverter cores do PDF",
+      "description": "Gere uma versão “modo escuro” invertendo as cores. Funciona melhor em documentos simples de texto/imagem.",
+      "submit": "Inverter cores e baixar"
+    },
+    "reversePages": {
+      "title": "Inverter ordem das páginas",
+      "description": "Inverta a ordem das páginas, tornando a última a primeira.",
+      "submit": "Inverter e baixar"
+    },
+    "viewMetadata": {
+      "title": "Ver metadados do PDF",
+      "description": "Envie um PDF para visualizar propriedades como título, autor e datas.",
+      "resultsPlaceholder": "Os metadados serão exibidos aqui após o envio.",
+      "submit": "Carregar e visualizar"
+    },
+    "editMetadata": {
+      "title": "Editar metadados do PDF",
+      "description": "Altere os metadados principais do seu PDF. Deixe o campo vazio para limpar o valor correspondente.",
+      "importantHeading": "Importante:",
+      "importantBody": "Esta ferramenta usa a biblioteca pdf-lib, que pode atualizar os campos Producer, CreationDate e ModDate ao salvar. Para conferir o resultado final, utilize a opção Ver metadados.",
+      "fields": {
+        "title": "Título",
+        "author": "Autor",
+        "subject": "Assunto",
+        "keywords": "Palavras-chave (separadas por vírgula)",
+        "creator": "Ferramenta criadora",
+        "producer": "Ferramenta produtora",
+        "creationDate": "Data de criação",
+        "modDate": "Data de modificação"
+      },
+      "actions": {
+        "title": "Campos personalizados",
+        "note": "Observação: nem todos os leitores de PDF suportam campos personalizados.",
+        "addField": "Adicionar campo",
+        "submit": "Atualizar metadados e baixar"
+      }
+    },
+    "removeMetadata": {
+      "title": "Remover metadados",
+      "description": "Elimine totalmente metadados identificáveis do PDF.",
+      "submit": "Remover e baixar"
+    },
+    "changePermissions": {
+      "title": "Alterar permissões do PDF",
+      "description": "Ajuste senhas e permissões sem perder qualidade.",
+      "currentPasswordLabel": "Senha atual (se houver)",
+      "currentPasswordPlaceholder": "Deixe em branco se não houver senha",
+      "newUserLabel": "Nova senha do usuário (opcional)",
+      "newUserPlaceholder": "Senha para abrir o PDF",
+      "newOwnerLabel": "Nova senha do proprietário (opcional)",
+      "newOwnerPlaceholder": "Senha para manter as permissões",
+      "infoHeading": "Como funciona",
+      "infoItems": [
+        "Senha do usuário: necessária para abrir o PDF.",
+        "Senha do proprietário: aplica as permissões configuradas abaixo.",
+        "Deixe ambas vazias para remover toda a proteção.",
+        "Marque as caixas para PERMITIR ações específicas (desmarcado = bloqueado)."
+      ],
+      "legend": "Permissões (só funcionam com a senha do proprietário):",
+      "permissions": {
+        "print": "Permitir impressão",
+        "copy": "Permitir copiar texto/imagens",
+        "modify": "Permitir modificações",
+        "annotate": "Permitir anotações",
+        "fillForms": "Permitir preenchimento de formulários",
+        "assemble": "Permitir montagem de páginas",
+        "extract": "Permitir extração de páginas",
+        "accessibility": "Permitir leitura por acessibilidade"
+      },
+      "submit": "Aplicar permissões"
+    },
+    "addAttachments": {
+      "title": "Adicionar anexos ao PDF",
+      "description": "Envie primeiro o PDF ao qual deseja anexar arquivos.",
+      "dropLabel": "Clique para selecionar os arquivos",
+      "dropHint": "Qualquer tipo de arquivo, vários itens permitidos",
+      "secondaryTitle": "Envie os arquivos que serão anexados",
+      "secondaryDescription": "Selecione um ou mais arquivos para incorporar ao PDF. Aceitamos qualquer formato (imagens, documentos, planilhas etc.).",
+      "submit": "Incorporar arquivos e baixar"
+    },
+    "extractAttachments": {
+      "title": "Extrair anexos",
+      "description": "Extraia todos os arquivos incorporados de um ou mais PDFs. Os anexos são reunidos em um ZIP.",
+      "submit": "Extrair anexos"
+    },
+    "editAttachments": {
+      "title": "Editar anexos",
+      "description": "Visualize, remova ou substitua anexos do seu PDF.",
+      "submit": "Salvar alterações e baixar"
+    },
+    "sanitizePdf": {
+      "title": "Sanitizar PDF",
+      "description": "Remova informações sensíveis ou desnecessárias antes de compartilhar o PDF. Escolha abaixo os elementos a serem eliminados.",
+      "warning": "Remover fontes incorporadas pode quebrar a renderização do texto. Use essa opção apenas se tiver certeza de que o visualizador terá fontes substitutas.",
+      "optionsHeading": "Opções de sanitização",
+      "sections": {
+        "security": "Segurança essencial",
+        "additional": "Opções adicionais"
+      },
+      "options": {
+        "flattenForms": "Achatar campos de formulário",
+        "metadata": "Remover todos os metadados",
+        "annotations": "Remover anotações",
+        "javascript": "Remover JavaScript",
+        "attachments": "Remover arquivos incorporados",
+        "layers": "Remover camadas (OCG)",
+        "links": "Remover links externos",
+        "structure": "Remover árvore de estrutura",
+        "markinfo": "Remover informações de marcação",
+        "fonts": "Remover fontes incorporadas"
+      },
+      "submit": "Sanitizar e baixar"
+    },
+    "pdfToMarkdown": {
+      "title": "PDF para Markdown",
+      "description": "Converta o texto do PDF em um arquivo Markdown estruturado.",
+      "note": "Observação: esta conversão é focada em texto. Tabelas e imagens não serão incluídas.",
+      "submit": "Converter para Markdown"
+    },
+    "flattenPdf": {
+      "title": "Achatar PDF",
+      "description": "Transforme formulários e anotações em conteúdo fixo e não editável.",
+      "infoHeading": "Como funciona",
+      "infoItems": [
+        "Modo seguro: mantém o texto selecionável, ideal para documentos colaborativos.",
+        "Modo destrutivo: remove o conteúdo ao achatar o PDF, indicado para máxima privacidade.",
+        "Ambos os modos eliminam scripts, formulários interativos e campos dinâmicos."
+      ],
+      "submit": "Achatar PDF"
+    },
+    "scanToPdf": {
+      "title": "Escanear para PDF",
+      "description": "Use a câmera do dispositivo para digitalizar documentos e salvá-los como PDF. No desktop, será aberto o seletor de arquivos.",
+      "submit": "Criar PDF a partir das capturas"
+    },
+    "splitInHalf": {
+      "title": "Dividir páginas ao meio",
+      "description": "Escolha como dividir cada página do documento em duas metades.",
+      "typeLabel": "Tipo de divisão",
+      "options": {
+        "vertical": "Dividir verticalmente (metade esquerda/direita)",
+        "horizontal": "Dividir horizontalmente (parte superior/inferior)"
+      },
+      "submit": "Dividir PDF"
+    },
+    "pageDimensions": {
+      "title": "Analisar dimensões das páginas",
+      "description": "Envie um PDF para ver as dimensões exatas, o formato padrão e a orientação de cada página.",
+      "unitsLabel": "Unidade de medida:",
+      "units": {
+        "pt": "Pontos (pt)",
+        "in": "Polegadas (in)",
+        "mm": "Milímetros (mm)",
+        "px": "Pixels (a 96 DPI)"
+      },
+      "tableHeaders": {
+        "page": "Página #",
+        "dimensions": "Dimensões (L x A)",
+        "size": "Tamanho padrão",
+        "orientation": "Orientação"
+      }
+    },
+    "nUp": {
+      "title": "Distribuição N-Up",
+      "description": "Combine várias páginas do PDF em uma única folha — ideal para livretos, provas e visualizações rápidas.",
+      "pagesPerSheet": "Páginas por folha",
+      "outputPageSize": "Tamanho da página de saída",
+      "spacingLabel": "Espaçamento entre páginas",
+      "marginLabel": "Margem externa",
+      "submit": "Gerar PDF N-Up"
+    },
+    "rotate": {
+      "title": "Girar PDF",
+      "description": "Gire todas as páginas ou apenas as selecionadas do documento.",
+      "bulkHeading": "Ações em lote",
+      "buttons": {
+        "rotateLeft": "Girar todas à esquerda",
+        "rotateRight": "Girar todas à direita"
+      },
+      "submit": "Salvar rotações"
+    },
+    "addPageNumbers": {
+      "title": "Adicionar numeração",
+      "description": "Insira números de página personalizados no PDF.",
+      "positionLabel": "Posição",
+      "positionOptions": {
+        "bottomCenter": "Inferior central",
+        "bottomLeft": "Inferior esquerda",
+        "bottomRight": "Inferior direita",
+        "topCenter": "Superior central",
+        "topLeft": "Superior esquerda",
+        "topRight": "Superior direita"
+      },
+      "fontSizeLabel": "Tamanho da fonte",
+      "formatLabel": "Formato",
+      "formatOptions": {
+        "default": "1, 2, 3...",
+        "pageXofY": "Página 1/N, 2/N..."
+      },
+      "colorLabel": "Cor do texto",
+      "submit": "Inserir numeração"
+    },
+    "posterize": {
+      "title": "Transformar PDF em pôster",
+      "description": "Divida páginas grandes em múltiplas folhas menores para montar pôsteres ou plotagens.",
+      "previewLabel": "Prévia da página ({{current}} / {{total}})",
+      "gridHeading": "Grade do pôster",
+      "rowsLabel": "Linhas",
+      "colsLabel": "Colunas",
+      "outputHeading": "Configurações da página de saída",
+      "pageSizeLabel": "Tamanho da página",
+      "orientationLabel": "Orientação",
+      "orientationOptions": {
+        "auto": "Automática (recomendado)",
+        "portrait": "Retrato",
+        "landscape": "Paisagem"
+      },
+      "advancedHeading": "Opções avançadas",
+      "scalingLabel": "Escala do conteúdo",
+      "scalingOptions": {
+        "fitTitle": "Ajustar",
+        "fitDescription": "Preserva todo o conteúdo; pode acrescentar margens.",
+        "fillTitle": "Preencher (corte)",
+        "fillDescription": "Preenche totalmente cada folha, podendo cortar as bordas."
+      },
+      "overlapLabel": "Sobreposição (para montagem)",
+      "overlapUnits": {
+        "pt": "Pontos",
+        "in": "Polegadas",
+        "mm": "Milímetros"
+      },
+      "pageRange": {
+        "label": "Intervalo de páginas (opcional)",
+        "placeholder": "ex.: 1-3, 5",
+        "helper": "Total de páginas: {{total}}"
+      },
+      "submit": "Gerar pôster em PDF"
+    },
+    "removeRestrictions": {
+      "title": "Remover restrições do PDF",
+      "description": "Libere as permissões de impressão, cópia e edição removendo as restrições de segurança do arquivo.",
+      "info": {
+        "heading": "Como funciona",
+        "body": "Esta operação:",
+        "items": [
+          "Remove todas as restrições de permissão (impressão, cópia e edição).",
+          "Remove a criptografia mesmo que o arquivo esteja protegido.",
+          "Elimina restrições associadas a assinaturas digitais (a assinatura se tornará inválida).",
+          "Gera um PDF totalmente editável e sem bloqueios."
+        ]
+      },
+      "ownerPassword": {
+        "label": "Senha do proprietário (se houver)",
+        "placeholder": "Deixe em branco se o PDF não tiver senha",
+        "helper": "Informe a senha do proprietário caso o PDF esteja protegido."
+      },
+      "warning": {
+        "heading": "Aviso",
+        "description": "Esta ferramenta deve ser usada apenas para finalidades legítimas, como:",
+        "items": [
+          "Remover restrições de PDFs que você possui ou tem autorização para alterar.",
+          "Recuperar acesso quando esqueceu a senha de um documento legítimo.",
+          "Acessar conteúdo que você adquiriu ou criou legalmente.",
+          "Editar documentos para fins corporativos autorizados.",
+          "Abrir arquivos para fluxos legítimos de arquivo, conformidade ou recuperação.",
+          "Limitações: esta ferramenta só remove restrições de PDFs com proteção fraca ou sem senha do proprietário. Ela não remove criptografia AES-256 aplicada corretamente."
+        ],
+        "footnote": "Usar este recurso para violar direitos autorais, infringir propriedade intelectual ou acessar documentos sem autorização pode ser ilegal. Consulte o responsável legal ou o proprietário do arquivo em caso de dúvida."
+      },
+      "submit": "Remover restrições e baixar"
+    },
+    "duplicateOrganize": {
+      "title": "Gerenciar páginas",
+      "description": "Arraste, solte e reorganize as páginas do PDF. Use os ícones abaixo para duplicar ou excluir rapidamente.",
+      "legend": {
+        "duplicate": "Duplicar página",
+        "delete": "Excluir página"
+      },
+      "submit": "Salvar novo PDF"
+    },
+    "combineSinglePage": {
+      "title": "Combinar em uma única página",
+      "description": "Una todas as páginas do PDF verticalmente para gerar um único documento rolável.",
+      "spacingLabel": "Espaçamento entre páginas (em pontos)",
+      "backgroundLabel": "Cor de fundo",
+      "separatorLabel": "Desenhar uma linha separadora entre as páginas",
+      "submit": "Combinar páginas"
+    },
+    "fixDimensions": {
+      "title": "Padronizar dimensões das páginas",
+      "description": "Converta todas as páginas do PDF para um tamanho uniforme. Escolha um formato conhecido ou defina medidas personalizadas.",
+      "targetSize": {
+        "label": "Tamanho desejado",
+        "custom": "Tamanho personalizado..."
+      },
+      "orientation": {
+        "label": "Orientação",
+        "options": {
+          "portrait": "Retrato",
+          "landscape": "Paisagem"
+        }
+      },
+      "customSize": {
+        "width": "Largura",
+        "height": "Altura",
+        "units": {
+          "label": "Unidade",
+          "options": {
+            "in": "Polegadas",
+            "mm": "Milímetros"
+          }
+        }
+      },
+      "scaling": {
+        "label": "Método de dimensionamento do conteúdo",
+        "fit": {
+          "title": "Ajustar",
+          "description": "Preserva todo o conteúdo, mas pode gerar barras brancas."
+        },
+        "fill": {
+          "title": "Preencher",
+          "description": "Cobre toda a página, podendo cortar o conteúdo."
+        }
+      },
+      "backgroundLabel": "Cor de fundo (modo “Ajustar”)",
+      "submit": "Padronizar páginas"
+    },
+    "changeBackgroundColor": {
+      "title": "Alterar cor de fundo",
+      "description": "Selecione uma nova cor para todas as páginas do PDF.",
+      "colorLabel": "Escolha a cor de fundo",
+      "submit": "Aplicar cor e baixar"
+    },
+    "changeTextColor": {
+      "title": "Alterar cor do texto",
+      "description": "Troque a cor dos textos escuros do PDF. As páginas são rasterizadas, portanto o texto não ficará selecionável.",
+      "colorLabel": "Selecione a cor do texto",
+      "originalPreview": "Original",
+      "processedPreview": "Prévia",
+      "submit": "Aplicar cor e baixar"
+    },
+    "comparePdfs": {
+      "title": "Comparar PDFs",
+      "description": "Envie dois arquivos para compará-los visualmente usando sobreposição ou visualização lado a lado.",
+      "dropzones": {
+        "original": "Enviar PDF original",
+        "revised": "Enviar PDF revisado"
+      },
+      "pageIndicator": "Página {{current}} de {{total}}",
+      "viewModes": {
+        "overlay": "Sobreposição",
+        "sideBySide": "Lado a lado"
+      },
+      "controls": {
+        "flicker": "Piscar",
+        "opacity": "Opacidade:",
+        "syncScroll": "Sincronizar rolagem"
+      }
+    },
+    "ocrPdf": {
+      "title": "OCR em PDF",
+      "description": "Converta PDFs digitalizados em documentos pesquisáveis. Selecione os idiomas presentes no arquivo para obter melhor precisão.",
+      "info": {
+        "heading": "Como funciona:",
+        "items": {
+          "textExtraction": {
+            "title": "Extração de texto",
+            "description": "Utiliza o Tesseract OCR para reconhecer texto em imagens ou PDFs escaneados."
+          },
+          "searchablePdf": {
+            "title": "PDF pesquisável",
+            "description": "Gera um PDF com camada invisível de texto, preservando o visual original."
+          },
+          "characterFilter": {
+            "title": "Filtro de caracteres",
+            "description": "Limite os símbolos aceitos para melhorar a precisão em notas fiscais, formulários etc."
+          },
+          "multiLanguage": {
+            "title": "Suporte multilíngue",
+            "description": "Selecione vários idiomas para documentos com conteúdo misto."
+          }
+        }
+      },
+      "languageSelect": {
+        "label": "Idiomas presentes no documento",
+        "placeholder": "Busque por idiomas...",
+        "selectedLabel": "Selecionados:",
+        "noneSelected": "Nenhum"
+      },
+      "advanced": {
+        "summary": "Configurações avançadas (recomendado para melhorar a precisão)",
+        "resolution": {
+          "label": "Resolução",
+          "options": {
+            "standard": "Padrão (192 DPI)",
+            "high": "Alta (288 DPI)",
+            "ultra": "Ultra (384 DPI)"
+          }
+        },
+        "binarize": "Binarizar imagem (aumenta o contraste para digitalizações limpas)",
+        "whitelistPreset": {
+          "label": "Modelo de lista permitida",
+          "options": {
+            "none": "Nenhum (todos os caracteres)",
+            "alphanumeric": "Alfanumérico + pontuação básica",
+            "numbersCurrency": "Números + símbolos monetários",
+            "lettersOnly": "Somente letras (A-Z, a-z)",
+            "numbersOnly": "Somente números (0-9)",
+            "invoice": "Notas fiscais/recibos (números, $, ., -, /)",
+            "forms": "Formulários (alfanumérico + símbolos comuns)",
+            "custom": "Personalizado..."
+          }
+        },
+        "whitelistInput": {
+          "label": "Lista de caracteres permitidos (opcional)",
+          "placeholder": "ex.: abcdefghijklmnopqrstuvwxyz0123456789$.,",
+          "helper": "Somente esses caracteres serão reconhecidos. Deixe vazio para aceitar todos."
+        }
+      },
+      "actions": {
+        "start": "Iniciar OCR",
+        "progress": "Inicializando...",
+        "resultsTitle": "OCR concluído",
+        "resultsDescription": "Seu PDF pesquisável está pronto. Você também pode copiar ou baixar o texto extraído.",
+        "copyTooltip": "Copiar para a área de transferência",
+        "downloadTxt": "Baixar como .txt",
+        "downloadPdf": "Baixar PDF pesquisável"
+      }
+    },
+    "wordToPdf": {
+      "title": "Word para PDF",
+      "description": "Envie um arquivo .docx para gerar um PDF com texto selecionável. Layouts muito complexos podem sofrer ajustes.",
+      "uploader": {
+        "instructions": "<span class=\"font-semibold\">Clique para selecionar</span> ou arraste e solte",
+        "hint": "Apenas um arquivo .docx"
+      },
+      "submit": "Visualizar e converter"
+    },
+    "removeAnnotations": {
+      "title": "Remover anotações",
+      "description": "Escolha os tipos de anotação que deseja excluir de todas as páginas ou de um intervalo específico.",
+      "pageSelection": {
+        "heading": "1. Escolha as páginas",
+        "all": "Todas as páginas",
+        "specific": "Páginas específicas",
+        "placeholder": "ex.: 1-3, 5, 8",
+        "helper": "Total de páginas: {{total}}"
+      },
+      "annotationSelection": {
+        "heading": "2. Selecione os tipos de anotação para remover",
+        "selectAll": "Selecionar / limpar tudo"
+      },
+      "annotations": {
+        "highlight": "Destaque (Highlight)",
+        "strikeOut": "Tachado (StrikeOut)",
+        "underline": "Sublinhado",
+        "ink": "Desenho à mão (Ink)",
+        "polygon": "Polígono",
+        "square": "Quadrado",
+        "circle": "Círculo",
+        "line": "Linha / seta",
+        "polyLine": "Polilinha",
+        "link": "Link",
+        "text": "Texto (nota)",
+        "freeText": "Texto livre",
+        "popup": "Popup / comentário",
+        "squiggly": "Ondulado (Squiggly)",
+        "stamp": "Carimbo (Stamp)",
+        "caret": "Marcador (Caret)",
+        "fileAttachment": "Anexo de arquivo"
+      },
+      "submit": "Remover anotações selecionadas"
+    },
+    "formFiller": {
+      "title": "Preencher formulário PDF",
+      "description": "Envie um PDF com campos interativos e preencha tudo em português. A visualização à direita é atualizada em tempo real.",
+      "emptyState": "Envie um arquivo para listar os campos aqui.",
+      "viewer": {
+        "pageIndicator": "Página {{current}} de {{total}}"
+      },
+      "submit": "Salvar e baixar"
+    },
+    "removeBlankPages": {
+      "title": "Remover páginas em branco",
+      "description": "Detecte e exclua páginas vazias (ou quase vazias) do PDF automaticamente. Ajuste a sensibilidade para definir o que conta como “em branco”.",
+      "sensitivityLabel": "Sensibilidade ({{value}}%)",
+      "sensitivityHelper": "Sensibilidades mais altas exigem páginas quase vazias para que sejam removidas.",
+      "analysisHeading": "Resultado da análise",
+      "submit": "Remover páginas e baixar"
+    },
+    "alternateMerge": {
+      "title": "Alternar e mesclar páginas",
+      "description": "Combine páginas de dois ou mais documentos alternando entre eles. Arraste os arquivos para definir a ordem (ex.: página 1 do Doc A, página 1 do Doc B, página 2 do Doc A...).",
+      "infoHeading": "Como funciona:",
+      "infoItems": [
+        "A ferramenta usa uma página de cada documento na ordem definida abaixo e repete o ciclo até acabar todo o conteúdo.",
+        "Se um documento terminar antes, ele é ignorado e o processo continua com os demais arquivos."
+      ],
+      "submit": "Alternar e mesclar PDFs"
+    },
+    "linearize": {
+      "title": "Linearizar PDFs (visualização rápida)",
+      "description": "Otimize vários PDFs para carregamento mais ágil na web. Todos os arquivos serão baixados em um ZIP.",
+      "submit": "Linearizar PDFs e baixar ZIP"
+    },
+    "crop": {
+      "title": "Cortar PDF",
+      "description": "Clique e arraste para selecionar a área de corte em cada página. É possível definir cortes diferentes por página.",
+      "zoomTitles": {
+        "out": "Reduzir zoom",
+        "fit": "Ajustar à tela",
+        "in": "Aumentar zoom"
+      },
+      "actions": {
+        "clearPage": {
+          "label": "Limpar página",
+          "tooltip": "Limpar corte desta página"
+        },
+        "clearAll": {
+          "label": "Limpar tudo",
+          "tooltip": "Limpar todas as seleções de corte"
+        }
+      },
+      "submit": "Aplicar corte e salvar PDF"
+    },
+    "pdfEditor": {
+      "title": "Editor de PDF",
+      "description": "Ferramenta para anotar, desenhar, destacar, redigir trechos, adicionar comentários e formas, capturar telas e visualizar PDFs com precisão."
+    },
+    "cropper": {
+      "title": "Recortar PDF",
+      "description": "Envie um PDF para recortar visualmente uma ou mais páginas. A ferramenta oferece pré-visualização em tempo real e dois modos de corte distintos.",
+      "infoHeading": "Como funciona:",
+      "infoItems": {
+        "preview": {
+          "title": "Pré-visualização",
+          "description": "Veja a área de corte em tempo real antes de aplicar."
+        },
+        "nonDestructive": {
+          "title": "Modo não destrutivo",
+          "description": "Ajusta os limites da página e “esconde” o conteúdo recortado, mantendo texto e dados originais."
+        },
+        "destructive": {
+          "title": "Modo destrutivo",
+          "description": "Remove o conteúdo definitivamente ao achatar o PDF; ideal para máxima privacidade, mas elimina texto selecionável."
+        }
+      },
+      "controls": {
+        "pageIndicator": "Página {{current}} de {{total}}",
+        "destructive": "Ativar corte destrutivo",
+        "applyToAll": "Aplicar em todas as páginas"
+      },
+      "status": "Selecione um arquivo PDF para começar.",
+      "submit": "Cortar e baixar"
+    },
+    "signPdf": {
+      "title": "Assinar PDF",
+      "description": "Crie sua assinatura, selecione-a e clique no documento para posicionar. Você pode arrastar para reposicionar.",
+      "tabs": {
+        "draw": "Desenhar",
+        "type": "Digitar",
+        "upload": "Enviar"
+      },
+      "drawPanel": {
+        "colorLabel": "Cor:",
+        "clear": "Limpar",
+        "save": "Salvar assinatura"
+      },
+      "typePanel": {
+        "placeholder": "Digite seu nome aqui",
+        "fontLabel": "Estilo de fonte",
+        "fontOptions": {
+          "signature": "Assinatura",
+          "handwriting": "Manuscrita",
+          "calligraphy": "Caligrafia",
+          "regular": "Regular",
+          "formal": "Formal"
+        },
+        "sizeLabel": "Tamanho ({{value}}px)",
+        "colorLabel": "Cor",
+        "previewPlaceholder": "Seu Nome",
+        "save": "Salvar assinatura"
+      },
+      "uploadPanel": {
+        "note": "* apenas arquivos PNG"
+      },
+      "savedSignatures": {
+        "heading": "Suas assinaturas salvas",
+        "helper": "As assinaturas salvas aparecerão aqui. Clique em uma para selecionar."
+      },
+      "viewer": {
+        "pageIndicator": "Página {{current}} de {{total}}",
+        "undoTooltip": "Desfazer última inserção"
+      },
+      "submit": "Aplicar assinaturas e baixar PDF"
+    }
+  }
+}

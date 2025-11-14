@@ -26,8 +26,8 @@
     <div class="container mx-auto px-4 h-16 flex items-center">
       <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
       <div class="ml-3">
-        <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
-        <p class="text-gray-400 text-sm leading-tight">
+        <p id="nav-brand" class="text-white font-bold text-lg leading-tight">PUC PDF</p>
+        <p id="nav-tagline" class="text-gray-400 text-sm leading-tight">
           Ferramentas privadas de PDF da PUC-Rio
         </p>
       </div>
@@ -40,23 +40,7 @@
       </h1>
       <p class="text-gray-400">Selecione uma ferramenta para começar.</p>
     </header>
-    <div id="grid-view">
-      <div class="mb-8 max-w-lg mx-auto">
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-            <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
-          </span>
-          <input type="text" id="search-bar" autocomplete="off"
-            class="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Busque uma ferramenta (ex.: 'dividir', 'organizar'...)" />
-          <span class="absolute inset-y-0 right-0 flex items-center rounded-lg pr-2">
-            <kbd id="shortcut" class="bg-gray-800 px-1 rounded-lg"></kbd>
-          </span>
-        </div>
-      </div>
-
-      <div id="tool-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
-    </div>
+    <div id="grid-view"></div>
 
     <div id="tool-interface"
       class="hidden w-full max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl p-6 md:p-8 border border-gray-700">
@@ -121,18 +105,18 @@
         <div>
           <div class="flex items-center justify-center md:justify-start mb-4">
             <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-10 w-auto mr-3" />
-            <span class="text-xl font-bold text-white">PUC PDF</span>
+            <span id="footer-brand" class="text-xl font-bold text-white">PUC PDF</span>
           </div>
           <p class="text-gray-500 text-xs mt-2">
-            <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
+            <a id="footer-code-link" href="https://github.com/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
           </p>
           <p class="text-gray-500 text-xs">
-            Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
+            <span id="footer-credit-label">Baseado em </span><a id="footer-credit-link" href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
           </p>
         </div>
 
         <div class="text-center md:text-right">
-          <h3 class="font-bold text-white mb-4">Siga-nos</h3>
+          <h3 id="footer-follow-title" class="font-bold text-white mb-4">Siga-nos</h3>
           <div class="flex justify-center md:justify-end space-x-4">
             <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" target="_blank" rel="noopener noreferrer"
               class="text-gray-400 hover:text-indigo-400" title="GitHub">

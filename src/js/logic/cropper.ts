@@ -5,6 +5,7 @@ import Cropper from 'cropperjs';
 import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
+import { t } from '../../i18n/index.js';
 
 // --- Global State for the Cropper Tool ---
 const cropperState = {
@@ -38,7 +39,9 @@ function saveCurrentCrop() {
  * @param {number} num The page number to render.
  */
 async function displayPageAsImage(num: any) {
-  showLoader(`Rendering Page ${num}...`);
+  showLoader(
+    t('alerts.cropper.renderingPage', { ns: 'alerts', page: num })
+  );
 
   try {
     const page = await cropperState.pdfDoc.getPage(num);
@@ -85,11 +88,17 @@ async function displayPageAsImage(num: any) {
       updatePageInfo();
       enableControls();
       hideLoader();
-      showAlert('Pronto', 'Selecione uma área para cortar.');
+      showAlert(
+        t('alerts.cropper.readyTitle', { ns: 'alerts' }),
+        t('alerts.cropper.readyMessage', { ns: 'alerts' })
+      );
     };
   } catch (error) {
     console.error('Error rendering page:', error);
-    showAlert('Erro', 'Não foi possível renderizar a página.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.cropper.renderError', { ns: 'alerts' })
+    );
     hideLoader();
   }
 }
@@ -186,7 +195,13 @@ async function performFlatteningCrop(cropData: any) {
 
   for (let i = 0; i < totalPages; i++) {
     const pageNum = i + 1;
-    showLoader(`Processando página ${pageNum} de ${totalPages}...`);
+    showLoader(
+      t('alerts.cropper.processingPage', {
+        ns: 'alerts',
+        current: pageNum,
+        total: totalPages,
+      })
+    );
 
     if (cropData[pageNum]) {
       const page = await cropperState.pdfDoc.getPage(pageNum);
@@ -284,8 +299,8 @@ export async function setupCropperTool() {
             cropperState.pageCrops[cropperState.currentPageNum];
           if (!currentCrop) {
             showAlert(
-              'Recorte não definido',
-              'Selecione uma área para cortar antes de continuar.'
+              t('alerts.cropper.missingSelectionTitle', { ns: 'alerts' }),
+              t('alerts.cropper.missingSelectionSingle', { ns: 'alerts' })
             );
             return;
           }
@@ -306,13 +321,13 @@ export async function setupCropperTool() {
 
         if (Object.keys(finalCropData).length === 0) {
           showAlert(
-            'Recorte não definido',
-            'Selecione uma área em pelo menos uma página para cortar.'
+            t('alerts.cropper.missingSelectionTitle', { ns: 'alerts' }),
+            t('alerts.cropper.missingSelectionAny', { ns: 'alerts' })
           );
           return;
         }
 
-        showLoader('Aplicando recorte...');
+        showLoader(t('alerts.cropper.applying', { ns: 'alerts' }));
 
         try {
           let finalPdfBytes;
@@ -335,18 +350,24 @@ export async function setupCropperTool() {
             fileName
           );
           showAlert(
-            'Sucesso',
-            'Recorte concluído! O download foi iniciado.'
+            t('alerts.successTitle', { ns: 'alerts' }),
+            t('alerts.cropper.success', { ns: 'alerts' })
           );
         } catch (e) {
           console.error(e);
-          showAlert('Erro', 'Ocorreu um erro durante o recorte.');
+          showAlert(
+            t('alerts.errorTitle', { ns: 'alerts' }),
+            t('alerts.cropper.error', { ns: 'alerts' })
+          );
         } finally {
           hideLoader();
         }
       });
   } catch (error) {
     console.error('Error setting up cropper tool:', error);
-    showAlert('Erro', 'Não foi possível carregar o PDF para recorte.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.cropper.loadError', { ns: 'alerts' })
+    );
   }
 }

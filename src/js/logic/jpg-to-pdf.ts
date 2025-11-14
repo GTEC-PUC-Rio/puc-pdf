@@ -66,7 +66,6 @@ export async function jpgToPdf() {
       try {
         jpgImage = await pdfDoc.embedJpg(originalBytes as Uint8Array);
       } catch (e) {
-        // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
         showAlert(
           `A incorporação direta de ${file.name} falhou. Tentando sanitizar...`
         );

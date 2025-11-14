@@ -5,6 +5,7 @@ import {
   readFileAsArrayBuffer,
 } from '../utils/helpers.js';
 import { state } from '../state.js';
+import { t } from '../../i18n/index.js';
 
 export async function removeRestrictions() {
   const file = state.files[0];
@@ -17,16 +18,18 @@ export async function removeRestrictions() {
   let qpdf: any;
 
   try {
-    showLoader('Inicializando...');
+    showLoader(
+      t('alerts.removeRestrictions.initializing', { ns: 'alerts' })
+    );
     qpdf = await initializeQpdf();
 
-    showLoader('Lendo o PDF...');
+    showLoader(t('alerts.removeRestrictions.readingPdf', { ns: 'alerts' }));
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Removendo restrições...');
+    showLoader(t('alerts.removeRestrictions.processing', { ns: 'alerts' }));
 
     const args = [inputPath];
 
@@ -45,21 +48,29 @@ export async function removeRestrictions() {
         qpdfError.message?.includes('encrypt')
       ) {
         throw new Error(
-          'Não foi possível remover as restrições. Talvez seja necessário informar a senha correta do proprietário.'
+          t('alerts.removeRestrictions.passwordRequired', { ns: 'alerts' })
         );
       }
 
       throw new Error(
-        'Não foi possível remover as restrições: ' +
-          (qpdfError.message || 'Erro desconhecido')
+        t('alerts.removeRestrictions.genericFailure', {
+          ns: 'alerts',
+          message:
+            qpdfError.message ||
+            t('alerts.removeRestrictions.defaultReason', { ns: 'alerts' }),
+        })
       );
     }
 
-    showLoader('Preparando download...');
+    showLoader(
+      t('alerts.removeRestrictions.preparingDownload', { ns: 'alerts' })
+    );
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {
-      throw new Error('A operação resultou em um arquivo vazio.');
+      throw new Error(
+        t('alerts.removeRestrictions.emptyFile', { ns: 'alerts' })
+      );
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -68,15 +79,21 @@ export async function removeRestrictions() {
     hideLoader();
 
     showAlert(
-      'Sucesso',
-      'Restrições removidas com sucesso! O arquivo agora está totalmente liberado para edição e impressão.'
+      t('alerts.successTitle', { ns: 'alerts' }),
+      t('alerts.removeRestrictions.successMessage', { ns: 'alerts' })
     );
   } catch (error: any) {
     console.error('Error during restriction removal:', error);
     hideLoader();
+    const reason =
+      error?.message ||
+      t('alerts.removeRestrictions.defaultReason', { ns: 'alerts' });
     showAlert(
-      'Falha na operação',
-      `Ocorreu um erro: ${error.message || 'O PDF pode estar corrompido ou protegido por senha.'}`
+      t('alerts.removeRestrictions.errorTitle', { ns: 'alerts' }),
+      t('alerts.removeRestrictions.errorMessage', {
+        ns: 'alerts',
+        reason,
+      })
     );
   } finally {
     try {

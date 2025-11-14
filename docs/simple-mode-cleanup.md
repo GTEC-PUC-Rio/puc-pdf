@@ -37,3 +37,4 @@ Seguindo esses passos o repositório passa a representar apenas o Simple Mode, c
 - 2025-11-14: Página inicial simplificada (nav/hero removidos), condicionais de `__SIMPLE_MODE__` eliminados e `vite.config.ts` não depende mais de variáveis de modo.
 - 2025-11-14: Páginas auxiliares (About/FAQ/Contato/etc. e ferramentas dedicadas) receberam o mesmo nav simples, carregamento protegido (`data-loading`) e não dependem mais do `mobileMenu.ts` (arquivo removido).
 - 2025-11-14: Scripts npm, Dockerfile, docker-compose e o workflow de build passaram a gerar somente o Simple Mode; README/SECURITY foram ajustados e `SIMPLE_MODE.md` foi removido.
+- 2025-11-14: Iniciada a base React/i18n — grid e barra de busca agora são renderizados por React 19 consumindo strings centralizadas em `src/locales/pt-BR`.

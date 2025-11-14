@@ -3,15 +3,19 @@ import { downloadFile } from '../utils/helpers.js';
 import { state } from '../state.js';
 
 import { PDFDocument as PDFLibDocument, rgb } from 'pdf-lib';
+import { t } from '../../i18n/index.js';
 
 export async function splitInHalf() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const splitType = document.getElementById('split-type').value;
   if (!state.pdfDoc) {
-    showAlert('Erro', 'Nenhum PDF foi carregado.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.pdfNotLoaded', { ns: 'alerts' })
+    );
     return;
   }
-  showLoader('Dividindo páginas do PDF...');
+  showLoader(t('alerts.splitInHalf.loading', { ns: 'alerts' }));
   try {
     const newPdfDoc = await PDFLibDocument.create();
     const pages = state.pdfDoc.getPages();
@@ -21,7 +25,13 @@ export async function splitInHalf() {
       const { width, height } = originalPage.getSize();
       const whiteColor = rgb(1, 1, 1); // For masking
 
-      showLoader(`Processando página ${i + 1} de ${pages.length}...`);
+      showLoader(
+        t('alerts.splitInHalf.processingPage', {
+          ns: 'alerts',
+          current: i + 1,
+          total: pages.length,
+        })
+      );
 
       // Copy the page twice for all split types
       const [page1] = await newPdfDoc.copyPages(state.pdfDoc, [i]);
@@ -48,7 +58,10 @@ export async function splitInHalf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Erro', 'Ocorreu um erro ao dividir o PDF.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.splitInHalf.error', { ns: 'alerts' })
+    );
   } finally {
     hideLoader();
   }

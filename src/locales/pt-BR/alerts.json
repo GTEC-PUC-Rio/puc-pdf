@@ -1,0 +1,99 @@
+{
+  "loading": "Processando...",
+  "defaultTitle": "Alerta",
+  "defaultMessage": "Esta é uma mensagem de alerta.",
+  "successTitle": "Sucesso",
+  "errorTitle": "Erro",
+  "infoTitle": "Informação",
+  "unknownError": "Erro desconhecido.",
+  "pdfNotLoaded": "Nenhum PDF foi carregado.",
+  "generatingPreviews": "Gerando prévias das páginas...",
+  "rotate": {
+    "applying": "Aplicando rotações...",
+    "error": "Não foi possível aplicar as rotações."
+  },
+  "addPageNumbers": {
+    "loading": "Inserindo numeração nas páginas...",
+    "success": "Numeração adicionada com sucesso!",
+    "error": "Não foi possível adicionar a numeração das páginas."
+  },
+  "removeRestrictions": {
+    "initializing": "Inicializando...",
+    "readingPdf": "Lendo o PDF...",
+    "processing": "Removendo restrições...",
+    "preparingDownload": "Preparando download...",
+    "successMessage": "Restrições removidas com sucesso! O arquivo agora está totalmente liberado para edição e impressão.",
+    "errorTitle": "Falha na operação",
+    "errorMessage": "Ocorreu um erro: {{reason}}",
+    "passwordRequired": "Não foi possível remover as restrições. Talvez seja necessário informar a senha correta do proprietário.",
+    "genericFailure": "Não foi possível remover as restrições: {{message}}",
+    "emptyFile": "A operação resultou em um arquivo vazio.",
+    "defaultReason": "O PDF pode estar corrompido ou protegido por senha."
+  },
+  "addWatermark": {
+    "loading": "Aplicando marca d'água...",
+    "missingImage": "Selecione uma imagem PNG ou JPG para a marca d'água.",
+    "unsupportedImage": "Formato de imagem não suportado. Utilize um arquivo PNG ou JPG.",
+    "missingText": "Digite um texto para a marca d'água.",
+    "success": "Marca d'água adicionada com sucesso!",
+    "error": "Não foi possível aplicar a marca d'água."
+  },
+  "cropper": {
+    "renderingPage": "Renderizando página {{page}}...",
+    "readyTitle": "Pronto",
+    "readyMessage": "Selecione uma área para cortar.",
+    "renderError": "Não foi possível renderizar a página.",
+    "missingSelectionTitle": "Recorte não definido",
+    "missingSelectionSingle": "Selecione uma área para cortar antes de continuar.",
+    "missingSelectionAny": "Selecione uma área em pelo menos uma página para cortar.",
+    "applying": "Aplicando recorte...",
+    "success": "Recorte concluído! O download foi iniciado.",
+    "error": "Ocorreu um erro durante o recorte.",
+    "loadError": "Não foi possível carregar o PDF para recorte.",
+    "processingPage": "Processando página {{current}} de {{total}}..."
+  },
+  "compress": {
+    "noFilesTitle": "Nenhum arquivo",
+    "noFilesMessage": "Selecione pelo menos um PDF.",
+    "vectorMode": "Executando compressão Vetorial (smart)...",
+    "photonMode": "Executando compressão Photon (rasterização)...",
+    "autoPrimary": "Executando modo automático (prioriza Vetorial)...",
+    "autoFallback": "Executando modo automático (fallback Photon)...",
+    "vectorFailed": "A compressão Vetorial não reduziu o tamanho. Tentando Photon...",
+    "multiStart": "Comprimindo múltiplos PDFs...",
+    "multiProgress": "Comprimindo {{current}}/{{total}}: {{file}}...",
+    "singleSuccessTitle": "Compressão concluída",
+    "singleSuccessBody": "Método: **{{method}}**. O tamanho passou de {{original}} para {{compressed}} (economia de {{percent}}%).",
+    "singleNoSavingsTitle": "Compressão finalizada",
+    "singleNoSavingsBody": "Método: **{{method}}**. Não foi possível reduzir o tamanho. Original: {{original}}, novo: {{compressed}}.",
+    "multiSuccessTitle": "Compressão concluída",
+    "multiSuccessBody": "Comprimidos {{count}} PDF(s). Tamanho total reduzido de {{original}} para {{compressed}} (economia de {{percent}}%).",
+    "multiNoSavingsBody": "Comprimidos {{count}} PDF(s). Tamanho total: {{compressed}}.",
+    "error": "Ocorreu um erro durante a compressão: {{message}}"
+  },
+  "comparePdfs": {
+    "loadingPage": "Carregando página {{page}}...",
+    "loadingFile": "Carregando {{file}}...",
+    "invalidFileTitle": "Arquivo inválido",
+    "invalidFileMessage": "Selecione um arquivo PDF válido.",
+    "loadError": "Não foi possível carregar o PDF. Ele pode estar corrompido ou protegido por senha."
+  },
+  "combineSinglePage": {
+    "loading": "Combinando páginas...",
+    "error": "Não foi possível combinar as páginas."
+  },
+  "splitInHalf": {
+    "loading": "Dividindo páginas do PDF...",
+    "processingPage": "Processando página {{current}} de {{total}}...",
+    "error": "Ocorreu um erro ao dividir o PDF."
+  },
+  "changeBackgroundColor": {
+    "loading": "Alterando cor de fundo...",
+    "error": "Não foi possível alterar a cor de fundo."
+  },
+  "changeTextColor": {
+    "loading": "Alterando cor do texto...",
+    "processingPage": "Processando página {{current}} de {{total}}...",
+    "error": "Não foi possível alterar a cor do texto."
+  }
+}

@@ -5,6 +5,7 @@ import {
   formatBytes,
 } from '../utils/helpers.js';
 import { state } from '../state.js';
+import { t } from '../../i18n/index.js';
 import * as pdfjsLib from 'pdfjs-dist';
 import { pdfWorkerUrl } from '../utils/pdfjs-worker.js';
 
@@ -271,7 +272,10 @@ export async function compress() {
 
   try {
     if (state.files.length === 0) {
-      showAlert('Nenhum arquivo', 'Selecione pelo menos um PDF.');
+      showAlert(
+        t('alerts.compress.noFilesTitle', { ns: 'alerts' }),
+        t('alerts.compress.noFilesMessage', { ns: 'alerts' })
+      );
       hideLoader();
       return;
     }
@@ -284,15 +288,15 @@ export async function compress() {
       let usedMethod;
 
       if (algorithm === 'vector') {
-        showLoader('Executando compressão Vetorial (smart)...');
+        showLoader(t('alerts.compress.vectorMode', { ns: 'alerts' }));
         resultBytes = await performSmartCompression(arrayBuffer, smartSettings);
         usedMethod = 'Vector';
       } else if (algorithm === 'photon') {
-        showLoader('Executando compressão Photon (rasterização)...');
+        showLoader(t('alerts.compress.photonMode', { ns: 'alerts' }));
         resultBytes = await performLegacyCompression(arrayBuffer, legacySettings);
         usedMethod = 'Photon';
       } else {
-        showLoader('Executando modo automático (prioriza Vetorial)...');
+        showLoader(t('alerts.compress.autoPrimary', { ns: 'alerts' }));
         const vectorResultBytes = await performSmartCompression(
           arrayBuffer,
           smartSettings
@@ -302,8 +306,11 @@ export async function compress() {
           resultBytes = vectorResultBytes;
           usedMethod = 'Vector (Automatic)';
         } else {
-          showAlert('A compressão Vetorial não reduziu o tamanho. Tentando Photon...', 'info');
-          showLoader('Executando modo automático (fallback Photon)...');
+          showAlert(
+            t('alerts.infoTitle', { ns: 'alerts', defaultValue: 'Informação' }),
+            t('alerts.compress.vectorFailed', { ns: 'alerts' })
+          );
+          showLoader(t('alerts.compress.autoFallback', { ns: 'alerts' }));
           resultBytes = await performLegacyCompression(
             arrayBuffer,
             legacySettings
@@ -320,17 +327,24 @@ export async function compress() {
 
       if (savings > 0) {
         showAlert(
-          'Compressão concluída',
-          `Método: **${usedMethod}**. ` +
-            `O tamanho passou de ${originalSize} para ${compressedSize} (economia de ${savingsPercent}%).`
+          t('alerts.compress.singleSuccessTitle', { ns: 'alerts' }),
+          t('alerts.compress.singleSuccessBody', {
+            ns: 'alerts',
+            method: usedMethod,
+            original: originalSize,
+            compressed: compressedSize,
+            percent: savingsPercent,
+          })
         );
       } else {
         showAlert(
-          'Compressão finalizada',
-          `Método: **${usedMethod}**. ` +
-            `Não foi possível reduzir o tamanho. Original: ${originalSize}, novo: ${compressedSize}.`,
-          // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 3.
-          'warning'
+          t('alerts.compress.singleNoSavingsTitle', { ns: 'alerts' }),
+          t('alerts.compress.singleNoSavingsBody', {
+            ns: 'alerts',
+            method: usedMethod,
+            original: originalSize,
+            compressed: compressedSize,
+          })
         );
       }
 
@@ -339,7 +353,7 @@ export async function compress() {
         'compressed-final.pdf'
       );
     } else {
-      showLoader('Comprimindo múltiplos PDFs...');
+      showLoader(t('alerts.compress.multiStart', { ns: 'alerts' }));
       const JSZip = (await import('jszip')).default;
       const zip = new JSZip();
       let totalOriginalSize = 0;
@@ -347,7 +361,14 @@ export async function compress() {
 
       for (let i = 0; i < state.files.length; i++) {
         const file = state.files[i];
-        showLoader(`Comprimindo ${i + 1}/${state.files.length}: ${file.name}...`);
+        showLoader(
+          t('alerts.compress.multiProgress', {
+            ns: 'alerts',
+            current: i + 1,
+            total: state.files.length,
+            file: file.name,
+          })
+        );
         const arrayBuffer = await readFileAsArrayBuffer(file);
         totalOriginalSize += file.size;
 
@@ -380,15 +401,23 @@ export async function compress() {
 
       if (totalSavings > 0) {
         showAlert(
-          'Compressão concluída',
-          `Comprimidos ${state.files.length} PDF(s). ` +
-            `Tamanho total reduzido de ${formatBytes(totalOriginalSize)} para ${formatBytes(totalCompressedSize)} (economia de ${totalSavingsPercent}%).`
+          t('alerts.compress.multiSuccessTitle', { ns: 'alerts' }),
+          t('alerts.compress.multiSuccessBody', {
+            ns: 'alerts',
+            count: state.files.length,
+            original: formatBytes(totalOriginalSize),
+            compressed: formatBytes(totalCompressedSize),
+            percent: totalSavingsPercent,
+          })
         );
       } else {
         showAlert(
-          'Compressão finalizada',
-          `Comprimidos ${state.files.length} PDF(s). ` +
-            `Tamanho total: ${formatBytes(totalCompressedSize)}.`
+          t('alerts.compress.singleNoSavingsTitle', { ns: 'alerts' }),
+          t('alerts.compress.multiNoSavingsBody', {
+            ns: 'alerts',
+            count: state.files.length,
+            compressed: formatBytes(totalCompressedSize),
+          })
         );
       }
 
@@ -396,8 +425,11 @@ export async function compress() {
     }
   } catch (e) {
     showAlert(
-      'Erro',
-      `Ocorreu um erro durante a compressão: ${e.message}`
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.compress.error', {
+        ns: 'alerts',
+        message: e.message || t('alerts.unknownError', { ns: 'alerts' }),
+      })
     );
   } finally {
     hideLoader();

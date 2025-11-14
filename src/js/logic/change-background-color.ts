@@ -3,10 +3,14 @@ import { downloadFile, hexToRgb } from '../utils/helpers.js';
 import { state } from '../state.js';
 
 import { PDFDocument as PDFLibDocument, rgb } from 'pdf-lib';
+import { t } from '../../i18n/index.js';
 
 export async function changeBackgroundColor() {
   if (!state.pdfDoc) {
-    showAlert('Erro', 'PDF não carregado.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.pdfNotLoaded', { ns: 'alerts' })
+    );
     return;
   }
 
@@ -14,7 +18,7 @@ export async function changeBackgroundColor() {
   const colorHex = document.getElementById('background-color').value;
   const color = hexToRgb(colorHex);
 
-  showLoader('Alterando cor de fundo...');
+  showLoader(t('alerts.changeBackgroundColor.loading', { ns: 'alerts' }));
   try {
     const newPdfDoc = await PDFLibDocument.create();
 
@@ -48,7 +52,10 @@ export async function changeBackgroundColor() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Erro', 'Não foi possível alterar a cor de fundo.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.changeBackgroundColor.error', { ns: 'alerts' })
+    );
   } finally {
     hideLoader();
   }

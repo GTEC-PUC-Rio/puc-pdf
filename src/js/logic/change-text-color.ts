@@ -7,6 +7,7 @@ import {
 import { state } from '../state.js';
 
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
+import { t } from '../../i18n/index.js';
 
 let isRenderingPreview = false;
 let renderTimeout: any;
@@ -99,7 +100,10 @@ export async function setupTextColorTool() {
 
 export async function changeTextColor() {
   if (!state.pdfDoc) {
-    showAlert('Erro', 'PDF não carregado.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.pdfNotLoaded', { ns: 'alerts' })
+    );
     return;
   }
 
@@ -108,7 +112,7 @@ export async function changeTextColor() {
   const { r, g, b } = hexToRgb(colorHex);
   const darknessThreshold = 120;
 
-  showLoader('Alterando cor do texto...');
+  showLoader(t('alerts.changeTextColor.loading', { ns: 'alerts' }));
   try {
     const newPdfDoc = await PDFLibDocument.create();
     // @ts-expect-error TS(2304) FIXME: Cannot find name 'pdfjsLib'.
@@ -117,7 +121,13 @@ export async function changeTextColor() {
     ).promise;
 
     for (let i = 1; i <= pdf.numPages; i++) {
-      showLoader(`Processando página ${i} de ${pdf.numPages}...`);
+      showLoader(
+        t('alerts.changeTextColor.processingPage', {
+          ns: 'alerts',
+          current: i,
+          total: pdf.numPages,
+        })
+      );
       const page = await pdf.getPage(i);
       const viewport = page.getViewport({ scale: 2.0 }); // High resolution for quality
 
@@ -170,7 +180,10 @@ export async function changeTextColor() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Erro', 'Não foi possível alterar a cor do texto.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.changeTextColor.error', { ns: 'alerts' })
+    );
   } finally {
     hideLoader();
   }

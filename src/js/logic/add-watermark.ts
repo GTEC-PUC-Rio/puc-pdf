@@ -12,6 +12,7 @@ import {
   degrees,
   StandardFonts,
 } from 'pdf-lib';
+import { t } from '../../i18n/index.js';
 
 export function setupWatermarkUI() {
   const watermarkTypeRadios = document.querySelectorAll(
@@ -80,7 +81,7 @@ export async function addWatermark() {
     ) as HTMLInputElement
   ).value;
 
-  showLoader('Adding watermark...');
+  showLoader(t('alerts.addWatermark.loading', { ns: 'alerts' }));
 
   try {
     const pages = state.pdfDoc.getPages();
@@ -94,7 +95,9 @@ export async function addWatermark() {
         document.getElementById('image-watermark-input') as HTMLInputElement
       ).files?.[0];
       if (!imageFile)
-        throw new Error('Selecione uma imagem para a marca d\'água.');
+        throw new Error(
+          t('alerts.addWatermark.missingImage', { ns: 'alerts' })
+        );
 
       const imageBytes = await readFileAsArrayBuffer(imageFile);
       if (imageFile.type === 'image/png') {
@@ -103,7 +106,7 @@ export async function addWatermark() {
         watermarkAsset = await state.pdfDoc.embedJpg(imageBytes);
       } else {
         throw new Error(
-          'Imagem não suportada. Utilize um PNG ou JPG para a marca d\'água.'
+          t('alerts.addWatermark.unsupportedImage', { ns: 'alerts' })
         );
       }
     }
@@ -115,7 +118,9 @@ export async function addWatermark() {
         // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
         const text = document.getElementById('watermark-text').value;
         if (!text.trim())
-          throw new Error('Digite um texto para a marca d\'água.');
+          throw new Error(
+            t('alerts.addWatermark.missingText', { ns: 'alerts' })
+          );
 
         const fontSize =
           parseInt(
@@ -183,11 +188,16 @@ export async function addWatermark() {
       ) as HTMLElement;
       if (element) element.click();
     }
+
+    showAlert(
+      t('alerts.successTitle', { ns: 'alerts' }),
+      t('alerts.addWatermark.success', { ns: 'alerts' })
+    );
   } catch (e) {
     console.error(e);
     showAlert(
-      'Erro',
-      e.message || 'Não foi possível adicionar a marca d\'água. Verifique os dados informados.'
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      e.message || t('alerts.addWatermark.error', { ns: 'alerts' })
     );
   } finally {
     hideLoader();

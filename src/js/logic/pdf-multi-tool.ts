@@ -10,6 +10,8 @@ import Sortable from 'sortablejs';
 import { downloadFile } from '../utils/helpers';
 import '../../css/styles.css';
 import { withBasePath } from '../utils/base-path.js';
+import { initI18n } from '../../i18n/index.js';
+import { applyLayoutTranslations } from '../utils/layout-translations.js';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
@@ -107,7 +109,14 @@ function hideLoading() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initializeTool();
+  initI18n()
+    .then(() => {
+      applyLayoutTranslations();
+      initializeTool();
+    })
+    .catch(() => {
+      initializeTool();
+    });
 });
 
 function initializeTool() {

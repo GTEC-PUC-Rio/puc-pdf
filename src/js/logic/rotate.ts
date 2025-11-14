@@ -3,9 +3,10 @@ import { downloadFile } from '../utils/helpers.js';
 import { state } from '../state.js';
 
 import { degrees } from 'pdf-lib';
+import { t } from '../../i18n/index.js';
 
 export async function rotate() {
-  showLoader('Aplicando rotações...');
+  showLoader(t('alerts.rotate.applying', { ns: 'alerts' }));
   try {
     const pages = state.pdfDoc.getPages();
     document.querySelectorAll('.page-rotator-item').forEach((item) => {
@@ -26,7 +27,10 @@ export async function rotate() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Erro', 'Não foi possível aplicar as rotações.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.rotate.error', { ns: 'alerts' })
+    );
   } finally {
     hideLoader();
   }

@@ -1,10 +1,18 @@
 import { showLoader, hideLoader, showAlert } from '../ui.js';
 import { downloadFile, hexToRgb } from '../utils/helpers.js';
 import { state } from '../state.js';
+import { t } from '../../i18n/index.js';
 
 import { PDFDocument as PDFLibDocument, rgb } from 'pdf-lib';
 
 export async function combineToSinglePage() {
+  if (!state.pdfDoc) {
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.pdfNotLoaded', { ns: 'alerts' })
+    );
+    return;
+  }
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const spacing = parseInt(document.getElementById('page-spacing').value) || 0;
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
@@ -13,7 +21,7 @@ export async function combineToSinglePage() {
   const addSeparator = document.getElementById('add-separator').checked;
   const backgroundColor = hexToRgb(backgroundColorHex);
 
-  showLoader('Combinando páginas...');
+  showLoader(t('alerts.combineSinglePage.loading', { ns: 'alerts' }));
   try {
     const sourceDoc = state.pdfDoc;
     const newDoc = await PDFLibDocument.create();
@@ -71,7 +79,10 @@ export async function combineToSinglePage() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Erro', 'Não foi possível combinar as páginas.');
+    showAlert(
+      t('alerts.errorTitle', { ns: 'alerts' }),
+      t('alerts.combineSinglePage.error', { ns: 'alerts' })
+    );
   } finally {
     hideLoader();
   }
