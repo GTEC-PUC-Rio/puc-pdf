@@ -34,47 +34,7 @@
     </div>
   </nav>
   <div id="app" class="min-h-screen container mx-auto p-4 md:p-8">
-    <header id="tools-header" class="text-center mb-12">
-      <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">
-        Ferramentas de PDF
-      </h1>
-      <p class="text-gray-400">Selecione uma ferramenta para começar.</p>
-    </header>
-    <div id="grid-view"></div>
-
-    <div id="tool-interface"
-      class="hidden w-full max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl p-6 md:p-8 border border-gray-700">
-      <button id="back-to-grid"
-        class="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 font-semibold">
-        <i data-lucide="arrow-left" class="cursor-pointer"></i>
-        <span class="cursor-pointer"> Voltar às ferramentas </span>
-      </button>
-      <div id="tool-content"></div>
-    </div>
-
-    <div id="loader-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div class="bg-gray-800 p-8 rounded-lg flex flex-col items-center gap-4 border border-gray-700 shadow-xl">
-        <div class="solid-spinner"></div>
-        <p id="loader-text" class="text-white text-lg font-medium">
-          Processando...
-        </p>
-      </div>
-    </div>
-
-    <div id="alert-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <div class="bg-gray-800 max-w-sm w-full p-6 rounded-lg border border-gray-700 shadow-xl text-center">
-        <h3 id="alert-title" class="text-xl font-bold text-white mb-2">
-          Alerta
-        </h3>
-        <p id="alert-message" class="text-gray-300 mb-6 whitespace-pre-line">
-          Esta é uma mensagem de alerta.
-        </p>
-        <button id="alert-ok"
-          class="btn bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700">
-          OK
-        </button>
-      </div>
-    </div>
+    <div id="react-root"></div>
 
     <div id="preview-modal"
       class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40 p-4">

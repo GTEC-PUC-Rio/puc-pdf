@@ -29,7 +29,8 @@
           "Todas as páginas dos PDFs enviados aparecem abaixo.",
           "Arraste e solte as miniaturas para definir exatamente a ordem desejada no novo arquivo."
         ]
-      }
+      },
+      "submit": "Unir PDFs"
     },
     "split": {
       "title": "Dividir PDF",

@@ -4,49 +4,39 @@ import { tesseractLanguages } from './config/tesseract-languages.js';
 import { icons, createIcons } from 'lucide';
 import Sortable from 'sortablejs';
 import { t } from '../i18n/index.js';
-
-// Centralizing DOM element selection
-export const dom = {
-  gridView: document.getElementById('grid-view'),
-  toolInterface: document.getElementById('tool-interface'),
-  toolContent: document.getElementById('tool-content'),
-  backToGridBtn: document.getElementById('back-to-grid'),
-  loaderModal: document.getElementById('loader-modal'),
-  loaderText: document.getElementById('loader-text'),
-  alertModal: document.getElementById('alert-modal'),
-  alertTitle: document.getElementById('alert-title'),
-  alertMessage: document.getElementById('alert-message'),
-  alertOkBtn: document.getElementById('alert-ok'),
-  toolsHeader: document.getElementById('tools-header'),
-};
+import {
+  showLoaderOverlay,
+  hideLoaderOverlay,
+  showAlertOverlay,
+  hideAlertOverlay,
+  setAppView,
+  setActiveReactTool,
+} from '../react/bridge/uiBridge.ts';
 
 export const showLoader = (text = t('loading', { ns: 'alerts' })) => {
-  dom.loaderText.textContent = text;
-  dom.loaderModal.classList.remove('hidden');
+  showLoaderOverlay(text);
 };
 
-export const hideLoader = () => dom.loaderModal.classList.add('hidden');
+export const hideLoader = () => {
+  hideLoaderOverlay();
+};
 
 export const showAlert = (
   title: any = t('defaultTitle', { ns: 'alerts' }),
   message: any = t('defaultMessage', { ns: 'alerts' })
 ) => {
-  dom.alertTitle.textContent = title;
-  dom.alertMessage.textContent = message;
-  dom.alertModal.classList.remove('hidden');
+  showAlertOverlay(title, message);
 };
 
-export const hideAlert = () => dom.alertModal.classList.add('hidden');
+export const hideAlert = () => {
+  hideAlertOverlay();
+};
 
-export const switchView = (view: any) => {
-  const showGrid = view === 'grid';
-  dom.gridView.classList.toggle('hidden', !showGrid);
-  dom.toolInterface.classList.toggle('hidden', showGrid);
-  if (dom.toolsHeader) {
-    dom.toolsHeader.classList.toggle('hidden', !showGrid);
-  }
+export const switchView = (view: 'grid' | 'tool') => {
+  setAppView(view);
 
-  if (showGrid) {
+  if (view === 'grid') {
+    setActiveReactTool(null);
     resetState();
   }
 };
