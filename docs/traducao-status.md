@@ -17,7 +17,7 @@ Todo o front-end é apresentado em português brasileiro. Este documento explica
 
 ## Auditoria rápida
 - Rode `rg "text-" src/react/components/tools -g"*.tsx"` para verificar strings literais restantes.
-- Execute `npm run test`/`npm run build` para ter certeza de que o i18n inicializa sem chaves faltantes.
+- Execute `pnpm run test`/`pnpm run build` para ter certeza de que o i18n inicializa sem chaves faltantes.
 - Periodicamente, valide os JSONs com um script simples (por exemplo, `node scripts/validate-locales.mjs`) para garantir que não haja chaves vazias ou duplicadas.
 
 Seguindo estes passos, mantemos o idioma consistente em todo o produto e evitamos regressões introduzidas por textos hardcoded.

@@ -29,6 +29,6 @@ Regras importantes:
 
 - Inclua a barra inicial e final (`/puc-pdf/`) para evitar links quebrados.
 - Se o valor não for definido, o build assume `/` automaticamente.
-- O mesmo valor deve ser usado localmente e na pipeline (por exemplo, exportando a variável antes do `npm run build` ou passando `--build-arg VITE_BASE=/puc-pdf/` quando usar Docker).
+- O mesmo valor deve ser usado localmente e na pipeline (por exemplo, exportando a variável antes do `pnpm run build` ou passando `--build-arg VITE_BASE=/puc-pdf/` quando usar Docker).
 
 Todos os assets, páginas e links internos usam agora essa base configurada, então não é necessário editar manualmente os caminhos nos HTMLs.

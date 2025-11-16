@@ -27,7 +27,7 @@ O roteador já lida com acessos diretos (ex.: `/tool/merge`), e o histórico/bac
 2. Importar o módulo de lógica necessário (`src/js/logic/...`) e executar o `setup` no `useEffect`.
 3. Registrar o componente no `reactToolRegistry` e garantir que o `toolId` exista em `src/js/config/tools.ts`.
 4. Adicionar as traduções em `src/locales/pt-BR/tools.json`.
-5. Rodar `npm run build` para confirmar que o Vite resolve o novo chunk.
+5. Rodar `pnpm run build` para confirmar que o Vite resolve o novo chunk.
 
 ## Integração com a lógica existente
 - `src/js/logic/*` permanece como fonte da verdade para processamento de PDF (workers, qpdf wasm, etc.).
@@ -35,8 +35,8 @@ O roteador já lida com acessos diretos (ex.: `/tool/merge`), e o histórico/bac
 - Os módulos de lógica ainda importam `alertService`, `loaderService` e helpers de `src/js/utils/`. As mensagens exibidas nesses serviços vêm do `i18n` (ver documento `i18n`).
 
 ## Testes e verificação
-- `npm run test` cobre componentes de navegação e o roteador (ver `src/tests/router/toolRoutes.test.tsx`).
-- `npm run build` compila todos os tools e garante que o bundle legado (`src/js/logic`) continue íntegro.
+- `pnpm run test` cobre componentes de navegação e o roteador (ver `src/tests/router/toolRoutes.test.tsx`).
+- `pnpm run build` compila todos os tools e garante que o bundle legado (`src/js/logic`) continue íntegro.
 - Para smoke tests manuais, abrir `/`, navegar até alguns `/tool/:id` e acessar diretamente rotas especiais para confirmar inicialização correta dos setups.
 
 ## Deployment

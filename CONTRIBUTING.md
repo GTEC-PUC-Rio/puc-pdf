@@ -54,7 +54,7 @@ When submitting code contributions, please use our [pull request template](.gith
     ```bash
     git clone https://github.com/alam00000/bentopdf.git
     cd bento-pdf
-    npm install
+    pnpm install
     ```
 
 2.  **Create a New Branch**
@@ -71,7 +71,7 @@ When submitting code contributions, please use our [pull request template](.gith
 4.  **Run Tests**
 
     ```bash
-    npm run test
+    pnpm run test
     ```
 
 5.  **Commit Your Changes**

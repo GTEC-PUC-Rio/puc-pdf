@@ -17,16 +17,16 @@ Este repositório é um fork do [BentoPDF original](https://github.com/alam00000
 ## Executando localmente (modo Simple)
 ```bash
 # 1. Instalar dependências
-npm install
+pnpm install
 
 # 2. Rodar o Vite em modo desenvolvimento
-npm run dev
+pnpm run dev
 ```
 O Vite expõe o app em `http://localhost:5173`. Qualquer alteração em HTML/CSS/JS e na pasta `public/` é refletida automaticamente, permitindo validar traduções, logos e textos.
 
 Para inspecionar o build final (minificado):
 ```bash
-npm run preview -- --host 0.0.0.0 --port 4173
+pnpm run preview -- --host 0.0.0.0 --port 4173
 ```
 O preview serve o conteúdo gerado em `dist/`, replicando o comportamento de produção.
 

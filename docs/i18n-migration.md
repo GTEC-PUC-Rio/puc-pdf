@@ -23,7 +23,7 @@ A tradução é centralizada no `i18next`. Mesmo atendendo apenas pt-BR, mantemo
 1. Identifique o namespace adequado. Ferramentas sempre entram em `tools.json` dentro de `templates.<toolId>`.
 2. Adicione a chave/valor em JSON seguindo o padrão existente (use frases completas e mantenha placeholders HTML explícitos, ex.: `<strong>`).
 3. Atualize o componente React ou o módulo TS para consumir `t('namespace.chave')`.
-4. Execute `npm run lint`/`npm run test` quando aplicável e faça um sanity check navegando até a tela que usa a nova string.
+4. Execute `pnpm run lint`/`pnpm run test` quando aplicável e faça um sanity check navegando até a tela que usa a nova string.
 
 ## Boas práticas
 - Padronize chaves no singular (`templates.merge.title`) e mantenha subestruturas previsíveis (`tabs`, `form`, `alerts`).
@@ -32,5 +32,5 @@ A tradução é centralizada no `i18next`. Mesmo atendendo apenas pt-BR, mantemo
 - Antes de remover uma chave, faça uma busca (`rg 'templates\.foo'`) para garantir que não existe uso residual.
 
 ## Validação
-- `npm run test` inclui verificações que garantem a inicialização do i18n nos componentes principais.
+- `pnpm run test` inclui verificações que garantem a inicialização do i18n nos componentes principais.
 - Planejamento futuro: adicionar um teste dedicado que carregue todos os JSONs e valide se não existem chaves duplicadas ou vazias. Enquanto isso não acontece, mantenha revisões manuais em PRs.
