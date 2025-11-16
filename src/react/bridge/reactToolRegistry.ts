@@ -61,7 +61,7 @@ import { PageDimensionsTool } from '../components/tools/PageDimensionsTool.tsx';
 import { FixDimensionsTool } from '../components/tools/FixDimensionsTool.tsx';
 import { OcrPdfTool } from '../components/tools/OcrPdfTool.tsx';
 import { WordToPdfTool } from '../components/tools/WordToPdfTool.tsx';
-import { SignPdfTool } from '../components/tools/SignPdfTool.tsx';
+import { SignPdfMaintenanceTool } from '../components/tools/SignPdfMaintenanceTool.tsx';
 import { PdfMultiToolTool } from '../components/tools/PdfMultiToolTool.tsx';
 import { RemoveRestrictionsTool } from '../components/tools/RemoveRestrictionsTool.tsx';
 import { AddAttachmentsTool } from '../components/tools/AddAttachmentsTool.tsx';
@@ -137,7 +137,7 @@ const registry: Record<string, ToolComponent> = {
   'md-to-pdf': MdToPdfTool,
   'ocr-pdf': OcrPdfTool,
   'word-to-pdf': WordToPdfTool,
-  'sign-pdf': SignPdfTool,
+  'sign-pdf': SignPdfMaintenanceTool,
   'remove-restrictions': RemoveRestrictionsTool,
   'add-attachments': AddAttachmentsTool,
   'extract-attachments': ExtractAttachmentsTool,

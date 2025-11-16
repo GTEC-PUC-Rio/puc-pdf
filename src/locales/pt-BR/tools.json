@@ -14,6 +14,10 @@
     "loginCta": "Fazer login"
   },
   "templates": {
+    "maintenance": {
+      "title": "Ferramenta em manutenção",
+      "description": "Estamos trabalhando para disponibilizá-la novamente em breve."
+    },
     "merge": {
       "title": "Unir PDFs",
       "description": "Una arquivos completos ou escolha páginas específicas para formar um novo documento.",
@@ -957,6 +961,10 @@
       "viewer": {
         "pageIndicator": "Página {{current}} de {{total}}",
         "undoTooltip": "Desfazer última inserção"
+      },
+      "maintenance": {
+        "title": "Assinador temporariamente indisponível",
+        "description": "Estamos atualizando a experiência de assinatura. Tente novamente em breve."
       },
       "submit": "Aplicar assinaturas e baixar PDF"
     }
