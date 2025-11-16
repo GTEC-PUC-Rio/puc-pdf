@@ -70,6 +70,11 @@ body {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  color: #e5e7eb;
   transition:
     background-color 0.2s ease-in-out,
     transform 0.1s ease-in-out;
@@ -520,4 +525,8 @@ button,
 button:disabled,
 .btn:disabled {
   cursor: not-allowed;
+}
+.legacy-bookmark #back-to-tools,
+.legacy-multi-tool #close-tool-btn {
+  display: none !important;
 }

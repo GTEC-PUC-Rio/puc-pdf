@@ -11,7 +11,59 @@ import '../../css/bookmark.css';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
-const modalContainer = document.getElementById('modal-container');
+let bookmarkTeardown: (() => void) | null = null;
+
+const cleanupListener = (
+  target: EventTarget,
+  type: string,
+  handler: EventListenerOrEventListenerObject,
+  options?: boolean | AddEventListenerOptions
+) => () => target.removeEventListener(type, handler, options);
+
+export const teardownBookmarkPage = () => {
+  if (bookmarkTeardown) {
+    bookmarkTeardown();
+    bookmarkTeardown = null;
+  }
+};
+
+export const setupBookmarkPage = (): boolean => {
+  teardownBookmarkPage();
+
+  const cleanupFns: Array<() => void> = [];
+  const addListener = (
+    target: EventTarget | null,
+    type: string,
+    handler: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions
+  ) => {
+    if (!target) return;
+    target.addEventListener(type, handler, options);
+    cleanupFns.push(() =>
+      target.removeEventListener(type, handler, options)
+    );
+  };
+  const addDocumentListener = (
+    type: string,
+    handler: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions
+  ) => {
+    addListener(document, type, handler, options);
+  };
+  const addWindowListener = (
+    type: string,
+    handler: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions
+  ) => {
+    addListener(window, type, handler, options);
+  };
+
+  const modalContainer = document.getElementById('modal-container');
+  if (!modalContainer) {
+    console.warn('Bookmark modal container not found.');
+    bookmarkTeardown = null;
+    return false;
+  }
 
 // Destination picking state
 let isPickingDestination = false;
@@ -450,120 +502,6 @@ function cancelDestinationPicking() {
   }
 }
 
-// Setup canvas click handler for destination picking
-document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('pdf-canvas');
-  const canvasWrapper = document.getElementById('pdf-canvas-wrapper');
-  const cancelPickingBtn = document.getElementById('cancel-picking-btn');
-
-  // Coordinate tooltip
-  let coordTooltip = null;
-
-  canvasWrapper.addEventListener('mousemove', (e) => {
-    if (!isPickingDestination) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Create or update tooltip
-    if (!coordTooltip) {
-      coordTooltip = document.createElement('div');
-      coordTooltip.className = 'coordinate-tooltip';
-      canvasWrapper.appendChild(coordTooltip);
-    }
-
-    coordTooltip.textContent = `X: ${Math.round(x)}, Y: ${Math.round(y)}`;
-    coordTooltip.style.left = e.clientX - rect.left + 15 + 'px';
-    coordTooltip.style.top = e.clientY - rect.top + 15 + 'px';
-  });
-
-  canvasWrapper.addEventListener('mouseleave', () => {
-    if (coordTooltip) {
-      coordTooltip.remove();
-      coordTooltip = null;
-    }
-  });
-
-  canvas.addEventListener('click', async (e) => {
-    if (!isPickingDestination || !currentPickingCallback) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const canvasX = e.clientX - rect.left;
-    const canvasY = e.clientY - rect.top;
-
-    // Get viewport for coordinate conversion
-    let viewport = currentViewport;
-    if (!viewport) {
-      const page = await pdfJsDoc.getPage(currentPage);
-      viewport = page.getViewport({ scale: currentZoom });
-    }
-
-    // Convert canvas pixel coordinates to PDF coordinates
-    // The canvas CSS size matches viewport dimensions, so coordinates map directly
-    // PDF uses bottom-left origin, canvas uses top-left
-    const scaleX = viewport.width / rect.width;
-    const scaleY = viewport.height / rect.height;
-    const pdfX = canvasX * scaleX;
-    const pdfY = viewport.height - canvasY * scaleY;
-
-    // Remove old marker and coordinate display
-    if (destinationMarker) {
-      destinationMarker.remove();
-    }
-    const oldCoordDisplay = document.getElementById(
-      'destination-coord-display'
-    );
-    if (oldCoordDisplay) {
-      oldCoordDisplay.remove();
-    }
-
-    // Create visual marker
-    destinationMarker = document.createElement('div');
-    destinationMarker.className = 'destination-marker';
-    destinationMarker.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" fill="#3b82f6" fill-opacity="0.2"/>
-                        <path d="M12 2 L12 22 M2 12 L22 12"/>
-                        <circle cx="12" cy="12" r="2" fill="#3b82f6"/>
-                    </svg>
-                `;
-    const canvasRect = canvas.getBoundingClientRect();
-    const wrapperRect = canvasWrapper.getBoundingClientRect();
-    destinationMarker.style.position = 'absolute';
-    destinationMarker.style.left =
-      canvasX + canvasRect.left - wrapperRect.left + 'px';
-    destinationMarker.style.top =
-      canvasY + canvasRect.top - wrapperRect.top + 'px';
-    canvasWrapper.appendChild(destinationMarker);
-
-    // Create persistent coordinate display
-    const coordDisplay = document.createElement('div');
-    coordDisplay.id = 'destination-coord-display';
-    coordDisplay.className =
-      'absolute bg-blue-500 text-white px-2 py-1 rounded text-xs font-mono z-50 pointer-events-none';
-    coordDisplay.style.left =
-      canvasX + canvasRect.left - wrapperRect.left + 20 + 'px';
-    coordDisplay.style.top =
-      canvasY + canvasRect.top - wrapperRect.top - 30 + 'px';
-    coordDisplay.textContent = `X: ${Math.round(pdfX)}, Y: ${Math.round(pdfY)}`;
-    canvasWrapper.appendChild(coordDisplay);
-
-    // Call callback with PDF coordinates
-    currentPickingCallback(currentPage, pdfX, pdfY);
-
-    // End picking mode
-    setTimeout(() => {
-      cancelDestinationPicking();
-    }, 500);
-  });
-
-  if (cancelPickingBtn) {
-    cancelPickingBtn.addEventListener('click', () => {
-      cancelDestinationPicking();
-    });
-  }
-});
 
 function showConfirmModal(message) {
   return new Promise((resolve) => {
@@ -645,16 +583,135 @@ const fileInput = document.getElementById('file-input');
 const csvInput = document.getElementById('csv-input');
 const jsonInput = document.getElementById('json-input');
 const autoExtractCheckbox = document.getElementById('auto-extract-checkbox');
-const appEl = document.getElementById('app');
-const uploaderEl = document.getElementById('uploader');
+const appEl =
+  document.getElementById('bookmark-app') || document.getElementById('app');
+const uploaderEl =
+  document.getElementById('bookmark-uploader') ||
+  document.getElementById('uploader');
+
+  if (!appEl || !uploaderEl) {
+    console.warn('Bookmark containers not found.');
+    bookmarkTeardown = null;
+    return false;
+  }
 const fileDisplayArea = document.getElementById(
   'file-display-area'
 ) as HTMLElement;
 const backToToolsBtn = document.getElementById(
   'back-to-tools'
 ) as HTMLButtonElement;
-const canvas = document.getElementById('pdf-canvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('pdf-canvas') as HTMLCanvasElement | null;
+const ctx = canvas?.getContext('2d') ?? null;
+
+  if (!canvas || !ctx) {
+    console.warn('Bookmark canvas element not found.');
+    bookmarkTeardown = null;
+    return false;
+  }
+  const canvasWrapper = document.getElementById('pdf-canvas-wrapper');
+  const cancelPickingBtn = document.getElementById('cancel-picking-btn');
+
+  const setupDestinationPickingListeners = () => {
+    if (!canvasWrapper || !canvas) return;
+
+    let coordTooltip: HTMLDivElement | null = null;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isPickingDestination) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (!coordTooltip) {
+        coordTooltip = document.createElement('div');
+        coordTooltip.className = 'coordinate-tooltip';
+        canvasWrapper.appendChild(coordTooltip);
+      }
+
+      coordTooltip.textContent = `X: ${Math.round(x)}, Y: ${Math.round(y)}`;
+      coordTooltip.style.left = e.clientX - rect.left + 15 + 'px';
+      coordTooltip.style.top = e.clientY - rect.top + 15 + 'px';
+    };
+
+    const handleMouseLeave = () => {
+      if (coordTooltip) {
+        coordTooltip.remove();
+        coordTooltip = null;
+      }
+    };
+
+    const handleCanvasClick = async (e: MouseEvent) => {
+      if (!isPickingDestination || !currentPickingCallback) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const canvasX = e.clientX - rect.left;
+      const canvasY = e.clientY - rect.top;
+
+      let viewport = currentViewport;
+      if (!viewport) {
+        const page = await pdfJsDoc.getPage(currentPage);
+        viewport = page.getViewport({ scale: currentZoom });
+      }
+
+      const scaleX = viewport.width / rect.width;
+      const scaleY = viewport.height / rect.height;
+      const pdfX = canvasX * scaleX;
+      const pdfY = viewport.height - canvasY * scaleY;
+
+      if (destinationMarker) {
+        destinationMarker.remove();
+      }
+      const oldCoordDisplay = document.getElementById(
+        'destination-coord-display'
+      );
+      if (oldCoordDisplay) {
+        oldCoordDisplay.remove();
+      }
+
+      destinationMarker = document.createElement('div');
+      destinationMarker.className = 'destination-marker';
+      destinationMarker.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" fill="#3b82f6" fill-opacity="0.2"/>
+                        <path d="M12 2 L12 22 M2 12 L22 12"/>
+                        <circle cx="12" cy="12" r="2" fill="#3b82f6"/>
+                    </svg>
+                `;
+      const canvasRect = canvas.getBoundingClientRect();
+      const wrapperRect = canvasWrapper.getBoundingClientRect();
+      destinationMarker.style.position = 'absolute';
+      destinationMarker.style.left =
+        canvasX + canvasRect.left - wrapperRect.left + 'px';
+      destinationMarker.style.top =
+        canvasY + canvasRect.top - wrapperRect.top + 'px';
+      canvasWrapper.appendChild(destinationMarker);
+
+      const coordDisplay = document.createElement('div');
+      coordDisplay.id = 'destination-coord-display';
+      coordDisplay.className =
+        'absolute bg-blue-500 text-white px-2 py-1 rounded text-xs font-mono z-50 pointer-events-none';
+      coordDisplay.style.left =
+        canvasX + canvasRect.left - wrapperRect.left + 20 + 'px';
+      coordDisplay.style.top =
+        canvasY + canvasRect.top - wrapperRect.top - 30 + 'px';
+      coordDisplay.textContent = `X: ${Math.round(pdfX)}, Y: ${Math.round(pdfY)}`;
+      canvasWrapper.appendChild(coordDisplay);
+
+      currentPickingCallback(currentPage, pdfX, pdfY);
+
+      setTimeout(() => {
+        cancelDestinationPicking();
+      }, 500);
+    };
+
+    addListener(canvasWrapper, 'mousemove', handleMouseMove);
+    addListener(canvasWrapper, 'mouseleave', handleMouseLeave);
+    addListener(canvas, 'click', handleCanvasClick);
+    addListener(cancelPickingBtn, 'click', cancelDestinationPicking);
+  };
+
+  setupDestinationPickingListeners();
 const pageIndicator = document.getElementById('page-indicator');
 const prevPageBtn = document.getElementById('prev-page');
 const nextPageBtn = document.getElementById('next-page');
@@ -713,7 +770,7 @@ function handleResize() {
   }
 }
 
-window.addEventListener('resize', handleResize);
+  addWindowListener('resize', handleResize);
 
 showViewerBtn.addEventListener('click', () => {
   viewerSection.classList.remove('hidden');
@@ -742,10 +799,10 @@ exportDropdownBtn.addEventListener('click', (e) => {
   importDropdown.classList.add('hidden');
 });
 
-document.addEventListener('click', () => {
-  importDropdown.classList.add('hidden');
-  exportDropdown.classList.add('hidden');
-});
+  addDocumentListener('click', () => {
+    importDropdown.classList.add('hidden');
+    exportDropdown.classList.add('hidden');
+  });
 
 let pdfLibDoc = null;
 let pdfJsDoc = null;
@@ -860,17 +917,17 @@ function resetToUploader() {
   showBookmarksBtn.classList.remove('bg-blue-50', 'text-blue-600');
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey || e.metaKey) {
-    if (e.key === 'z' && !e.shiftKey) {
-      e.preventDefault();
-      undo();
-    } else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') {
-      e.preventDefault();
-      redo();
+  addDocumentListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        undo();
+      } else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') {
+        e.preventDefault();
+        redo();
+      }
     }
-  }
-});
+  });
 
 batchModeCheckbox.addEventListener('change', (e) => {
   batchMode = e.target.checked;
@@ -2075,11 +2132,15 @@ async function extractExistingBookmarks(doc) {
 }
 
 // Back to tools button
-if (backToToolsBtn) {
-  backToToolsBtn.addEventListener('click', () => {
-    window.location.href = withBasePath('index.html#tools-header');
-  });
-}
+  if (backToToolsBtn && backToToolsBtn.dataset.routerNav !== 'true') {
+    const backHandler = () => {
+      window.location.href = withBasePath('index.html#tools-header');
+    };
+    backToToolsBtn.addEventListener('click', backHandler);
+    cleanupFns.push(() =>
+      backToToolsBtn.removeEventListener('click', backHandler)
+    );
+  }
 
 downloadBtn.addEventListener('click', async () => {
   const pages = pdfLibDoc.getPages();
@@ -2240,3 +2301,10 @@ downloadBtn.addEventListener('click', async () => {
     );
   }
 });
+
+  bookmarkTeardown = () => {
+    cleanupFns.forEach((fn) => fn());
+    cleanupFns.length = 0;
+  };
+  return true;
+};

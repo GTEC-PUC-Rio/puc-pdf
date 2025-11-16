@@ -30,3 +30,59 @@ global.IntersectionObserver = vi.fn().mockImplementation(() => ({
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
+
+if (typeof globalThis.DOMMatrix === 'undefined') {
+  class DOMMatrixPolyfill {
+    multiplySelf() {
+      return this;
+    }
+
+    invertSelf() {
+      return this;
+    }
+  }
+
+  // @ts-expect-error - jsdom does not provide DOMMatrix in Node.
+  globalThis.DOMMatrix = DOMMatrixPolyfill;
+}
+
+if (typeof globalThis.Worker === 'undefined') {
+  class WorkerPolyfill {
+    onmessage: ((event: MessageEvent) => void) | null = null;
+    postMessage() {}
+    terminate() {}
+    addEventListener() {}
+    removeEventListener() {}
+  }
+
+  // @ts-expect-error - jsdom does not provide Worker.
+  globalThis.Worker = WorkerPolyfill;
+}
+
+HTMLCanvasElement.prototype.getContext = () =>
+  ({
+    fillRect: () => {},
+    strokeRect: () => {},
+    clearRect: () => {},
+    drawImage: () => {},
+    beginPath: () => {},
+    moveTo: () => {},
+    lineTo: () => {},
+    stroke: () => {},
+    arc: () => {},
+    fill: () => {},
+    strokeStyle: '',
+    fillStyle: '',
+    lineWidth: 1,
+    canvas: document.createElement('canvas'),
+    getImageData: () => ({ data: [] }),
+    putImageData: () => {},
+  }) as unknown as CanvasRenderingContext2D;
+
+if (!globalThis.URL.createObjectURL) {
+  globalThis.URL.createObjectURL = () => 'blob:mock-url';
+}
+
+if (!globalThis.URL.revokeObjectURL) {
+  globalThis.URL.revokeObjectURL = () => undefined;
+}

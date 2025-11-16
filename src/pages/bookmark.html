@@ -602,6 +602,9 @@
       </div>
     </footer>
     <script type="module" src="../js/utils/lucide-init.ts"></script>
-    <script type="module" src="../js/logic/bookmark-pdf.ts"></script>
+    <script type="module">
+      import { setupBookmarkPage } from '../js/logic/bookmark-pdf.ts';
+      setupBookmarkPage();
+    </script>
   </body>
 </html>

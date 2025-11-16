@@ -13,8 +13,5 @@ export function resetState() {
   state.pdfDoc = null;
   state.pdfPages = [];
   state.currentPdfUrl = null;
-  const toolContent = document.getElementById('tool-content');
-  if (toolContent) {
-    toolContent.innerHTML = '';
-  }
+  document.getElementById('tool-content')?.replaceChildren();
 }

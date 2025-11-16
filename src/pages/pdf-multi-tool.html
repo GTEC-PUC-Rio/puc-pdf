@@ -51,7 +51,7 @@
 
 
   <!-- Main Container -->
-  <div class="flex flex-col h-[calc(100vh-4rem)]">
+  <div id="multi-tool-root" class="flex flex-col h-[calc(100vh-4rem)]">
 
     <!-- Toolbar -->
     <div class="bg-gray-800 border-b border-gray-700 p-2 sm:p-3 overflow-x-auto scrollbar-hide">
@@ -225,7 +225,10 @@
 
   <!-- Scripts -->
   <script type="module" src="../js/utils/lucide-init.ts"></script>
-  <script type="module" src="../js/logic/pdf-multi-tool.ts"></script>
+  <script type="module">
+    import { setupPdfMultiToolPage } from '../js/logic/pdf-multi-tool.ts';
+    setupPdfMultiToolPage();
+  </script>
 </body>
 
 </html>

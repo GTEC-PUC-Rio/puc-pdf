@@ -62,3 +62,35 @@ Este guia descreve uma estratégia gradual para portar o front-end atual (HTML/T
 - Validar dependências e plugins necessários com o time de infraestrutura.
 - Definir quais partes da UI serão migradas primeiro (ex.: grid de ferramentas e modais).
 - Planejar uma fase de “dual build”, em que o React convive com o código atual até que tudo esteja portado.
+
+## 7. Roteamento declarativo para ferramentas
+Com o grid migrado e a maioria das UIs encapsuladas em componentes React, o próximo passo é abandonar o “shell” híbrido (React + `setupToolInterface`) e deixar o React Router assumir o ciclo de vida das ferramentas.
+
+### 7.1 Objetivo
+Cada ferramenta deve ter uma rota dedicada (`/tool/:toolId`), renderizando:
+- Um componente React nativo (para as ferramentas já portadas);
+- Ou um wrapper genérico (`LegacyToolPage`) que injeta o template HTML existente e chama o `setup/teardown` correspondente.
+
+Dessa forma o histórico, o scroll e o carregamento ficam sob controle do React Router, eliminando os hacks atuais para sincronizar rota ↔ tool.
+
+### 7.2 Etapas propostas
+1. **Criar `LegacyToolPage`:** componente que recebe `toolId`, injeta `toolTemplates[toolId]` em um contêiner e executa o `setup`/`resetState` via `useEffect`. Esse wrapper já é usado nas páginas que migramos (bookmark, multi-tool), então basta generalizar.
+2. **Inserir rotas reais:** no `RootRouter`, adicionar `<Route path="/tool/:toolId" element={<ToolPage />} />`, onde `ToolPage` decide se renderiza um componente React (via `reactToolRegistry`) ou o wrapper legado.
+3. **Grid apenas navega:** ao clicar no card, chamar `navigate('/tool/merge')` sem invocar `setupToolInterface`. O efeito no `ToolPage` assume o restante.
+4. **Remover shell antigo:** quando tudo estiver funcionando via rotas, apagar `setupToolInterface`, `toolTemplates` e a bridge manual de scroll/navegação. O grid passa a ser apenas outro componente React e o estado global `state.activeTool` pode ser simplificado.
+5. **URLs legadas:** mapear os antigos links (ex.: `/src/pages/bookmark.html`, hashes `#tool`) para as novas rotas via rewrites no servidor (nginx, Vite dev). Assim preservamos compatibilidade até removermos os HTMLs.
+
+### 7.3 Checklist de migração de rotas
+- [x] Criar wrapper (`LegacyToolMount`) e validá-lo para ferramentas legadas/React que ainda dependem do shell.
+- [x] Adicionar `/tool/:toolId` ao Router e fazer o grid navegar diretamente para essas rotas.
+- [x] Migrar cada ferramenta React do registry para a rota declarativa (sem `setupToolInterface`).
+- [ ] Cobrir ferramentas estritamente legadas com wrappers específicos ou convertê-las para componentes definitivos.
+- [x] Remover `setupToolInterface`, `toolTemplates` e o `historyBridge` (todos os fluxos agora dependem exclusivamente do React Router).
+- [x] Atualizar documentação/testes, garantindo que acessos diretos (`/tool/merge`) funcionem no build final.
+
+> **Atualização 3:** Bookmark e Multi Tool agora usam o mesmo breadcrumb global, e os botões legados "Voltar"/"Fechar" foram ocultados sem quebrar a lógica existente. A próxima etapa é validar testes/acessos diretos e remover qualquer resquício de markup duplicado.
+
+> **Atualização:** o router já responde a `/tool/:toolId`. O grid usa `navigate('/tool/...')`, e o wrapper `LegacyToolMount` invoca o setup legado quando necessário. O próximo passo é eliminar `setupToolInterface` substituindo cada ferramenta por um componente dedicado ou por wrappers que não dependam de IDs globais.
+> **Atualização 2:** Todas as ferramentas agora são servidas por componentes React; o shell antigo (`toolTemplates`/`setupToolInterface`) e o `historyBridge` foram eliminados. O grid e as ferramentas navegam exclusivamente pelas rotas do React Router.
+> **Atualização 4:** Adicionamos `src/tests/router/toolRoutes.test.tsx` para garantir a navegação direta em `/tool/:toolId` (o teste cobre ferramentas simples e avançadas) e padronizamos o breadcrumb também nas páginas especiais (`/pdf-to-json`, `/json-to-pdf`, `/table-of-contents`). Isso elimina o botão legado “Voltar às ferramentas” e garante histórico/scroll consistentes. Hoje todas as 61 ferramentas do grid vivem em rotas declarativas; os marcadores foram incorporados como `bookmark-pdf`.
+> **Atualização 5:** As páginas especiais restantes (Ferramenta completa de PDF e os conversores JSON ↔ PDF) agora são componentes declarativos (`multi-tool`, `pdf-to-json`, `json-to-pdf`). As antigas rotas HTML apenas redirecionam para `/tool/:id`, então qualquer acesso direto recebe o mesmo layout, scroll e breadcrumb do restante da aplicação.

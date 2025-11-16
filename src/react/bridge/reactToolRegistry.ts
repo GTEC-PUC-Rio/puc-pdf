@@ -1,5 +1,7 @@
 import type { ComponentType } from 'react';
 import { MergeTool } from '../components/tools/MergeTool.tsx';
+import { BookmarkTool } from '../components/tools/BookmarkTool.tsx';
+import { TableOfContentsTool } from '../components/tools/TableOfContentsTool.tsx';
 import { SplitTool } from '../components/tools/SplitTool.tsx';
 import { OrganizeTool } from '../components/tools/OrganizeTool.tsx';
 import { RotateTool } from '../components/tools/RotateTool.tsx';
@@ -28,6 +30,7 @@ import { RemoveBlankPagesTool } from '../components/tools/RemoveBlankPagesTool.t
 import { PosterizeTool } from '../components/tools/PosterizeTool.tsx';
 import { ComparePdfsTool } from '../components/tools/ComparePdfsTool.tsx';
 import { PdfToJpgTool } from '../components/tools/PdfToJpgTool.tsx';
+import { PdfToJsonTool } from '../components/tools/PdfToJsonTool.tsx';
 import { AddPageNumbersTool } from '../components/tools/AddPageNumbersTool.tsx';
 import { JpgToPdfTool } from '../components/tools/JpgToPdfTool.tsx';
 import { PdfToPngTool } from '../components/tools/PdfToPngTool.tsx';
@@ -41,6 +44,7 @@ import { ViewMetadataTool } from '../components/tools/ViewMetadataTool.tsx';
 import { RemoveMetadataTool } from '../components/tools/RemoveMetadataTool.tsx';
 import { FlattenTool } from '../components/tools/FlattenTool.tsx';
 import { PdfToMarkdownTool } from '../components/tools/PdfToMarkdownTool.tsx';
+import { JsonToPdfTool } from '../components/tools/JsonToPdfTool.tsx';
 import { TxtToPdfTool } from '../components/tools/TxtToPdfTool.tsx';
 import { InvertColorsTool } from '../components/tools/InvertColorsTool.tsx';
 import { ReversePagesTool } from '../components/tools/ReversePagesTool.tsx';
@@ -58,6 +62,7 @@ import { FixDimensionsTool } from '../components/tools/FixDimensionsTool.tsx';
 import { OcrPdfTool } from '../components/tools/OcrPdfTool.tsx';
 import { WordToPdfTool } from '../components/tools/WordToPdfTool.tsx';
 import { SignPdfTool } from '../components/tools/SignPdfTool.tsx';
+import { PdfMultiToolTool } from '../components/tools/PdfMultiToolTool.tsx';
 import { RemoveRestrictionsTool } from '../components/tools/RemoveRestrictionsTool.tsx';
 import { AddAttachmentsTool } from '../components/tools/AddAttachmentsTool.tsx';
 import { ExtractAttachmentsTool } from '../components/tools/ExtractAttachmentsTool.tsx';
@@ -68,6 +73,9 @@ import { SanitizePdfTool } from '../components/tools/SanitizePdfTool.tsx';
 type ToolComponent = ComponentType;
 
 const registry: Record<string, ToolComponent> = {
+  'multi-tool': PdfMultiToolTool,
+  'bookmark-pdf': BookmarkTool,
+  'table-of-contents': TableOfContentsTool,
   merge: MergeTool,
   split: SplitTool,
   organize: OrganizeTool,
@@ -91,6 +99,7 @@ const registry: Record<string, ToolComponent> = {
   edit: EditTool,
   'compare-pdfs': ComparePdfsTool,
   'pdf-to-jpg': PdfToJpgTool,
+  'pdf-to-json': PdfToJsonTool,
   'add-page-numbers': AddPageNumbersTool,
   'jpg-to-pdf': JpgToPdfTool,
   'pdf-to-png': PdfToPngTool,
@@ -104,6 +113,7 @@ const registry: Record<string, ToolComponent> = {
   'remove-metadata': RemoveMetadataTool,
   flatten: FlattenTool,
   'pdf-to-markdown': PdfToMarkdownTool,
+  'json-to-pdf': JsonToPdfTool,
   'txt-to-pdf': TxtToPdfTool,
   'invert-colors': InvertColorsTool,
   'reverse-pages': ReversePagesTool,

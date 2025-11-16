@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export type AppView = 'grid' | 'tool';
-
 export interface LoaderOverlayState {
   visible: boolean;
   text: string;
@@ -15,8 +13,6 @@ export interface AlertOverlayState {
 
 type LoaderSetter = Dispatch<SetStateAction<LoaderOverlayState>>;
 type AlertSetter = Dispatch<SetStateAction<AlertOverlayState>>;
-type ViewSetter = Dispatch<SetStateAction<AppView>>;
-type ToolSetter = Dispatch<SetStateAction<string | null>>;
 
 let loaderState: LoaderOverlayState = { visible: false, text: '' };
 let loaderSetter: LoaderSetter | null = null;
@@ -28,38 +24,14 @@ let alertState: AlertOverlayState = {
 };
 let alertSetter: AlertSetter | null = null;
 
-let appViewState: AppView = 'grid';
-let appViewSetter: ViewSetter | null = null;
-
-let reactToolId: string | null = null;
-let reactToolSetter: ToolSetter | null = null;
-
 const emitLoaderState = (next: LoaderOverlayState) => {
   loaderState = next;
-  if (loaderSetter) {
-    loaderSetter(next);
-  }
+  loaderSetter?.(next);
 };
 
 const emitAlertState = (next: AlertOverlayState) => {
   alertState = next;
-  if (alertSetter) {
-    alertSetter(next);
-  }
-};
-
-const emitViewState = (next: AppView) => {
-  appViewState = next;
-  if (appViewSetter) {
-    appViewSetter(next);
-  }
-};
-
-const emitReactToolState = (next: string | null) => {
-  reactToolId = next;
-  if (reactToolSetter) {
-    reactToolSetter(next);
-  }
+  alertSetter?.(next);
 };
 
 export const registerLoaderBridge = (setter: LoaderSetter) => {
@@ -94,30 +66,4 @@ export const showAlertOverlay = (title: string, message: string) => {
 
 export const hideAlertOverlay = () => {
   emitAlertState({ ...alertState, visible: false });
-};
-
-export const registerViewBridge = (setter: ViewSetter) => {
-  appViewSetter = setter;
-  setter(appViewState);
-};
-
-export const unregisterViewBridge = () => {
-  appViewSetter = null;
-};
-
-export const setAppView = (view: AppView) => {
-  emitViewState(view);
-};
-
-export const registerReactToolBridge = (setter: ToolSetter) => {
-  reactToolSetter = setter;
-  setter(reactToolId);
-};
-
-export const unregisterReactToolBridge = () => {
-  reactToolSetter = null;
-};
-
-export const setActiveReactTool = (toolId: string | null) => {
-  emitReactToolState(toolId);
 };

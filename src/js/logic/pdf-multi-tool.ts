@@ -13,6 +13,11 @@ import { withBasePath } from '../utils/base-path.js';
 import { initI18n, t } from '../../i18n/index.js';
 import { applyLayoutTranslations } from '../utils/layout-translations.js';
 
+type CleanupFn = () => void;
+type Listener = (target: EventTarget | null, type: string, handler: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => void;
+
+let multiToolTeardown: (() => void) | null = null;
+
 const multiToolT = (
   key: string,
   options?: Record<string, unknown>
@@ -93,6 +98,7 @@ let currentPdfDocs: PDFLibDocument[] = [];
 let splitMarkers: Set<number> = new Set();
 let isRendering = false;
 let renderCancelled = false;
+let sortableInstance: Sortable | null = null;
 
 const pageCanvasCache = new Map<string, HTMLCanvasElement>();
 
@@ -170,24 +176,62 @@ function hideLoading() {
   if (loader) loader.classList.add('hidden');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initI18n()
-    .then(() => {
-      applyLayoutTranslations();
-      applyMultiToolTranslations();
-      initializeTool();
-    })
-    .catch(() => {
-      initializeTool();
-    });
-});
+const resetInternalState = () => {
+  allPages = [];
+  selectedPages.clear();
+  currentPdfDocs = [];
+  splitMarkers.clear();
+  isRendering = false;
+  renderCancelled = false;
+  pageCanvasCache.clear();
+  undoStack.length = 0;
+  redoStack.length = 0;
+};
+
+export const teardownPdfMultiToolPage = () => {
+  if (multiToolTeardown) {
+    multiToolTeardown();
+    multiToolTeardown = null;
+  }
+};
+
+export const setupPdfMultiToolPage = () => {
+  teardownPdfMultiToolPage();
+
+  const bootstrap = () => {
+    initI18n()
+      .then(() => {
+        applyLayoutTranslations();
+        applyMultiToolTranslations();
+        initializeTool();
+      })
+      .catch(() => {
+        initializeTool();
+      });
+  };
+
+  bootstrap();
+
+  multiToolTeardown = () => {
+    sortableInstance?.destroy();
+    sortableInstance = null;
+    resetInternalState();
+    hideLoading();
+    hideModal();
+  };
+
+  return multiToolTeardown;
+};
 
 function initializeTool() {
   createIcons({ icons });
 
-  document.getElementById('close-tool-btn')?.addEventListener('click', () => {
-    window.location.href = withBasePath('index.html');
-  });
+  const closeBtn = document.getElementById('close-tool-btn');
+  if (closeBtn && closeBtn.dataset.routerNav !== 'true') {
+    closeBtn.addEventListener('click', () => {
+      window.location.href = withBasePath('index.html');
+    });
+  }
 
   document.getElementById('upload-pdfs-btn')?.addEventListener('click', () => {
     if (isRendering) {
@@ -576,7 +620,11 @@ function setupSortable() {
   const pagesContainer = document.getElementById('pages-container');
   if (!pagesContainer) return;
 
-  Sortable.create(pagesContainer, {
+  if (sortableInstance) {
+    sortableInstance.destroy();
+  }
+
+  sortableInstance = Sortable.create(pagesContainer, {
     animation: 150,
     handle: '.cursor-move',
     onEnd: (evt) => {

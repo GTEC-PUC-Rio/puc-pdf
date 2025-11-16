@@ -37,7 +37,7 @@ export default defineConfig({
     },
 
     // Include/exclude patterns
-    include: ['src/**/*.{test,spec}.{js,ts}'],
+    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
 
     // Test timeout

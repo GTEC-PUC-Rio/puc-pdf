@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Política de Privacidade - PUC PDF</title>
-    <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade - PUC PDF</title>
+  <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
   <style>
     body[data-loading] {
       visibility: hidden;
@@ -18,221 +19,15 @@
       window.setTimeout(reveal, 3000);
     })();
   </script>
+</head>
 
-  </head>
+<body data-loading="true" class="antialiased bg-gray-900 text-gray-300">
+  <script>
+    window.location.replace('%BASE_URL%privacy');
+  </script>
+  <p style="color:#fff;text-align:center;margin-top:2rem;">
+    Redirecionando para <a href="%BASE_URL%privacy">/privacy</a>...
+  </p>
+</body>
 
-  <body data-loading="true" class="antialiased bg-gray-900 text-gray-300">
-      <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-    <div class="container mx-auto px-4 h-16 flex items-center">
-      <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
-      <div class="ml-3">
-        <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
-        <p class="text-gray-400 text-sm leading-tight">Ferramentas privadas de PDF da PUC-Rio</p>
-      </div>
-    </div>
-  </nav>
-
-
-    <div id="app" class="container mx-auto p-4 md:p-8">
-      <section class="max-w-4xl mx-auto py-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-center text-white mb-4">
-          Política de Privacidade
-        </h1>
-        <p class="text-center text-gray-500">
-          Última atualização: 14 de setembro de 2025
-        </p>
-
-        <div class="legal-content mt-12">
-          <h2>1. Nosso compromisso com a privacidade</h2>
-          <p>
-            O PUC PDF (&ldquo;nós&rdquo;, &ldquo;nos&rdquo;, &ldquo;nosso&rdquo;) é, antes de tudo, um serviço focado em
-            privacidade. Esta Política de Privacidade descreve nosso compromisso absoluto em proteger você. Nosso princípio
-            central é simples: <strong>seus arquivos são seus</strong>. Nós não visualizamos, acessamos, armazenamos ou
-            compartilhamos seus documentos. Todo o processamento de PDFs ocorre inteiramente no seu computador, dentro do
-            seu navegador (client-side).
-          </p>
-
-          <h3>1.1 O princípio client-side</h3>
-          <p>
-            Diferente de outros serviços online de PDF, o PUC PDF não envia seus arquivos para um servidor para fazer o
-            trabalho. As ferramentas são impulsionadas por bibliotecas JavaScript e WebAssembly que rodam diretamente no
-            seu dispositivo. Isso significa que seus dados nunca saem do seu computador, garantindo o máximo de privacidade
-            e segurança.
-          </p>
-
-          <h2>2. Informações que não coletamos</h2>
-          <p>
-            Por causa da nossa arquitetura client-side, somos tecnicamente incapazes de coletar as seguintes informações:
-          </p>
-          <ul>
-            <li>
-              O conteúdo dos seus PDFs ou de qualquer outro documento usado com nossas ferramentas.
-            </li>
-            <li>Quaisquer dados pessoais contidos nos seus documentos.</li>
-            <li>Os nomes dos seus arquivos.</li>
-            <li>
-              Qualquer informação derivada ou metadado, além do estritamente necessário para a ferramenta funcionar durante
-              a sessão ativa (e isso é descartado imediatamente).
-            </li>
-          </ul>
-
-          <h2>3. Informações que podemos coletar (dados não pessoais)</h2>
-          <p>
-            Para melhorar o site e nossos serviços, podemos coletar informações anônimas e não identificáveis. Esse tipo de
-            dado nos ajuda a entender como as pessoas interagem com o produto, quais ferramentas são mais populares e como
-            podemos aprimorar a experiência. Isso inclui:
-          </p>
-          <ul>
-            <li>
-              <strong>Métricas de uso:</strong> dados anonimizados como quais ferramentas foram usadas, com que frequência e
-              quais recursos foram acessados. Tudo agregado e sem relação com usuários ou documentos específicos.
-            </li>
-            <li>
-              <strong>Dados de desempenho:</strong> relatórios anônimos de erros ou métricas de performance para identificar
-              e corrigir bugs. Esses dados não contêm informações pessoais nem conteúdo de arquivos.
-            </li>
-          </ul>
-          <p>
-            Usamos plataformas de analytics que respeitam a privacidade para esse fim. Especificamente, utilizamos o
-            <a
-              href="https://simpleanalytics.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-indigo-400 hover:underline"
-              >Simple Analytics</a
-            >
-            para acompanhar visitas anônimas. Isso significa que conseguimos ver quantas pessoas acessam o site, mas
-            <strong>nunca coletamos informações pessoais nem identificamos indivíduos</strong>. O Simple Analytics é
-            totalmente compatível com a GDPR e respeita a privacidade. Não usamos cookies de rastreamento para anúncios ou
-            perfis entre sites.
-          </p>
-
-          <h2>4. Bibliotecas de terceiros</h2>
-          <p>
-            O PUC PDF é construído com bibliotecas open source poderosas como PDF-lib.js e PDF.js. Essas bibliotecas são
-            confiáveis no mundo todo e operam seguindo o mesmo princípio client-side. Embora as tenhamos auditado, sugerimos
-            que você consulte as respectivas políticas de privacidade para ficar ainda mais tranquilo.
-          </p>
-
-          <h2>5. Segurança</h2>
-          <p>
-            Como seus arquivos nunca são transmitidos pela internet para os nossos servidores, você fica protegido de
-            possíveis vazamentos durante o trânsito ou armazenamento. A segurança dos documentos está nas suas mãos e
-            depende da proteção do seu próprio computador e navegador.
-          </p>
-
-          <h2>6. Privacidade de crianças</h2>
-          <p>
-            Nossos serviços não são direcionados a menores de 13 anos. Não coletamos deliberadamente informações pessoais
-            de crianças. Se você acredita que uma criança nos forneceu dados pessoais, entre em contato para que possamos
-            removê-los.
-          </p>
-
-          <h2>7. Alterações desta política</h2>
-          <p>
-            Podemos atualizar esta Política de Privacidade de tempos em tempos. Avisaremos publicando a nova versão nesta
-            página e atualizando a data de &ldquo;Última atualização&rdquo; no topo. Recomendamos revisar o documento
-            periodicamente.
-          </p>
-
-          <h2>8. Fale conosco</h2>
-          <p>
-            Se tiver dúvidas sobre esta Política de Privacidade, escreva para
-            <a href="mailto:contact@bentopdf.com">contact@bentopdf.com</a>
-          </p>
-        </div>
-      </section>
-    </div>
-
-    <footer class="mt-16 border-t-2 border-gray-700 py-8">
-      <div class="container mx-auto px-4">
-        <div
-          class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left"
-        >
-          <div class="mb-8 md:mb-0">
-            <div class="flex items-center justify-center md:justify-start mb-4">
-              <img
-                src="%BASE_URL%images/logo-puc.png"
-                alt="Logo da PUC-Rio"
-                class="h-10 w-auto mr-3"
-              />
-              <span class="text-xl font-bold text-white">PUC PDF</span>
-            </div>
-            <p class="text-gray-500 text-xs mt-2">
-              <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
-            </p>
-            <p class="text-gray-500 text-xs">
-              Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
-            </p>
-          </div>
-          <div>
-            <h3 class="font-bold text-white mb-4">Empresa</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li>
-                <a href="about.html" class="hover:text-indigo-400">Sobre nós</a>
-              </li>
-              <li><a href="faq.html" class="hover:text-indigo-400">Perguntas frequentes</a></li>
-              <li>
-                <a href="contact.html" class="hover:text-indigo-400"
-                  >Fale conosco</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-bold text-white mb-4">Jurídico</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li>
-                <a href="terms.html" class="hover:text-indigo-400"
-                  >Termos e Condições</a
-                >
-              </li>
-              <li>
-                <a href="privacy.html" class="hover:text-indigo-400"
-                  >Política de Privacidade</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-bold text-white mb-4">Siga-nos</h3>
-            <div class="flex justify-center md:justify-start space-x-4">
-              <a
-                href="https://www.instagram.com/pucrio.oficial"
-                class="text-gray-400 hover:text-indigo-400"
-                target="_blank" rel="noopener noreferrer"
-              >
-                <i data-lucide="instagram"></i>
-              </a>
-              <a
-                href="https://www.linkedin.com/school/puc-rio/"
-                class="text-gray-400 hover:text-indigo-400"
-                target="_blank" rel="noopener noreferrer"
-              >
-                <i data-lucide="linkedin"></i>
-              </a>
-              <a
-                href="https://x.com/pucriooficial"
-                class="text-gray-400 hover:text-indigo-400"
-                target="_blank" rel="noopener noreferrer"
-              >
-                <svg
-                  class="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <script type="module" src="src/js/utils/lucide-init.ts"></script>
-
-  </body>
 </html>

@@ -15,6 +15,7 @@ const cropperState = {
   originalPdfBytes: null,
   cropperImageElement: null,
   pageCrops: {},
+  renderRequestId: 0,
 };
 
 /**
@@ -40,8 +41,9 @@ function saveCurrentCrop() {
  */
 async function displayPageAsImage(num: any) {
   showLoader(
-    t('alerts.cropper.renderingPage', { ns: 'alerts', page: num })
+    t('cropper.renderingPage', { ns: 'alerts', page: num })
   );
+  const requestId = ++cropperState.renderRequestId;
 
   try {
     const page = await cropperState.pdfDoc.getPage(num);
@@ -53,16 +55,21 @@ async function displayPageAsImage(num: any) {
     tempCanvas.height = viewport.height;
     await page.render({ canvasContext: tempCtx, viewport: viewport }).promise;
 
-    if (cropperState.cropper) {
-      cropperState.cropper.destroy();
-    }
-
     const image = document.createElement('img');
-    image.src = tempCanvas.toDataURL('image/png');
-    document.getElementById('cropper-container').innerHTML = '';
-    document.getElementById('cropper-container').appendChild(image);
-
+    const container = document.getElementById('cropper-container');
+    if (container) {
+      container.innerHTML = '';
+    }
     image.onload = () => {
+      if (cropperState.renderRequestId !== requestId) {
+        return;
+      }
+      if (cropperState.cropper) {
+        cropperState.cropper.destroy();
+      }
+      if (!image.parentNode && container) {
+        container.appendChild(image);
+      }
       cropperState.cropper = new Cropper(image, {
         viewMode: 1,
         background: false,
@@ -89,15 +96,19 @@ async function displayPageAsImage(num: any) {
       enableControls();
       hideLoader();
       showAlert(
-        t('alerts.cropper.readyTitle', { ns: 'alerts' }),
-        t('alerts.cropper.readyMessage', { ns: 'alerts' })
+        t('cropper.readyTitle', { ns: 'alerts' }),
+        t('cropper.readyMessage', { ns: 'alerts' })
       );
     };
+    if (container) {
+      container.appendChild(image);
+    }
+    image.src = tempCanvas.toDataURL('image/png');
   } catch (error) {
     console.error('Error rendering page:', error);
     showAlert(
-      t('alerts.errorTitle', { ns: 'alerts' }),
-      t('alerts.cropper.renderError', { ns: 'alerts' })
+      t('errorTitle', { ns: 'alerts' }),
+      t('cropper.renderError', { ns: 'alerts' })
     );
     hideLoader();
   }
@@ -196,7 +207,7 @@ async function performFlatteningCrop(cropData: any) {
   for (let i = 0; i < totalPages; i++) {
     const pageNum = i + 1;
     showLoader(
-      t('alerts.cropper.processingPage', {
+      t('cropper.processingPage', {
         ns: 'alerts',
         current: pageNum,
         total: totalPages,
@@ -299,8 +310,8 @@ export async function setupCropperTool() {
             cropperState.pageCrops[cropperState.currentPageNum];
           if (!currentCrop) {
             showAlert(
-              t('alerts.cropper.missingSelectionTitle', { ns: 'alerts' }),
-              t('alerts.cropper.missingSelectionSingle', { ns: 'alerts' })
+              t('cropper.missingSelectionTitle', { ns: 'alerts' }),
+              t('cropper.missingSelectionSingle', { ns: 'alerts' })
             );
             return;
           }
@@ -321,13 +332,13 @@ export async function setupCropperTool() {
 
         if (Object.keys(finalCropData).length === 0) {
           showAlert(
-            t('alerts.cropper.missingSelectionTitle', { ns: 'alerts' }),
-            t('alerts.cropper.missingSelectionAny', { ns: 'alerts' })
+            t('cropper.missingSelectionTitle', { ns: 'alerts' }),
+            t('cropper.missingSelectionAny', { ns: 'alerts' })
           );
           return;
         }
 
-        showLoader(t('alerts.cropper.applying', { ns: 'alerts' }));
+        showLoader(t('cropper.applying', { ns: 'alerts' }));
 
         try {
           let finalPdfBytes;
@@ -351,13 +362,13 @@ export async function setupCropperTool() {
           );
           showAlert(
             t('alerts.successTitle', { ns: 'alerts' }),
-            t('alerts.cropper.success', { ns: 'alerts' })
+            t('cropper.success', { ns: 'alerts' })
           );
         } catch (e) {
           console.error(e);
           showAlert(
             t('alerts.errorTitle', { ns: 'alerts' }),
-            t('alerts.cropper.error', { ns: 'alerts' })
+            t('cropper.error', { ns: 'alerts' })
           );
         } finally {
           hideLoader();
@@ -365,9 +376,9 @@ export async function setupCropperTool() {
       });
   } catch (error) {
     console.error('Error setting up cropper tool:', error);
-    showAlert(
-      t('alerts.errorTitle', { ns: 'alerts' }),
-      t('alerts.cropper.loadError', { ns: 'alerts' })
-    );
+      showAlert(
+        t('errorTitle', { ns: 'alerts' }),
+        t('cropper.loadError', { ns: 'alerts' })
+      );
   }
 }

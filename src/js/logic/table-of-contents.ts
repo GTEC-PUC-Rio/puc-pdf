@@ -1,32 +1,5 @@
-import { downloadFile, formatBytes } from "../utils/helpers";
-import { withBasePath } from "../utils/base-path.js";
-
-const worker = new Worker(withBasePath('workers/table-of-contents.worker.js'));
-
-let pdfFile: File | null = null;
-
-const dropZone = document.getElementById('drop-zone') as HTMLElement;
-const fileInput = document.getElementById('file-input') as HTMLInputElement;
-const generateBtn = document.getElementById(
-  'generate-btn'
-) as HTMLButtonElement;
-const tocTitleInput = document.getElementById('toc-title') as HTMLInputElement;
-const fontSizeSelect = document.getElementById(
-  'font-size'
-) as HTMLSelectElement;
-const fontFamilySelect = document.getElementById(
-  'font-family'
-) as HTMLSelectElement;
-const addBookmarkCheckbox = document.getElementById(
-  'add-bookmark'
-) as HTMLInputElement;
-const statusMessage = document.getElementById('status-message') as HTMLElement;
-const fileDisplayArea = document.getElementById(
-  'file-display-area'
-) as HTMLElement;
-const backToToolsBtn = document.getElementById(
-  'back-to-tools'
-) as HTMLButtonElement;
+import { downloadFile, formatBytes } from '../utils/helpers.js';
+import { withBasePath } from '../utils/base-path.js';
 
 interface GenerateTOCMessage {
   command: 'generate-toc';
@@ -49,158 +22,221 @@ interface TOCErrorResponse {
 
 type TOCWorkerResponse = TOCSuccessResponse | TOCErrorResponse;
 
-function showStatus(
-  message: string,
-  type: 'success' | 'error' | 'info' = 'info'
-) {
-  statusMessage.textContent = message;
-  statusMessage.className = `mt-4 p-3 rounded-lg text-sm ${
-    type === 'success'
-      ? 'bg-green-900 text-green-200'
-      : type === 'error'
-        ? 'bg-red-900 text-red-200'
-        : 'bg-blue-900 text-blue-200'
-  }`;
-  statusMessage.classList.remove('hidden');
-}
+type ListenerDisposer = () => void;
 
-function hideStatus() {
-  statusMessage.classList.add('hidden');
-}
+let teardownFn: ListenerDisposer | null = null;
 
-function renderFileDisplay(file: File) {
-  fileDisplayArea.innerHTML = '';
-  fileDisplayArea.classList.remove('hidden');
+export const setupTableOfContentsPage = () => {
+  teardownTableOfContentsPage();
 
-  const fileDiv = document.createElement('div');
-  fileDiv.className =
-    'flex items-center justify-between bg-gray-700 p-3 rounded-lg text-sm';
+  const dropZone = document.getElementById('drop-zone') as HTMLElement | null;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
+  const generateBtn = document.getElementById('generate-btn') as HTMLButtonElement | null;
+  const tocTitleInput = document.getElementById('toc-title') as HTMLInputElement | null;
+  const fontSizeSelect = document.getElementById('font-size') as HTMLSelectElement | null;
+  const fontFamilySelect = document.getElementById('font-family') as HTMLSelectElement | null;
+  const addBookmarkCheckbox = document.getElementById('add-bookmark') as HTMLInputElement | null;
+  const statusMessage = document.getElementById('status-message') as HTMLElement | null;
+  const fileDisplayArea = document.getElementById('file-display-area') as HTMLElement | null;
 
-  const nameSpan = document.createElement('span');
-  nameSpan.className = 'truncate font-medium text-gray-200';
-  nameSpan.textContent = file.name;
-
-  const sizeSpan = document.createElement('span');
-  sizeSpan.className = 'flex-shrink-0 ml-4 text-gray-400';
-  sizeSpan.textContent = formatBytes(file.size);
-
-  fileDiv.append(nameSpan, sizeSpan);
-  fileDisplayArea.appendChild(fileDiv);
-}
-
-function handleFileSelect(file: File) {
-  if (file.type !== 'application/pdf') {
-    showStatus('Selecione um arquivo PDF.', 'error');
+  if (
+    !dropZone ||
+    !fileInput ||
+    !generateBtn ||
+    !tocTitleInput ||
+    !fontSizeSelect ||
+    !fontFamilySelect ||
+    !addBookmarkCheckbox ||
+    !statusMessage ||
+    !fileDisplayArea
+  ) {
+    console.warn('Table of contents page elements not found.');
     return;
   }
 
-  pdfFile = file;
-  generateBtn.disabled = false;
-  renderFileDisplay(file);
-}
+  const worker = new Worker(withBasePath('workers/table-of-contents.worker.js'));
+  let pdfFile: File | null = null;
 
-dropZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  dropZone.classList.add('border-blue-500');
-});
+  const disposeListeners: ListenerDisposer[] = [];
+  const addListener = (
+    target: HTMLElement | Document | Window,
+    type: string,
+    handler: EventListener
+  ) => {
+    target.addEventListener(type, handler);
+    disposeListeners.push(() => target.removeEventListener(type, handler));
+  };
 
-dropZone.addEventListener('dragleave', () => {
-  dropZone.classList.remove('border-blue-500');
-});
+  const showStatus = (
+    message: string,
+    type: 'success' | 'error' | 'info' = 'info'
+  ) => {
+    statusMessage.textContent = message;
+    statusMessage.className = `mt-4 p-3 rounded-lg text-sm ${
+      type === 'success'
+        ? 'bg-green-900 text-green-200'
+        : type === 'error'
+          ? 'bg-red-900 text-red-200'
+          : 'bg-blue-900 text-blue-200'
+    }`;
+    statusMessage.classList.remove('hidden');
+  };
 
-dropZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  dropZone.classList.remove('border-blue-500');
-  const file = e.dataTransfer?.files[0];
-  if (file) {
-    handleFileSelect(file);
-  }
-});
+  const hideStatus = () => {
+    statusMessage.classList.add('hidden');
+  };
 
-fileInput.addEventListener('change', (e) => {
-  const file = (e.target as HTMLInputElement).files?.[0];
-  if (file) {
-    handleFileSelect(file);
-  }
-});
-
-async function generateTableOfContents() {
-  if (!pdfFile) {
-    showStatus('Selecione primeiro um arquivo PDF.', 'error');
-    return;
-  }
-
-  try {
-    generateBtn.disabled = true;
-    showStatus('Reading file (Main Thread)...', 'info');
-
-    const arrayBuffer = await pdfFile.arrayBuffer();
-
-    showStatus('Generating table of contents...', 'info');
-
-    const title = tocTitleInput.value || 'Table of Contents';
-    const fontSize = parseInt(fontSizeSelect.value, 10);
-    const fontFamily = parseInt(fontFamilySelect.value, 10);
-    const addBookmark = addBookmarkCheckbox.checked;
-
-    const message: GenerateTOCMessage = {
-      command: 'generate-toc',
-      pdfData: arrayBuffer,
-      title,
-      fontSize,
-      fontFamily,
-      addBookmark,
-    };
-
-    worker.postMessage(message, [arrayBuffer]);
-  } catch (error) {
-    console.error('Error reading file:', error);
-    showStatus(
-      `Erro ao ler o arquivo: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
-      'error'
-    );
-    generateBtn.disabled = false;
-  }
-}
-
-worker.onmessage = (e: MessageEvent<TOCWorkerResponse>) => {
-  generateBtn.disabled = false;
-
-  if (e.data.status === 'success') {
-    const pdfBytesBuffer = e.data.pdfBytes;
-    const pdfBytes = new Uint8Array(pdfBytesBuffer);
-
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    downloadFile(blob, pdfFile?.name.replace('.pdf', '_with_toc.pdf') || 'output_with_toc.pdf');
-
-    showStatus(
-      'Sumário gerado com sucesso! Download iniciado.',
-      'success'
-    );
-
-    hideStatus();
-    pdfFile = null;
-    fileInput.value = '';
+  const renderFileDisplay = (file: File) => {
     fileDisplayArea.innerHTML = '';
+    fileDisplayArea.classList.remove('hidden');
+
+    const fileDiv = document.createElement('div');
+    fileDiv.className =
+      'flex items-center justify-between bg-gray-700 p-3 rounded-lg text-sm';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'truncate font-medium text-gray-200';
+    nameSpan.textContent = file.name;
+
+    const sizeSpan = document.createElement('span');
+    sizeSpan.className = 'flex-shrink-0 ml-4 text-gray-400';
+    sizeSpan.textContent = formatBytes(file.size);
+
+    fileDiv.append(nameSpan, sizeSpan);
+    fileDisplayArea.appendChild(fileDiv);
+  };
+
+  const handleFileSelect = (file: File) => {
+    if (file.type !== 'application/pdf') {
+      showStatus('Selecione um arquivo PDF.', 'error');
+      return;
+    }
+
+    pdfFile = file;
+    generateBtn.disabled = false;
+    renderFileDisplay(file);
+  };
+
+  const handleDrop = (e: DragEvent) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-blue-500');
+    const file = e.dataTransfer?.files[0];
+    if (file) {
+      handleFileSelect(file);
+    }
+  };
+
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
+    dropZone.classList.add('border-blue-500');
+  };
+
+  const handleDragLeave = () => {
+    dropZone.classList.remove('border-blue-500');
+  };
+
+  const handleFileInputChange = (e: Event) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (file) {
+      handleFileSelect(file);
+    }
+  };
+
+  const generateTableOfContents = async () => {
+    if (!pdfFile) {
+      showStatus('Selecione primeiro um arquivo PDF.', 'error');
+      return;
+    }
+
+    try {
+      generateBtn.disabled = true;
+      showStatus('Reading file (Main Thread)...', 'info');
+
+      const arrayBuffer = await pdfFile.arrayBuffer();
+
+      showStatus('Generating table of contents...', 'info');
+
+      const title = tocTitleInput.value || 'Table of Contents';
+      const fontSize = parseInt(fontSizeSelect.value, 10);
+      const fontFamily = parseInt(fontFamilySelect.value, 10);
+      const addBookmark = addBookmarkCheckbox.checked;
+
+      const message: GenerateTOCMessage = {
+        command: 'generate-toc',
+        pdfData: arrayBuffer,
+        title,
+        fontSize,
+        fontFamily,
+        addBookmark,
+      };
+
+      worker.postMessage(message, [arrayBuffer]);
+    } catch (error) {
+      console.error('Error reading file:', error);
+      showStatus(
+        `Erro ao ler o arquivo: ${
+          error instanceof Error ? error.message : 'Erro desconhecido'
+        }`,
+        'error'
+      );
+      generateBtn.disabled = false;
+    }
+  };
+
+  worker.onmessage = (e: MessageEvent<TOCWorkerResponse>) => {
+    generateBtn.disabled = false;
+
+    if (e.data.status === 'success') {
+      const pdfBytesBuffer = e.data.pdfBytes;
+      const pdfBytes = new Uint8Array(pdfBytesBuffer);
+
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      downloadFile(
+        blob,
+        pdfFile?.name.replace('.pdf', '_with_toc.pdf') || 'output_with_toc.pdf'
+      );
+
+      showStatus('Sumário gerado com sucesso! Download iniciado.', 'success');
+
+      hideStatus();
+      pdfFile = null;
+      fileInput.value = '';
+      fileDisplayArea.innerHTML = '';
+      fileDisplayArea.classList.add('hidden');
+      generateBtn.disabled = true;
+    } else if (e.data.status === 'error') {
+      const errorMessage = e.data.message || 'Erro desconhecido no worker.';
+      console.error('Worker Error:', errorMessage);
+      showStatus(`Erro: ${errorMessage}`, 'error');
+    }
+  };
+
+  worker.onerror = (error) => {
+    console.error('Worker error:', error);
+    showStatus('Worker error occurred. Check console for details.', 'error');
+    generateBtn.disabled = false;
+  };
+
+  addListener(dropZone, 'dragover', handleDragOver as EventListener);
+  addListener(dropZone, 'dragleave', handleDragLeave as EventListener);
+  addListener(dropZone, 'drop', handleDrop as EventListener);
+  addListener(fileInput, 'change', handleFileInputChange as EventListener);
+  addListener(generateBtn, 'click', generateTableOfContents as EventListener);
+
+  teardownFn = () => {
+    disposeListeners.forEach((dispose) => dispose());
+    worker.terminate();
+    pdfFile = null;
+    hideStatus();
     fileDisplayArea.classList.add('hidden');
+    fileDisplayArea.innerHTML = '';
     generateBtn.disabled = true;
-  } else if (e.data.status === 'error') {
-    const errorMessage = e.data.message || 'Erro desconhecido no worker.';
-    console.error('Worker Error:', errorMessage);
-    showStatus(`Erro: ${errorMessage}`, 'error');
+  };
+};
+
+export const teardownTableOfContentsPage = () => {
+  if (teardownFn) {
+    teardownFn();
+    teardownFn = null;
   }
 };
-
-worker.onerror = (error) => {
-  console.error('Worker error:', error);
-  showStatus('Worker error occurred. Check console for details.', 'error');
-  generateBtn.disabled = false;
-};
-
-if (backToToolsBtn) {
-  backToToolsBtn.addEventListener('click', () => {
-    window.location.href = withBasePath('index.html#tools-header');
-  });
-}
-
-generateBtn.addEventListener('click', generateTableOfContents);

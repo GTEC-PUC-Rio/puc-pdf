@@ -4,7 +4,7 @@ export const categories = [
     name: 'Ferramentas populares',
     tools: [
       {
-        href: '/src/pages/pdf-multi-tool.html',
+        id: 'multi-tool',
         name: 'Ferramenta completa de PDF',
         icon: 'pencil-ruler',
         subtitle:
@@ -84,14 +84,13 @@ export const categories = [
           'Anote, destaque, oculte informações, comente, adicione formas/imagens, pesquise e visualize PDFs.',
       },
       {
-        // id: 'bookmark-pdf',
-        href: '/src/pages/bookmark.html',
+        id: 'bookmark-pdf',
         name: 'Editar marcadores',
         icon: 'bookmark',
         subtitle: 'Adicione, edite, importe, exclua e extraia marcadores de PDF.',
       },
       {
-        href: '/src/pages/table-of-contents.html',
+        id: 'table-of-contents',
         name: 'Tabela de conteúdo',
         icon: 'list',
         subtitle: 'Gere uma página de sumário a partir dos marcadores.',
@@ -222,7 +221,7 @@ export const categories = [
         subtitle: 'Converta um arquivo de texto simples em PDF.',
       },
       {
-        href: '/src/pages/json-to-pdf.html',
+        id: 'json-to-pdf',
         name: 'JSON para PDF',
         icon: 'file-code',
         subtitle: 'Converta arquivos JSON para PDF.',
@@ -269,7 +268,7 @@ export const categories = [
         subtitle: 'Converta todas as cores para preto e branco.',
       },
       {
-        href: '/src/pages/pdf-to-json.html',
+        id: 'pdf-to-json',
         name: 'PDF para JSON',
         icon: 'file-code',
         subtitle: 'Converta arquivos PDF em JSON.',
@@ -328,7 +327,7 @@ export const categories = [
         subtitle: 'Visualize ou remova anexos do PDF.',
       },
       {
-        href: '/src/pages/pdf-multi-tool.html',
+        id: 'multi-tool',
         name: 'Ferramenta completa de PDF',
         icon: 'pencil-ruler',
         subtitle: 'Editor completo com gerenciamento de páginas.',

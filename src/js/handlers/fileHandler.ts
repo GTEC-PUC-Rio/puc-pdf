@@ -5,7 +5,6 @@ import {
   showAlert,
   renderPageThumbnails,
   renderFileDisplay,
-  switchView,
 } from '../ui.js';
 import { formatIsoDate, readFileAsArrayBuffer } from '../utils/helpers.js';
 import { setupCanvasEditor } from '../canvasEditor.js';
@@ -20,6 +19,15 @@ import {
   singlePdfLoadTools,
 } from '../config/pdf-tools.js';
 import * as pdfjsLib from 'pdfjs-dist';
+import { withBasePath } from '../utils/base-path.js';
+
+const navigateToGrid = () => {
+  if (window.history.length > 1) {
+    window.history.back();
+    return;
+  }
+  window.location.href = withBasePath('');
+};
 
 async function handleSinglePdfUpload(toolId, file) {
   showLoader('Carregando PDF...');
@@ -40,7 +48,7 @@ async function handleSinglePdfUpload(toolId, file) {
         'PDF protegido',
         'Este PDF está protegido por senha. Use primeiro as ferramentas Descriptografar ou Alterar Permissões.'
       );
-      switchView('grid');
+      navigateToGrid();
       return;
     }
 
@@ -481,8 +489,7 @@ async function handleMultiFileUpload(toolId) {
       const errorMessage = `Foram encontrados PDFs protegidos por senha.\n\nUse primeiro as ferramentas Descriptografar ou Alterar Permissões nesses arquivos:\n\n${encryptedPDFFileNames.join('\n')}`;
 
       showAlert('PDFs protegidos', errorMessage);
-
-      switchView('grid');
+      navigateToGrid();
 
       return;
     }

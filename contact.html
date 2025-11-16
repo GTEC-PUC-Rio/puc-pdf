@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fale Conosco - PUC PDF</title>
-    <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fale Conosco - PUC PDF</title>
+  <link rel="icon" type="image/x-icon" href="%BASE_URL%images/puc-favicon.ico" />
   <style>
     body[data-loading] {
       visibility: hidden;
@@ -18,135 +19,15 @@
       window.setTimeout(reveal, 3000);
     })();
   </script>
+</head>
 
-  </head>
+<body data-loading="true" class="antialiased bg-gray-900 text-gray-300">
+  <script>
+    window.location.replace('%BASE_URL%contact');
+  </script>
+  <p style="color:#fff;text-align:center;margin-top:2rem;">
+    Redirecionando para <a href="%BASE_URL%contact">/contact</a>...
+  </p>
+</body>
 
-  <body data-loading="true" class="antialiased bg-gray-900 text-gray-300">
-      <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-    <div class="container mx-auto px-4 h-16 flex items-center">
-      <img src="%BASE_URL%images/logo-puc.png" alt="Logo da PUC-Rio" class="h-8 w-auto" />
-      <div class="ml-3">
-        <p class="text-white font-bold text-lg leading-tight">PUC PDF</p>
-        <p class="text-gray-400 text-sm leading-tight">Ferramentas privadas de PDF da PUC-Rio</p>
-      </div>
-    </div>
-  </nav>
-
-
-    <div id="app" class="min-h-screen container mx-auto p-4 md:p-8">
-      <section id="contact-hero" class="text-center py-16 md:py-24">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-          Entre em contato
-        </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-          Vamos adorar ouvir você. Se tiver uma pergunta, feedback ou pedido de recurso, fale com a gente sem receio.
-        </p>
-      </section>
-
-      <div class="max-w-2xl mx-auto text-center py-8">
-        <p class="text-lg text-gray-400">
-          Você pode falar diretamente conosco por e-mail em:
-          <a
-            href="mailto:contact@bentopdf.com"
-            class="text-indigo-400 underline hover:text-indigo-300"
-            >contact@bentopdf.com</a
-          >
-        </p>
-      </div>
-    </div>
-
-    <footer class="mt-16 border-t-2 border-gray-700 py-8">
-      <div class="container mx-auto px-4">
-        <div
-          class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left"
-        >
-          <div class="mb-8 md:mb-0">
-            <div class="flex items-center justify-center md:justify-start mb-4">
-              <img
-                src="%BASE_URL%images/logo-puc.png"
-                alt="Logo da PUC-Rio"
-                class="h-10 w-auto mr-3"
-              />
-              <span class="text-xl font-bold text-white">PUC PDF</span>
-            </div>
-            <p class="text-gray-500 text-xs mt-2">
-              <a href="https://github.com/GTEC-PUC-Rio/puc-pdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">Código-fonte</a>
-            </p>
-            <p class="text-gray-500 text-xs">
-              Baseado em <a href="https://github.com/alam00000/bentopdf" class="hover:text-indigo-400 underline" target="_blank" rel="noopener noreferrer">BentoPDF</a>
-            </p>
-          </div>
-          <div>
-            <h3 class="font-bold text-white mb-4">Empresa</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li>
-                <a href="about.html" class="hover:text-indigo-400">Sobre nós</a>
-              </li>
-              <li><a href="faq.html" class="hover:text-indigo-400">Perguntas frequentes</a></li>
-              <li>
-                <a href="contact.html" class="hover:text-indigo-400"
-                  >Fale conosco</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-bold text-white mb-4">Jurídico</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li>
-                <a href="./terms.html" class="hover:text-indigo-400"
-                  >Termos e Condições</a
-                >
-              </li>
-              <li>
-                <a href="./privacy.html" class="hover:text-indigo-400"
-                  >Política de Privacidade</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div>
-              <h3 class="font-bold text-white mb-4">Siga-nos</h3>
-              <div class="flex justify-center md:justify-start space-x-4">
-                <a
-                  href="https://www.instagram.com/pucrio.oficial"
-                  class="text-gray-400 hover:text-indigo-400"
-                  target="_blank" rel="noopener noreferrer"
-                >
-                  <i data-lucide="instagram"></i>
-                </a>
-                <a
-                  href="https://www.linkedin.com/school/puc-rio/"
-                  class="text-gray-400 hover:text-indigo-400"
-                  target="_blank" rel="noopener noreferrer"
-                >
-                  <i data-lucide="linkedin"></i>
-                </a>
-                <a
-                  href="https://x.com/pucriooficial"
-                  class="text-gray-400 hover:text-indigo-400"
-                  target="_blank" rel="noopener noreferrer"
-                >
-                  <svg
-                    class="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script type="module" src="src/js/utils/lucide-init.ts"></script>
-
-  </body>
 </html>
