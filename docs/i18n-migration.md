@@ -1,41 +1,36 @@
-# Plano de migração para i18n
+# Guia de internacionalização
 
-Este documento descreve como estamos incorporando o `i18next` para centralizar todas as strings da interface. Mesmo que o produto continue apenas em pt-BR, organizar o conteúdo desde já permite habilitar outros idiomas no futuro e facilita ajustes institucionais.
+A tradução é centralizada no `i18next`. Mesmo atendendo apenas pt-BR, mantemos o catálogo organizado para permitir ajustes rápidos e futura expansão para outros idiomas. Este documento descreve como a infraestrutura atual funciona e como adicionar novas strings.
 
-## Objetivos
-- Remover strings hardcoded de HTML/TSX/TS e movê-las para `src/locales/pt-BR`.
-- Usar as mesmas chaves no React e no código vanilla (Simple Mode) por meio do helper `t(...)`.
-- Garantir que páginas legadas (ex.: `pdf-multi-tool.html`) também consumam traduções estáticas compartilhadas.
+## Componentes principais
+- `src/i18n/index.ts`: inicializa o `i18next`, registra os namespaces carregados e exporta o helper `initI18n()` (para scripts vanilla) e o `I18nextProvider` usado no React.
+- `src/locales/pt-BR/` contém os arquivos JSON separados por domínio:
+  - `common.json`: cabeçalho, rodapé, breadcrumb, mensagens genéricas e CTAs compartilhados.
+  - `alerts.json`: loaders, toasts e mensagens de erro/sucesso mostradas pelos serviços globais.
+  - `tools.json`: títulos, descrições e labels de todas as ferramentas. Cada `toolId` possui o bloco `templates.<id>` com subtabs, placeholders etc.
+- `src/js/utils/layout-translations.ts`: aplica as traduções globais aos pontos onde ainda existe HTML estático (por exemplo, quando o `PdfMultiToolPage` injeta trechos legados).
 
-## Estrutura atual
-- `src/i18n/index.ts`: inicializa o `i18next` e exporta `initI18n`/`t`.
-- `src/locales/pt-BR/common.json`: navegação, rodapé, ações, modais e strings genéricas (upload, preview, botões).
-- `src/locales/pt-BR/alerts.json`: textos de loaders e alertas.
-- `src/locales/pt-BR/tools.json`: título/subtítulo do grid, estados vazios e CTAs.
-- `src/js/utils/layout-translations.ts`: aplica traduções estáticas a nav, rodapé, modais e botões compartilhados (usado pelo `main.ts` e pelo `pdf-multi-tool.ts`).
+## Uso no React
+- `src/react/main.tsx` chama `initI18n()` antes de renderizar o app e envolve todo o router com `I18nextProvider`.
+- Componentes funcionais usam `const { t } = useTranslation('<namespace>')`. Para strings que aparecem em diversos pontos, prefira `common` ou `alerts`. Ferramentas usam a seção `tools`.
+- Sempre defina fallbacks para `dangerouslySetInnerHTML` usando `?? ''` e prefira interpolação (`t('foo', { value })`) a concatenações manuais.
 
-## Etapas da migração
-1. **Chrome compartilhado (concluído)**  
-   - Nav, rodapé, botões dos modais e textos do dropzone foram movidos para `common.json`.
-   - `applyLayoutTranslations()` sincroniza esses elementos tanto na Home quanto no Multi Tool.
-2. **Fluxos do Simple Mode (em andamento)**  
-   - Migrar gradualmente cada template em `src/js/ui.ts` para usar `t(...)`.  
-   - Criar namespaces específicos (`tools.merge`, `tools.compress`, etc.) para opções, descrições e mensagens de instrução.
-3. **Alertas e loaders das lógicas (pendente)**  
-   - Mapear `src/js/logic/*` e mover todos os textos de `alert()`, `showLoader`, `console.warn` visíveis para usuários.
-4. **Páginas estáticas**  
-   - Reutilizar `layout-translations.ts` e injetar `initI18n()` nas páginas HTML legadas ou migrá-las para React quando possível.
-5. **Testes e validação**  
-   - Criar testes que conferem se chaves obrigatórias existem (ex.: usando `vitest` para validar JSONs).
+## Uso fora do React
+- Scripts de lógica (`src/js/logic/*`) importam `t` diretamente de `src/i18n/index.ts`. Garanta que `initI18n()` seja chamado uma vez no bootstrap (já feito em `main.tsx`).
+- Quando uma lógica roda em Web Worker e não recebe `t`, passe as mensagens via parâmetros ou mantenha as strings no thread principal.
 
-## Guia rápido para novas traduções
-1. Adicione a string em `src/locales/pt-BR/<namespace>.json`.
-2. Se for usada no React, importe `t` diretamente. Caso precise de re-render automático, troque para `react-i18next` no componente.
-3. Para HTML/TS vanilla, garanta que `initI18n()` foi chamado antes de acessar `t`.
-4. Prefira estruturar as chaves por contexto (ex.: `upload.clearAll`, `modals.preview.download`) para evitar colisões.
+## Como adicionar ou alterar traduções
+1. Identifique o namespace adequado. Ferramentas sempre entram em `tools.json` dentro de `templates.<toolId>`.
+2. Adicione a chave/valor em JSON seguindo o padrão existente (use frases completas e mantenha placeholders HTML explícitos, ex.: `<strong>`).
+3. Atualize o componente React ou o módulo TS para consumir `t('namespace.chave')`.
+4. Execute `npm run lint`/`npm run test` quando aplicável e faça um sanity check navegando até a tela que usa a nova string.
 
-## Próximos passos sugeridos
-- Criar um namespace `tools.<toolId>` e migrar, ferramenta a ferramenta, o conteúdo de `toolTemplates`.
-- Adaptar `src/react/App.tsx` para envolver `I18nextProvider`, permitindo hooks como `useTranslation`.
-- Adicionar um script de lint simples que verifica se todas as traduções pt-BR têm valor preenchido.
-- Atualizar os testes para cobrirem o comportamento traduzido (placeholders, labels e mensagens de alerta).
+## Boas práticas
+- Padronize chaves no singular (`templates.merge.title`) e mantenha subestruturas previsíveis (`tabs`, `form`, `alerts`).
+- Quando precisar de plurais, use o suporte nativo do i18next (`t('key', { count })`).
+- Interpole valores dinâmicos usando placeholders nomeados (`{ value }`) e evite concatenar strings fora do `t`.
+- Antes de remover uma chave, faça uma busca (`rg 'templates\.foo'`) para garantir que não existe uso residual.
+
+## Validação
+- `npm run test` inclui verificações que garantem a inicialização do i18n nos componentes principais.
+- Planejamento futuro: adicionar um teste dedicado que carregue todos os JSONs e valide se não existem chaves duplicadas ou vazias. Enquanto isso não acontece, mantenha revisões manuais em PRs.

@@ -49,9 +49,55 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #111827;
-  color: #d1d5db;
+  font-family: 'Rethink Sans', 'Roboto', system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rethink Sans';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rethinksans/v7/AMOIz4SDuXOMCPfdoglY9JQEUWi769174g.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rethink Sans';
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rethinksans/v7/AMOIz4SDuXOMCPfdoglY9JQEUWi1690.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Rethink Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEWli389k.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Rethink Sans';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 .tool-card {
@@ -66,7 +112,7 @@ body {
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.2),
     0 4px 6px -2px rgba(0, 0, 0, 0.1);
-  border-color: #4f46e5;
+  border-color: var(--primary);
 }
 
 .btn {
@@ -86,7 +132,19 @@ body {
 
 /* Custom file input */
 input[type='file']::file-selector-button {
-  @apply bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg cursor-pointer hover:bg-indigo-700 transition-colors duration-200 mr-4;
+  background-color: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border: none;
+  margin-right: 1rem;
+}
+
+input[type='file']::file-selector-button:hover {
+  background-color: var(--primary-hover);
 }
 
 /* Custom scrollbar */
@@ -99,19 +157,18 @@ input[type='file']::file-selector-button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4f46e5;
+  background: var(--primary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4338ca;
-  /* indigo-700 */
+  background: var(--primary-hover);
 }
 
 /* Style for drag-and-drop placeholder */
 .sortable-ghost {
   opacity: 0.4;
-  border: 2px dashed #4f46e5;
+  border: 2px dashed var(--primary);
 }
 
 #embed-pdf-container > div {
@@ -208,8 +265,7 @@ footer a {
 }
 
 .cta-button {
-  background-color: #4f46e5;
-  /* indigo-600 */
+  background-color: var(--primary);
   color: white;
   font-weight: 600;
   padding: 12px 24px;
@@ -219,8 +275,7 @@ footer a {
 }
 
 .cta-button:hover {
-  background-color: #4338ca;
-  /* indigo-700 */
+  background-color: var(--primary-hover);
 }
 
 .marker-text {
@@ -258,13 +313,13 @@ footer a {
   right: 0;
   bottom: 0;
   height: 6px;
-  background: linear-gradient(120deg, #6366f1, #8b5cf6);
+  background: linear-gradient(120deg, var(--primary), var(--primary-hover));
   z-index: -1;
 }
 
 .section-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, #4f46e5, transparent);
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
   /* Fades from transparent to indigo and back */
   margin: 2rem auto;
   /* my-16 */
@@ -276,13 +331,9 @@ footer a {
 .btn-gradient {
   display: inline-block;
   padding: 0.75rem 2rem;
-  /* py-3 px-8 */
-  border-radius: 0.5rem;
-  /* rounded-lg */
-  background-image: linear-gradient(to bottom, #6366f1, #4f46e5);
-  /* from-indigo-500 to-indigo-600 */
+  border-radius: 0.75rem;
+  background-image: linear-gradient(135deg, var(--primary), var(--primary-hover));
   color: #ffffff;
-  /* text-white */
   font-weight: 600;
   /* font-semibold */
   transition-property: all;
@@ -292,8 +343,8 @@ footer a {
 
 .btn-gradient:hover {
   box-shadow:
-    0 10px 15px -3px rgba(79, 70, 229, 0.3),
-    0 4px 6px -4px rgba(79, 70, 229, 0.3);
+    0 10px 15px -3px rgba(0, 94, 102, 0.35),
+    0 4px 6px -4px rgba(0, 94, 102, 0.25);
   /* hover:shadow-xl hover:shadow-indigo-500/30 */
   transform: translateY(-0.25rem);
   /* hover:-translate-y-1 */
@@ -304,7 +355,7 @@ footer a {
   outline-offset: 2px;
   box-shadow:
     0 0 0 2px #111827,
-    0 0 0 4px #818cf8;
+    0 0 0 4px rgba(0, 122, 131, 0.6);
   /* focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-indigo-400 */
 }
 
@@ -322,7 +373,7 @@ footer a {
   /* h-16 */
   border: 5px solid #374151;
   /* border-gray-700 */
-  border-bottom-color: #4f46e5;
+  border-bottom-color: var(--primary);
   /* border-indigo-600 */
   border-radius: 50%;
   display: inline-block;
@@ -352,9 +403,9 @@ footer a {
 
 /* Highlight for selected signature in the saved list */
 .saved-signature.selected {
-  border-color: #4f46e5;
-  /* indigo-600 */
-  box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+  border-color: var(--primary);
+  /* brand-primary */
+  box-shadow: 0 0 10px rgba(0, 94, 102, 0.45);
 }
 
 /* Cursor change when hovering over a placed signature */
@@ -378,9 +429,101 @@ footer a {
   cursor: nwse-resize;
 }
 
+:root {
+  --radius: 10px;
+  --background: #fdfdfd;
+  --foreground: #1f2a2e;
+  --surface: #ffffff;
+  --surface-alt: #f5f7f8;
+  --border: #e0e7ec;
+  --text-muted: #7a8a94;
+  --primary: #005e66;
+  --primary-hover: #007a83;
+  --accent: #f4f8fa;
+  --accent-foreground: #1f2a2e;
+}
+
+body {
+  font-family: 'Rethink Sans', 'Roboto', system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.bg-gray-800,
+.bg-gray-900,
+.bg-gray-700 {
+  background-color: var(--surface) !important;
+}
+
+.bg-slate-800,
+.bg-slate-900,
+.bg-slate-700 {
+  background-color: var(--surface) !important;
+}
+
+.border-gray-700 {
+  border-color: var(--border) !important;
+}
+
+.border-gray-600,
+.border-slate-600,
+.border-slate-700 {
+  border-color: var(--border) !important;
+}
+
+.text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+.text-white,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300 {
+  color: var(--foreground) !important;
+}
+
+.text-slate-200,
+.text-slate-300 {
+  color: var(--foreground) !important;
+}
+
+.text-indigo-400,
+.text-indigo-300,
+.text-indigo-500,
+.text-indigo-600 {
+  color: var(--primary) !important;
+}
+
+.hover\:text-indigo-300:hover,
+.hover\:text-indigo-400:hover,
+.hover\:text-indigo-500:hover {
+  color: var(--primary-hover) !important;
+}
+
+.bg-indigo-600,
+.bg-indigo-500,
+.bg-indigo-400 {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+
+.hover\:bg-indigo-700:hover,
+.hover\:bg-indigo-600:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+.border-indigo-600,
+.border-indigo-500,
+.border-indigo-400 {
+  border-color: var(--primary) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
 .faq-item.open .faq-question {
-  color: #818cf8;
-  /* indigo-400 */
+  color: var(--primary);
 }
 
 .faq-item.open .faq-icon {
@@ -522,6 +665,13 @@ button,
   cursor: pointer;
 }
 
+.legacy-bookmark,
+.legacy-multi-tool,
+.legacy-bookmark button,
+.legacy-multi-tool button {
+  font-family: 'Rethink Sans', 'Roboto', system-ui, sans-serif;
+}
+
 button:disabled,
 .btn:disabled {
   cursor: not-allowed;
@@ -529,4 +679,35 @@ button:disabled,
 .legacy-bookmark #back-to-tools,
 .legacy-multi-tool #close-tool-btn {
   display: none !important;
+}
+.app-header {
+  background: linear-gradient(120deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: #ffffff;
+  font-family: 'Rethink Sans', 'Roboto', system-ui, sans-serif;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bg-main-color {
+  background-color: var(--primary);
+}
+
+.app-header a {
+  color: inherit;
+}
+
+.app-header svg {
+  color: inherit;
+  stroke: currentColor;
+}
+
+.app-header img {
+  display: block;
+}
+
+.app-header .text-on-primary {
+  color: #ffffff !important;
+}
+
+.app-header .text-on-primary-muted {
+  color: rgba(255, 255, 255, 0.78) !important;
 }

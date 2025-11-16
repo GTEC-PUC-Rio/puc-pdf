@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { createIcons, icons } from 'lucide';
 
 import { withBasePath } from '../../../js/utils/base-path.js';
+import { AppHeader } from '../navigation/AppHeader.tsx';
 
 const companyLinks = [
   { href: 'about', label: 'Sobre nós' },
@@ -20,34 +21,24 @@ export const StaticLayout = ({ children }: { children: ReactNode }) => {
     document.body?.removeAttribute('data-loading');
   }, []);
 
-  const logoSrc = withBasePath('images/logo-puc.png');
+  const footerLogoSrc = withBasePath('images/logo-puc-mono.png');
   const resolveHref = (slug: string) => withBasePath(slug);
 
   return (
     <>
-      <nav className="bg-gray-800 border-b border-gray-700 sticky top-0 z-30">
-        <div className="container mx-auto px-4 h-16 flex items-center">
-          <img src={logoSrc} alt="Logo da PUC-Rio" className="h-8 w-auto" />
-          <div className="ml-3">
-            <p className="text-white font-bold text-lg leading-tight">PUC PDF</p>
-            <p className="text-gray-400 text-sm leading-tight">
-              Ferramentas privadas de PDF da PUC-Rio
-            </p>
-          </div>
-        </div>
-      </nav>
+      <AppHeader />
 
-      <div id="app" className="min-h-screen container mx-auto">
+      <main id="app" className="min-h-screen max-w-5xl mx-auto px-4 sm:px-6 py-10">
         {children}
-      </div>
+      </main>
 
-      <footer className="mt-16 border-t-2 border-gray-700 py-8">
+      <footer className="mt-12 border-t border-gray-200 py-8 bg-white text-gray-600">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
             <div className="mb-8 md:mb-0">
               <div className="flex items-center justify-center md:justify-start mb-4">
-                <img src={logoSrc} alt="Logo da PUC-Rio" className="h-10 w-auto mr-3" />
-                <span className="text-xl font-bold text-white">PUC PDF</span>
+                <img src={footerLogoSrc} alt="Logo da PUC-Rio" className="h-10 w-auto mr-3" />
+                <span className="text-xl font-bold text-[var(--primary)]">PUC PDF</span>
               </div>
               <p className="text-gray-500 text-xs mt-2">
                 <a

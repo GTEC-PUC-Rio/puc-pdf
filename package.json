@@ -60,6 +60,8 @@
     "jspdf": "^3.0.3",
     "jszip": "^3.10.1",
     "lucide": "^0.546.0",
+    "lucide-react": "^0.546.0",
+    "oidc-client-ts": "^3.4.0",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.4.296",
     "pdfkit": "^0.17.2",

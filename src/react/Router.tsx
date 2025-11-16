@@ -12,6 +12,8 @@ import { PrivacyPage } from './components/static/PrivacyPage.tsx';
 import { TermsPage } from './components/static/TermsPage.tsx';
 import { GridPage } from './pages/GridPage.tsx';
 import { ToolPage } from './pages/ToolPage.tsx';
+import { AuthProvider } from './context/AuthContext.tsx';
+import { AuthCallbackPage } from './pages/AuthCallbackPage.tsx';
 
 const StaticRoute = ({ children }: { children: React.ReactNode }) => (
   <StaticLayout>{children}</StaticLayout>
@@ -31,12 +33,13 @@ const PlaceholderPage = ({ title }: { title: string }) => (
 export const RootRouter = () => (
   <StrictMode>
     <I18nextProvider i18n={i18next}>
-      <BrowserRouter basename={import.meta.env.BASE_URL ?? '/'}>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<GridPage />} />
-            <Route path="/tool/:toolId" element={<ToolPage />} />
-          </Route>
+      <AuthProvider>
+        <BrowserRouter basename={import.meta.env.BASE_URL ?? '/'}>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<GridPage />} />
+              <Route path="/tool/:toolId" element={<ToolPage />} />
+            </Route>
           <Route
             path="/about"
             element={
@@ -80,13 +83,14 @@ export const RootRouter = () => (
 
           <Route path="/pdf-to-json" element={<Navigate to="/tool/pdf-to-json" replace />} />
           <Route path="/json-to-pdf" element={<Navigate to="/tool/json-to-pdf" replace />} />
-          <Route path="/multi-tool" element={<Navigate to="/tool/multi-tool" replace />} />
-          <Route path="/bookmark" element={<Navigate to="/tool/bookmark-pdf" replace />} />
-
-          <Route path="/table-of-contents" element={<Navigate to="/tool/table-of-contents" replace />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
+            <Route path="/multi-tool" element={<Navigate to="/tool/multi-tool" replace />} />
+            <Route path="/bookmark" element={<Navigate to="/tool/bookmark-pdf" replace />} />
+            <Route path="/table-of-contents" element={<Navigate to="/tool/table-of-contents" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </I18nextProvider>
   </StrictMode>
 );

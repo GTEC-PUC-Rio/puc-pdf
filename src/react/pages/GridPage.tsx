@@ -4,6 +4,11 @@ import { createIcons, icons } from 'lucide';
 import { useTranslation } from 'react-i18next';
 
 import { categories } from '../../js/config/tools.js';
+import { Input } from '../ui/index.ts';
+
+type ToolDefinition = (typeof categories)[number]['tools'][number] & {
+  href?: string | null;
+};
 
 const mapHrefToRoute = (href?: string | null) => {
   if (!href) return null;
@@ -24,8 +29,8 @@ const ToolCard = ({
   tool,
   onSelect,
 }: {
-  tool: (typeof categories)[number]['tools'][number];
-  onSelect: (tool: (typeof categories)[number]['tools'][number]) => void;
+  tool: ToolDefinition;
+  onSelect: (tool: ToolDefinition) => void;
 }) => (
   <button
     type="button"
@@ -83,33 +88,27 @@ export const GridPage = () => {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const shortcutLabel = navigator.userAgent.toUpperCase().includes('MAC')
     ? '⌘ + K'
     : 'Ctrl + K';
 
   return (
     <div id="grid-view">
-      <div className="my-8 max-w-lg mx-auto">
-        <div className="relative">
-          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <i data-lucide="search" className="w-5 h-5 text-gray-400"></i>
-          </span>
-          <input
-            ref={searchInputRef}
-            type="text"
-            autoComplete="off"
-            className="w-full pl-10 pr-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder={t('search.placeholder')}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          {!isMobile && (
-            <span className="absolute inset-y-0 right-0 flex items-center rounded-lg pr-2">
-              <kbd className="bg-gray-800 px-1 rounded-lg">{shortcutLabel}</kbd>
-            </span>
-          )}
-        </div>
+      <div className="my-8 flex flex-col sm:flex-row sm:items-center gap-3 w-full">
+        <Input
+          ref={searchInputRef}
+          autoFocus
+          autoComplete="off"
+          placeholder={t('search.placeholder')}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          iconLeft={<i data-lucide="search" className="w-5 h-5"></i>}
+          wrapperClassName="flex-1 w-full"
+          className="text-sm"
+        />
+        <span className="hidden sm:inline-flex text-xs text-slate-400 font-mono px-2 py-1 rounded-lg border border-slate-700">
+          {shortcutLabel}
+        </span>
       </div>
 
       <div className="space-y-8">
@@ -119,28 +118,31 @@ export const GridPage = () => {
               {category.name}
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-              {category.tools.map((tool) => (
-                <ToolCard
-                  key={tool.id ?? tool.href}
-                  tool={tool}
-                  onSelect={(selected) => {
-                    if (selected.href) {
-                      const route = mapHrefToRoute(selected.href);
-                      if (route?.startsWith('/')) {
-                        navigate(route);
-                        return;
+              {category.tools.map((toolItem) => {
+                const tool = toolItem as ToolDefinition;
+                return (
+                  <ToolCard
+                    key={tool.id ?? tool.href ?? tool.name}
+                    tool={tool}
+                    onSelect={(selected) => {
+                      if (selected.href) {
+                        const route = mapHrefToRoute(selected.href);
+                        if (route?.startsWith('/')) {
+                          navigate(route);
+                          return;
+                        }
+                        if (route) {
+                          window.location.href = route;
+                          return;
+                        }
                       }
-                      if (route) {
-                        window.location.href = route;
-                        return;
+                      if (selected.id) {
+                        navigate(`/tool/${selected.id}`);
                       }
-                    }
-                    if (selected.id) {
-                      navigate(`/tool/${selected.id}`);
-                    }
-                  }}
-                />
-              ))}
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
         ))}

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LoaderModal } from '../components/LoaderModal.tsx';
 import { AlertModal } from '../components/AlertModal.tsx';
+import { AppHeader } from '../components/navigation/AppHeader.tsx';
 import {
   registerLoaderBridge,
   unregisterLoaderBridge,
@@ -39,9 +40,10 @@ export const AppLayout = () => {
 
   return (
     <>
-      <div className="min-h-screen container mx-auto">
+      <AppHeader />
+      <main className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 py-6">
         <Outlet />
-      </div>
+      </main>
       <LoaderModal visible={loaderState.visible} text={loaderState.text} />
       <AlertModal
         visible={alertState.visible}

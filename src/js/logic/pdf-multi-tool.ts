@@ -551,14 +551,14 @@ function createPageCard(pageData: PageData, index: number) {
   // Rotate button
   const rotateBtn = document.createElement('button');
   rotateBtn.className = 'p-1 rounded hover:bg-gray-700';
-  rotateBtn.innerHTML = '<i data-lucide="rotate-cw" class="w-4 h-4 text-gray-300"></i>';
+  rotateBtn.innerHTML = '<i data-lucide="rotate-cw" class="w-4 h-4 text-white"></i>';
   rotateBtn.onclick = (e) => {
     e.stopPropagation();
     rotatePage(index, 90);
   };
   const rotateLeftBtn = document.createElement('button');
   rotateLeftBtn.className = 'p-1 rounded hover:bg-gray-700';
-  rotateLeftBtn.innerHTML = '<i data-lucide="rotate-ccw" class="w-4 h-4 text-gray-300"></i>';
+  rotateLeftBtn.innerHTML = '<i data-lucide="rotate-ccw" class="w-4 h-4 text-white"></i>';
   rotateLeftBtn.onclick = (e) => {
     e.stopPropagation();
     rotatePage(index, -90);
@@ -567,7 +567,7 @@ function createPageCard(pageData: PageData, index: number) {
   // Duplicate button
   const duplicateBtn = document.createElement('button');
   duplicateBtn.className = 'p-1 rounded hover:bg-gray-700';
-  duplicateBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-gray-300"></i>';
+  duplicateBtn.innerHTML = '<i data-lucide="copy" class="w-4 h-4 text-white"></i>';
   duplicateBtn.title = multiToolT('card.actions.duplicate');
   duplicateBtn.onclick = (e) => {
     e.stopPropagation();
@@ -589,7 +589,7 @@ function createPageCard(pageData: PageData, index: number) {
   // Insert PDF button
   const insertBtn = document.createElement('button');
   insertBtn.className = 'p-1 rounded hover:bg-gray-700';
-  insertBtn.innerHTML = '<i data-lucide="file-plus" class="w-4 h-4 text-gray-300"></i>';
+  insertBtn.innerHTML = '<i data-lucide="file-plus" class="w-4 h-4 text-white"></i>';
   insertBtn.title = multiToolT('card.actions.insertAfter');
   insertBtn.onclick = (e) => {
     e.stopPropagation();
@@ -600,7 +600,7 @@ function createPageCard(pageData: PageData, index: number) {
   // Split button
   const splitBtn = document.createElement('button');
   splitBtn.className = 'p-1 rounded hover:bg-gray-700';
-  splitBtn.innerHTML = '<i data-lucide="scissors" class="w-4 h-4 text-gray-300"></i>';
+  splitBtn.innerHTML = '<i data-lucide="scissors" class="w-4 h-4 text-white"></i>';
   splitBtn.title = multiToolT('card.actions.toggleSplit');
   splitBtn.onclick = (e) => {
     e.stopPropagation();

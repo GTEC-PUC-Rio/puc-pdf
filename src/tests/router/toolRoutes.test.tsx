@@ -5,16 +5,19 @@ import { I18nextProvider } from 'react-i18next';
 
 import { initI18n, i18next } from '@/i18n/index';
 import { ToolPage } from '@/react/pages/ToolPage';
+import { AuthProvider } from '@/react/context/AuthContext';
 
 const renderRoute = (initialEntry: string) =>
   render(
     <I18nextProvider i18n={i18next}>
-      <MemoryRouter initialEntries={[initialEntry]}>
-        <Routes>
-          <Route path="/" element={<div data-testid="grid-placeholder">Grid</div>} />
-          <Route path="/tool/:toolId" element={<ToolPage />} />
-        </Routes>
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={[initialEntry]}>
+          <Routes>
+            <Route path="/" element={<div data-testid="grid-placeholder">Grid</div>} />
+            <Route path="/tool/:toolId" element={<ToolPage />} />
+          </Routes>
+        </MemoryRouter>
+      </AuthProvider>
     </I18nextProvider>
   );
 
@@ -44,10 +47,10 @@ describe('Declarative tool routes', () => {
     ).toBeTruthy();
   });
 
-  it('loads advanced editors such as sign-pdf directly', () => {
+  it('loads advanced editors such as sign-pdf directly', async () => {
     renderRoute('/tool/sign-pdf');
 
-    expect(screen.getByRole('heading', { name: /assinar pdf/i })).toBeTruthy();
+    expect(await screen.findByRole('heading', { name: /assinar pdf/i })).toBeTruthy();
     expect(screen.getByText(/suas assinaturas salvas/i)).toBeTruthy();
   });
 

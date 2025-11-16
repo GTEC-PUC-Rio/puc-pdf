@@ -7,8 +7,8 @@ Para manter o visual alinhado à identidade da PUC-Rio, aplicamos três ajustes 
    - O arquivo está em `public/images/puc-favicon.ico`; substitua-o (mantendo o nome) para atualizar o ícone sem precisar alterar o código.
 
 2. **Logotipo**  
-   - Substituímos os antigos svgs do BentoPDF pela marca oficial (`/images/logo-puc.png`) em navbars, rodapés e no Simple Mode (inserido via `src/js/main.ts`).  
-   - O arquivo local está em `public/images/logo-puc.png`. Troque-o pelo novo logo mantendo o mesmo nome, ou ajuste o atributo `src` caso altere o caminho.
+   - O cabeçalho continua exibindo a marca colorida (`/images/logo-puc.png`), enquanto rodapés e páginas institucionais passaram a usar a versão monocromática nova (`/images/logo-puc-mono.png`).  
+   - Ambos os arquivos estão em `public/images/`. Substitua-os mantendo os mesmos nomes para atualizar rapidamente o branding, ou ajuste o atributo `src` caso mude o caminho.  
    - Para uso offline, não há mais dependência de CDN; todos os assets ficam no repositório.
 
 3. **Links institucionais**  

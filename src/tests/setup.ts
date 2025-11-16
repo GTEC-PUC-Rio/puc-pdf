@@ -59,25 +59,34 @@ if (typeof globalThis.Worker === 'undefined') {
   globalThis.Worker = WorkerPolyfill;
 }
 
-HTMLCanvasElement.prototype.getContext = () =>
-  ({
-    fillRect: () => {},
-    strokeRect: () => {},
-    clearRect: () => {},
-    drawImage: () => {},
-    beginPath: () => {},
-    moveTo: () => {},
-    lineTo: () => {},
-    stroke: () => {},
-    arc: () => {},
-    fill: () => {},
-    strokeStyle: '',
-    fillStyle: '',
-    lineWidth: 1,
-    canvas: document.createElement('canvas'),
-    getImageData: () => ({ data: [] }),
-    putImageData: () => {},
-  }) as unknown as CanvasRenderingContext2D;
+const mockCanvasContext = {
+  fillRect: () => {},
+  strokeRect: () => {},
+  clearRect: () => {},
+  drawImage: () => {},
+  beginPath: () => {},
+  moveTo: () => {},
+  lineTo: () => {},
+  stroke: () => {},
+  arc: () => {},
+  fill: () => {},
+  strokeStyle: '',
+  fillStyle: '',
+  lineWidth: 1,
+  canvas: document.createElement('canvas'),
+  getImageData: () => ({ data: [] }),
+  putImageData: () => {},
+} as unknown as CanvasRenderingContext2D;
+
+HTMLCanvasElement.prototype.getContext = function getContext(
+  contextId: string,
+  _options?: unknown
+) {
+  if (contextId === '2d') {
+    return mockCanvasContext;
+  }
+  return null;
+} as typeof HTMLCanvasElement.prototype.getContext;
 
 if (!globalThis.URL.createObjectURL) {
   globalThis.URL.createObjectURL = () => 'blob:mock-url';

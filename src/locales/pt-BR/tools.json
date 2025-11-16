@@ -7,6 +7,12 @@
   "cta": {
     "backToTools": "Voltar às ferramentas"
   },
+  "auth": {
+    "loading": "Carregando sessão...",
+    "requiredTitle": "Login obrigatório",
+    "requiredMessage": "Esta ferramenta exige autenticação. Faça login para continuar.",
+    "loginCta": "Fazer login"
+  },
   "templates": {
     "merge": {
       "title": "Unir PDFs",
