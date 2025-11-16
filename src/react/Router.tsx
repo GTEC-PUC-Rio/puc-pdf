@@ -34,7 +34,23 @@ export const RootRouter = () => (
   <StrictMode>
     <I18nextProvider i18n={i18next}>
       <AuthProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL ?? '/'}>
+        <BrowserRouter
+          basename={
+            (() => {
+              const envBase =
+                import.meta.env.VITE_BASE ?? import.meta.env.BASE_URL ?? '/';
+              if (!envBase || envBase === '/') {
+                return '/';
+              }
+              const normalized = envBase.endsWith('/')
+                ? envBase.slice(0, -1)
+                : envBase;
+              return normalized.startsWith('/')
+                ? normalized
+                : `/${normalized}`;
+            })()
+          }
+        >
           <Routes>
             <Route element={<AppLayout />}>
               <Route path="/" element={<GridPage />} />
