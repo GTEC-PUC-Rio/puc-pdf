@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prebuild": "pnpm run sync:pdf-worker",
     "preview": "vite preview",
     "obfuscate": "node scripts/build.mjs",
     "test": "vitest",
@@ -18,7 +19,9 @@
     "format": "prettier --write .",
     "release": "node scripts/release.js patch",
     "release:minor": "node scripts/release.js minor",
-    "release:major": "node scripts/release.js major"
+    "release:major": "node scripts/release.js major",
+    "sync:pdf-worker": "node scripts/sync-pdf-worker.mjs",
+    "postinstall": "node scripts/sync-pdf-worker.mjs"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
